@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import { Photo } from "@/components/site/photo";
 import { BaseList, Container, CtaBand, Faq, Points, SectionTitle, TextLink } from "@/components/site/sections";
 import { ArrowIcon } from "@/components/ui/arrow-icon";
@@ -77,7 +78,7 @@ export default function CajaSeca() {
       {/* Bloque 1 · Hero */}
       <section className="border-b border-navy-800/8">
         <Container className="grid items-center gap-12 pt-10 pb-16 lg:grid-cols-[1fr_1.05fr] lg:gap-16 lg:pt-14 lg:pb-20">
-          <div className="flex flex-col items-start gap-6">
+          <div className="hero-in flex flex-col items-start gap-6">
             <nav aria-label="Ruta de navegación" className="text-sm text-muted">
               <ol className="flex flex-wrap items-center gap-2">
                 <li><Link href="/" className="hover:text-primary">Inicio</Link></li>
@@ -104,7 +105,7 @@ export default function CajaSeca() {
           <Photo
             alt="Caja seca de 53 pies de MM Carga en carretera"
             label="caja seca de 53 pies en carretera"
-            className="aspect-[4/3] rounded-dialog"
+            className="hero-photo aspect-[4/3] rounded-dialog"
             priority
           />
         </Container>
@@ -115,18 +116,18 @@ export default function CajaSeca() {
         <Container className="grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:gap-20">
           <div className="flex flex-col gap-6">
             <SectionTitle title="Caja seca de 53 pies para carga nacional y de exportación" />
-            <p className="text-body text-ink">
+            <p data-reveal style={{ "--d": 1 } as CSSProperties} className="text-body text-ink">
               La caja seca de 53 pies es un remolque cerrado que protege la mercancía de la intemperie, el polvo y el
               riesgo de robo durante el trayecto. Es el equipo de mayor uso para carga seca paletizada o empacada, ya
               que combina gran capacidad volumétrica con altos niveles de seguridad.
             </p>
-            <p className="text-body text-muted">
+            <p data-reveal style={{ "--d": 2 } as CSSProperties} className="text-body text-muted">
               MM Carga cuenta con más de 100 cajas de 53 pies propias, que operan en rutas nacionales y en servicio de
               exportación a Estados Unidos vía Laredo. Todas las unidades cuentan con rastreo GPS y cámaras,
               supervisadas por nuestro centro de monitoreo las 24 horas.
             </p>
           </div>
-          <aside className="self-start rounded-card bg-surface p-8">
+          <aside data-reveal style={{ "--d": 2 } as CSSProperties} className="self-start rounded-card bg-surface p-8">
             <p className="text-sm font-bold text-navy-800">Este servicio está dirigido a:</p>
             <ul className="mt-5 flex flex-col gap-4">
               {audience.map((a) => (
@@ -147,13 +148,13 @@ export default function CajaSeca() {
         <Container className="flex flex-col gap-12">
           <SectionTitle title="Alcance del servicio de transporte en caja seca" />
           <ul className="grid gap-px overflow-hidden rounded-card border border-navy-800/10 bg-navy-800/10 md:grid-cols-2 lg:grid-cols-3">
-            {scope.map((s) => (
-              <li key={s.title} className="flex flex-col gap-3 bg-white p-7">
+            {scope.map((s, i) => (
+              <li key={s.title} data-reveal="fade" style={{ "--d": i } as CSSProperties} className="flex flex-col gap-3 bg-white p-7">
                 <h3 className="text-[19px] font-bold text-navy-800">{s.title}</h3>
                 <p className="text-small text-muted">{s.text}</p>
               </li>
             ))}
-            <li className="flex flex-col justify-between gap-6 bg-navy-800 p-7 text-white">
+            <li data-reveal="fade" style={{ "--d": 5 } as CSSProperties} className="flex flex-col justify-between gap-6 bg-navy-800 p-7 text-white">
               <p className="text-[19px] font-bold">¿Tu operación requiere otro esquema?</p>
               <Link
                 href="/contacto/"
@@ -175,7 +176,7 @@ export default function CajaSeca() {
               Valores de referencia. La capacidad final se confirma según el tipo de carga.
             </p>
           </div>
-          <div className="overflow-x-auto">
+          <div data-reveal style={{ "--d": 2 } as CSSProperties} className="overflow-x-auto">
             <table className="w-full min-w-[480px] border-collapse text-left">
               <caption className="sr-only">Medidas y capacidad de la caja seca de 53 pies</caption>
               <tbody>
@@ -198,7 +199,7 @@ export default function CajaSeca() {
         <Container className="grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
           <div className="flex flex-col gap-6">
             <SectionTitle title="Cobertura del servicio de caja seca" />
-            <p className="text-body text-muted">
+            <p data-reveal style={{ "--d": 1 } as CSSProperties} className="text-body text-muted">
               Operamos el servicio de caja seca desde nuestras bases en Monterrey, Nuevo Laredo y Silao, con conexión
               entre la industria del noreste, el Bajío y la frontera con Estados Unidos.
             </p>
@@ -229,8 +230,8 @@ export default function CajaSeca() {
         <Container className="flex flex-col gap-10">
           <SectionTitle title="Otros servicios de MM Carga" />
           <ul className="grid gap-5.5 sm:grid-cols-2 lg:grid-cols-4">
-            {others.map((s) => (
-              <li key={s.slug}>
+            {others.map((s, i) => (
+              <li key={s.slug} data-reveal style={{ "--d": i } as CSSProperties}>
                 <Link
                   href={s.slug}
                   className="group flex h-full flex-col gap-3 rounded-card border border-brand-800/8 bg-white p-6 shadow-card transition hover:-translate-y-1 hover:border-brand-800/22 hover:shadow-card-hover"

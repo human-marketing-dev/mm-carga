@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import type { CSSProperties } from "react";
+import { MexicoMap } from "@/components/site/mexico-map";
 import { Photo } from "@/components/site/photo";
 import {
-  BaseList,
   Certifications,
   Container,
   CtaBand,
@@ -79,7 +80,7 @@ export default function Home() {
       {/* Bloque 1 · Hero */}
       <section className="relative overflow-hidden bg-(image:--gradient-hero) text-white">
         <Container className="grid items-center gap-12 pt-16 pb-20 lg:grid-cols-[1.25fr_1fr] lg:gap-16 lg:pt-24 lg:pb-28">
-          <div className="flex flex-col items-start gap-7">
+          <div className="hero-in flex flex-col items-start gap-7">
             <Badge>+30 AÑOS DE EXPERIENCIA</Badge>
             <h1 className="text-[clamp(36px,4vw,56px)] leading-[1.08] font-heavy">
               Empresa líder en logística y transporte de carga en México
@@ -95,7 +96,7 @@ export default function Home() {
               </Button>
             </div>
           </div>
-          <div className="relative">
+          <div className="hero-photo relative">
             <Photo
               alt="Tráiler de MM Carga, empresa de logística y transporte de carga en México"
               label="tráiler MM Carga en carretera"
@@ -117,6 +118,8 @@ export default function Home() {
             {figures.map((f, i) => (
               <div
                 key={f.label}
+                data-reveal
+                style={{ "--d": i } as CSSProperties}
                 className={`flex flex-col gap-1 py-8 lg:py-10 ${i % 2 ? "pl-6" : "pr-6"} lg:px-8 ${
                   i > 0 ? "lg:border-l lg:border-navy-800/10" : "lg:pl-0"
                 } ${i % 2 ? "border-l border-navy-800/10" : ""} ${i > 1 ? "border-t border-navy-800/10 lg:border-t-0" : ""}`}
@@ -136,7 +139,7 @@ export default function Home() {
       <section className="py-20 md:py-28">
         <Container className="grid gap-10 lg:grid-cols-2 lg:gap-20">
           <SectionTitle kicker="Quiénes somos" title="Empresa de logística con infraestructura propia en México" />
-          <div className="flex flex-col gap-6 text-body text-ink lg:pt-9">
+          <div data-reveal style={{ "--d": 2 } as CSSProperties} className="flex flex-col gap-6 text-body text-ink lg:pt-9">
             <p>
               MM Carga es una empresa mexicana especializada en logística, transporte terrestre de carga y
               almacenamiento de mercancías. Contamos con infraestructura propia (flota, cajas secas, almacenes y bases de
@@ -166,7 +169,12 @@ export default function Home() {
           </div>
           <ul className="grid gap-5.5 md:grid-cols-6">
             {services.map((s, i) => (
-              <li key={s.slug} className={i < 2 ? "md:col-span-3" : "md:col-span-2"}>
+              <li
+                key={s.slug}
+                data-reveal
+                style={{ "--d": i } as CSSProperties}
+                className={i < 2 ? "md:col-span-3" : "md:col-span-2"}
+              >
                 <Link
                   href={s.slug}
                   className="group flex h-full flex-col overflow-hidden rounded-card border border-brand-800/8 bg-white shadow-card transition hover:-translate-y-1 hover:border-brand-800/22 hover:shadow-card-hover"
@@ -194,13 +202,13 @@ export default function Home() {
 
       {/* Bloque 5 · Cobertura */}
       <section className="py-20 md:py-28">
-        <Container className="grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
+        <Container className="grid items-center gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
           <div className="flex flex-col gap-6">
             <SectionTitle
               kicker="Cobertura"
               title="Presencia en los principales puertos, la frontera norte y el Bajío"
             />
-            <p className="text-body text-muted">
+            <p data-reveal style={{ "--d": 1 } as CSSProperties} className="text-body text-muted">
               Contamos con bases de operación propias en Altamira, Manzanillo, Coatzacoalcos, Nuevo Laredo, Silao y
               Monterrey. Esta red nos permite atender con oportunidad las operaciones portuarias del Golfo y del
               Pacífico, el comercio con Estados Unidos y el corredor industrial del centro del país.
@@ -210,7 +218,7 @@ export default function Home() {
               <TextLink href="/transporte-de-carga-en-monterrey/">Transporte de carga en Monterrey</TextLink>
             </div>
           </div>
-          <BaseList />
+          <MexicoMap />
         </Container>
       </section>
 

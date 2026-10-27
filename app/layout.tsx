@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { SiteFooter } from "@/components/site/footer";
 import { SiteHeader } from "@/components/site/header";
+import { RevealObserver } from "@/components/site/reveal";
 import "./globals.css";
 
 const inter = Inter({
@@ -18,11 +19,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es-MX" className={`${inter.variable} h-full antialiased`}>
+    <html lang="es-MX" className={`${inter.variable} h-full antialiased`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+      </head>
       <body className="min-h-full flex flex-col font-sans">
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />
+        <RevealObserver />
       </body>
     </html>
   );

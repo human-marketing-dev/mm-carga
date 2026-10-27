@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { ArrowIcon } from "@/components/ui/arrow-icon";
 import { Button } from "@/components/ui/button";
 import { bases, certifications, contact } from "@/lib/site";
@@ -21,7 +21,7 @@ export function SectionTitle({
   className?: string;
 }) {
   return (
-    <div className={`flex max-w-3xl flex-col gap-4 ${className}`}>
+    <div data-reveal className={`flex max-w-3xl flex-col gap-4 ${className}`}>
       {kicker && <p className="text-xs font-bold tracking-[0.16em] text-primary uppercase">{kicker}</p>}
       <h2 className="text-[30px] leading-[1.15] font-semibold text-navy-ink md:text-[40px]">{title}</h2>
       {intro && <p className="text-body text-muted">{intro}</p>}
@@ -41,8 +41,13 @@ export function TextLink({ href, children }: { href: string; children: ReactNode
 export function Points({ items }: { items: { title: string; text: string }[] }) {
   return (
     <div className="grid gap-x-10 gap-y-10 sm:grid-cols-2">
-      {items.map((it) => (
-        <div key={it.title} className="flex flex-col gap-3 border-t-2 border-navy-800 pt-5">
+      {items.map((it, i) => (
+        <div
+          key={it.title}
+          data-reveal
+          style={{ "--d": i } as CSSProperties}
+          className="flex flex-col gap-3 border-t-2 border-navy-800 pt-5"
+        >
           <h3 className="text-[19px] leading-snug font-bold text-navy-800">{it.title}</h3>
           <p className="text-small text-muted">{it.text}</p>
         </div>
@@ -65,7 +70,7 @@ export function Faq({ title, items }: { title: string; items: { q: string; a: st
     <section className="py-20 md:py-28">
       <Container className="grid gap-10 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
         <SectionTitle title={title} />
-        <div className="divide-y divide-navy-800/10 border-y border-navy-800/10">
+        <div data-reveal style={{ "--d": 2 } as CSSProperties} className="divide-y divide-navy-800/10 border-y border-navy-800/10">
           {items.map((it) => (
             <details key={it.q} className="group">
               <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden">
@@ -93,13 +98,18 @@ export function Certifications({ title, intro }: { title: string; intro?: string
   return (
     <section className="border-y border-navy-800/8 py-16">
       <Container className="flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between">
-        <div className="flex max-w-sm flex-col gap-3">
+        <div data-reveal className="flex max-w-sm flex-col gap-3">
           <h2 className="text-2xl font-semibold text-navy-ink">{title}</h2>
           {intro && <p className="text-small text-muted">{intro}</p>}
         </div>
         <ul className="grid grid-cols-3 items-center gap-x-8 gap-y-6 sm:grid-cols-7 lg:max-w-4xl">
-          {certifications.map((c) => (
-            <li key={c.file} className={c.width > 200 ? "col-span-3 sm:col-span-2" : ""}>
+          {certifications.map((c, i) => (
+            <li
+              key={c.file}
+              data-reveal="fade"
+              style={{ "--d": i } as CSSProperties}
+              className={c.width > 200 ? "col-span-3 sm:col-span-2" : ""}
+            >
               <Image
                 src={`/images/certificaciones/${c.file}`}
                 alt={c.alt}
@@ -118,10 +128,10 @@ export function Certifications({ title, intro }: { title: string; intro?: string
 export function BaseList({ highlight }: { highlight?: string[] }) {
   return (
     <ul className="grid gap-px overflow-hidden rounded-card border border-navy-800/10 bg-navy-800/10 sm:grid-cols-2 lg:grid-cols-3">
-      {bases.map((b) => {
+      {bases.map((b, i) => {
         const on = highlight?.includes(b.city);
         return (
-          <li key={b.city} className={`flex flex-col gap-1 p-6 ${on ? "bg-brand-50" : "bg-white"}`}>
+          <li key={b.city} data-reveal="fade" style={{ "--d": i } as CSSProperties} className={`flex flex-col gap-1 p-6 ${on ? "bg-brand-50" : "bg-white"}`}>
             <span className="text-xs font-bold tracking-[0.14em] text-muted uppercase">{b.region}</span>
             <span className="flex items-center gap-2.5 text-lg font-bold text-navy-800">
               <span
@@ -142,11 +152,11 @@ export function CtaBand({ title, text, whatsapp = true }: { title: string; text:
   return (
     <section className="bg-(image:--gradient-hero) py-20 text-white md:py-24">
       <Container className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
-        <div className="flex max-w-2xl flex-col gap-4">
+        <div data-reveal className="flex max-w-2xl flex-col gap-4">
           <h2 className="text-[30px] leading-[1.15] font-semibold md:text-[40px]">{title}</h2>
           <p className="text-lead text-white/78">{text}</p>
         </div>
-        <div className="flex flex-wrap gap-4">
+        <div data-reveal style={{ "--d": 2 } as CSSProperties} className="flex flex-wrap gap-4">
           <Button href="/contacto/">Solicita una cotización</Button>
           {whatsapp && (
             <Button href={contact.whatsapp} variant="outline" target="_blank" rel="noopener noreferrer">
