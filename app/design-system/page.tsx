@@ -3,6 +3,8 @@ import { Badge, Eyebrow } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { FloatingCard } from "@/components/ui/floating-card";
 import { LocationTag, MapPin } from "@/components/ui/location-tag";
+import { Logo } from "@/components/ui/logo";
+import Image from "next/image";
 import { ServiceCard } from "@/components/ui/service-card";
 
 export const metadata: Metadata = {
@@ -16,6 +18,7 @@ const colors = [
   ["navy-850", "#041D4E"],
   ["navy-800", "#062864"],
   ["navy-ink", "#011E58"],
+  ["brand-logo", "#0046A4"],
   ["brand-800", "#073B83"],
   ["brand-700", "#0A48A1"],
   ["brand-650", "#1456A0"],
@@ -33,6 +36,15 @@ const colors = [
   ["success", "#21D47D"],
 ];
 
+const certificaciones = [
+  { file: "certificado-1.webp", alt: "Dun & Bradstreet", width: 280, height: 39 },
+  { file: "certificado-2.webp", alt: "CANACAR", width: 130, height: 90 },
+  { file: "certificado-3.webp", alt: "Transporte Limpio", width: 130, height: 90 },
+  { file: "certificado-4.webp", alt: "ISO 9001:2015", width: 130, height: 90 },
+  { file: "certificado-5.webp", alt: "OEA Operador Económico Autorizado", width: 130, height: 90 },
+  { file: "certificado-6.webp", alt: "CTPAT", width: 130, height: 90 },
+];
+
 const bases = ["Altamira", "Monterrey", "Manzanillo", "Silao", "Nuevo Laredo", "Coatzacoalcos"];
 
 export default function DesignSystem() {
@@ -45,6 +57,18 @@ export default function DesignSystem() {
           Tokens y componentes extraídos de mmcarga.com. Página interna, no indexada.
         </p>
       </header>
+
+      <section className="flex flex-col gap-6">
+        <h2 className="text-2xl font-bold text-navy-ink">Logo</h2>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid h-36 place-items-center rounded-card border border-black/8 bg-white">
+            <Logo />
+          </div>
+          <div className="grid h-36 place-items-center rounded-card bg-navy-800">
+            <Logo variant="white" />
+          </div>
+        </div>
+      </section>
 
       <section className="flex flex-col gap-6">
         <h2 className="text-2xl font-bold text-navy-ink">Colores</h2>
@@ -110,6 +134,21 @@ export default function DesignSystem() {
         <div className="relative h-40 rounded-card bg-brand-50">
           <MapPin x="30%" y="50%" label="Monterrey" />
           <MapPin x="65%" y="40%" label="Altamira" />
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-6">
+        <h2 className="text-2xl font-bold text-navy-ink">Certificaciones</h2>
+        <div className="flex flex-wrap items-center gap-6">
+          {certificaciones.map((c) => (
+            <Image
+              key={c.file}
+              src={`/images/certificaciones/${c.file}`}
+              alt={c.alt}
+              width={c.width}
+              height={c.height}
+            />
+          ))}
         </div>
       </section>
 

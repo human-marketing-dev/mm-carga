@@ -24,6 +24,7 @@
   --color-navy-ink: #011e58; /* H2 sobre fondo claro */
 
   /* Azul de marca y acentos */
+  --color-brand-logo: #0046a4; /* azul del logo */
   --color-brand-50: #eaf3ff;
   --color-brand-400: #1674ff;
   --color-brand-500: #0757d5; /* primario: botón principal y badge */
