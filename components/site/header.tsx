@@ -1,0 +1,109 @@
+import Link from "next/link";
+import { Logo } from "@/components/ui/logo";
+import { contact, services } from "@/lib/site";
+
+const nav = [
+  { href: "/almacenamiento-de-mercancias/", label: "Almacenamiento" },
+  { href: "/cobertura/", label: "Cobertura" },
+  { href: "/nosotros/", label: "Nosotros" },
+  { href: "/contacto/", label: "Contacto" },
+];
+
+const transport = services.filter((s) => s.slug !== "/almacenamiento-de-mercancias/");
+
+export function SiteHeader() {
+  return (
+    <header className="sticky top-0 z-40 border-b border-navy-800/8 bg-white/95 backdrop-blur">
+      <div className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-6 px-5 lg:px-8">
+        <Link href="/" aria-label="MM Carga, inicio" className="shrink-0">
+          <Logo className="h-9" />
+        </Link>
+
+        <nav aria-label="Principal" className="hidden items-center gap-1 text-[15px] font-semibold text-navy-800 lg:flex">
+          <div className="group relative">
+            <Link
+              href="/transporte-de-carga/"
+              className="flex items-center gap-1.5 rounded-tag px-3 py-2 hover:text-primary"
+            >
+              Transporte de carga
+              <svg viewBox="0 0 12 12" className="size-2.5" aria-hidden="true">
+                <path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.6" />
+              </svg>
+            </Link>
+            <div className="invisible absolute top-full left-0 w-80 pt-2 opacity-0 transition group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+              <ul className="rounded-card-sm border border-navy-800/8 bg-white p-2 shadow-card">
+                {transport.map((s) => (
+                  <li key={s.slug}>
+                    <Link
+                      href={s.slug}
+                      className="block rounded-tag px-3 py-2.5 font-medium text-ink hover:bg-surface hover:text-primary"
+                    >
+                      {s.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          {nav.map((n) => (
+            <Link key={n.href} href={n.href} className="rounded-tag px-3 py-2 hover:text-primary">
+              {n.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="hidden items-center gap-5 lg:flex">
+          <a href={contact.phoneHref} className="text-sm font-semibold text-navy-800 tabular-nums hover:text-primary">
+            {contact.phone}
+          </a>
+          <Link
+            href="/contacto/"
+            className="rounded-btn-sm bg-primary px-4.5 py-3 text-sm font-heavy text-white shadow-btn-solid transition hover:bg-primary-hover"
+          >
+            Solicita una cotización
+          </Link>
+        </div>
+
+        <details className="group lg:hidden">
+          <summary className="flex size-11 cursor-pointer list-none items-center justify-center rounded-btn-sm border border-navy-800/12 text-navy-800 [&::-webkit-details-marker]:hidden">
+            <span className="sr-only">Abrir menú</span>
+            <svg viewBox="0 0 20 20" className="size-5" aria-hidden="true">
+              <path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" strokeWidth="1.8" />
+            </svg>
+          </summary>
+          <div className="absolute inset-x-0 top-18 border-b border-navy-800/8 bg-white px-5 pt-2 pb-6 shadow-card">
+            <ul className="flex flex-col text-base font-semibold text-navy-800">
+              <li>
+                <Link href="/transporte-de-carga/" className="block py-3">
+                  Transporte de carga
+                </Link>
+                <ul className="mb-2 border-l border-navy-800/10 pl-4 text-[15px] font-medium text-ink">
+                  {transport.map((s) => (
+                    <li key={s.slug}>
+                      <Link href={s.slug} className="block py-2">
+                        {s.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+              {nav.map((n) => (
+                <li key={n.href} className="border-t border-navy-800/8">
+                  <Link href={n.href} className="block py-3">
+                    {n.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <Link
+              href="/contacto/"
+              className="mt-4 flex justify-center rounded-btn-sm bg-primary px-4.5 py-3.5 text-sm font-heavy text-white"
+            >
+              Solicita una cotización
+            </Link>
+          </div>
+        </details>
+      </div>
+    </header>
+  );
+}

@@ -49,7 +49,7 @@ const bases = ["Altamira", "Monterrey", "Manzanillo", "Silao", "Nuevo Laredo", "
 
 export default function DesignSystem() {
   return (
-    <main className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-4 py-16">
+    <div className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-4 py-16">
       <header className="flex flex-col gap-4">
         <Eyebrow>Design system</Eyebrow>
         <h1 className="text-h2 text-navy-ink max-md:text-[30px]">MM Carga</h1>
@@ -169,6 +169,6 @@ export default function DesignSystem() {
           />
         </div>
       </section>
-    </main>
+    </div>
   );
 }

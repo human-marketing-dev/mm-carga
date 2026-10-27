@@ -19,7 +19,7 @@ Vista previa: `/design-system` (noindex).
 
 ## Incierto o no extraído
 
-- **Paleta inconsistente en el original.** Cada bloque define sus propios azules (#0757D5, #073B83, #0A48A1, #0B56B3, #1456A0). Se conservaron todos como tokens; conviene que el equipo elija uno como primario.
+- **Azul primario:** `primary` = #0757D5 (elegido el 27 oct; hover #0B56B3). Los demás azules del sitio original se conservan como tokens de apoyo.
 - **Tipografía global del tema.** Solo el hero declara `Inter, Montserrat, …`. El resto hereda del tema, cuyo CSS no fue accesible; se asumió Inter en todo el sitio.
 - **Header, footer, contadores, certificaciones, "Sobre nosotros".** Los estiliza el tema `pxl-` desde archivos CSS externos que no se pudieron leer. No hay tokens de ellos.
 - **Icono dentro de los botones del hero.** Se sabe que es una flecha blanca; el tamaño y fondo de su caja (`bg-white/16`, 46px) son aproximados.

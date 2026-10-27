@@ -24,6 +24,8 @@
   --color-navy-ink: #011e58; /* H2 sobre fondo claro */
 
   /* Azul de marca y acentos */
+  --color-primary: #0757d5; /* azul primario elegido (27 oct) */
+  --color-primary-hover: #0b56b3;
   --color-brand-logo: #0046a4; /* azul del logo */
   --color-brand-50: #eaf3ff;
   --color-brand-400: #1674ff;
@@ -106,6 +108,16 @@
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+html {
+  scroll-padding-top: 6rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
