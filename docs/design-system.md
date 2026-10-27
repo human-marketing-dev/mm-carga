@@ -22,5 +22,5 @@ Vista previa: `/design-system` (noindex).
 - **Tipografía global del tema.** Solo el hero declara `Inter, Montserrat, …`. El resto hereda del tema, cuyo CSS no fue accesible; se asumió Inter en todo el sitio.
 - **Header, footer, contadores, certificaciones, "Sobre nosotros".** Los estiliza el tema `pxl-` desde archivos CSS externos que no se pudieron leer. No hay tokens de ellos.
 - **Icono dentro de los botones del hero.** Se sabe que es una flecha blanca; el tamaño y fondo de su caja (`bg-white/16`, 46px) son aproximados.
-- **Logo, favicon e imágenes.** No se descargaron (el entorno bloquea mmcarga.com). Las imágenes de la vista previa se cargan remoto desde `mmcarga.com/wp-content/uploads` (configurado en `next.config.ts`, temporal). URLs del logo: `/wp-content/uploads/2023/11/logo-mm-carga.png` y `/wp-content/uploads/2026/06/logo-mm-carga-azul.png`.
+- **Logo, favicon e imágenes.** No se descargaron (el entorno bloquea mmcarga.com). Mientras llegan, las imágenes usan `public/images/placeholder.svg`. URLs del logo: `/wp-content/uploads/2023/11/logo-mm-carga.png` y `/wp-content/uploads/2026/06/logo-mm-carga-azul.png`.
 - **Iconos.** El tema usa Flaticon (`flaticon-check`) e imágenes PNG; no hay set de iconos propio que migrar.

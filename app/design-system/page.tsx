@@ -119,13 +119,13 @@ export default function DesignSystem() {
           <ServiceCard
             title="Cajas secas de 53'"
             description="Transporte de carga general protegida en cajas secas de 53 pies."
-            image="https://mmcarga.com/wp-content/uploads/2023/11/CAJAS.png"
+            image="/images/placeholder.svg"
             href="/transporte-de-carga/caja-seca-53"
           />
           <ServiceCard
             title="Tolvas a granel"
             description="Traslado de materiales a granel en tolvas de gran capacidad."
-            image="https://mmcarga.com/wp-content/uploads/2023/11/tolvas.png"
+            image="/images/placeholder.svg"
             href="/transporte-de-carga/tolva-a-granel"
           />
         </div>
