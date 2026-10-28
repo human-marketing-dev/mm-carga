@@ -46,3 +46,49 @@ export const IconCertified = () => (
     <path d="m8.75 12 2.25 2.25 4.25-4.5" />
   </Icon>
 );
+
+export const IconRoute = () => (
+  <Icon>
+    <circle cx="6" cy="18" r="2.25" />
+    <circle cx="18" cy="6" r="2.25" />
+    <path d="M8.25 18h7.5a3 3 0 0 0 0-6h-7.5a3 3 0 0 1 0-6h7.5" />
+  </Icon>
+);
+
+// Cruce fronterizo: carretera que pasa una línea
+export const IconBorder = () => (
+  <Icon>
+    <path d="M3 12h18M17 8l4 4-4 4" />
+    <path d="M10 3.75v4M10 16.25v4" strokeDasharray="1.5 2" />
+  </Icon>
+);
+
+// Drop & Hook: caja que se queda en el andén
+export const IconTrailer = () => (
+  <Icon>
+    <path d="M2.75 6.25h14v10h-14zM16.75 13.25h3.5" />
+    <circle cx="6.5" cy="18.25" r="1.75" />
+    <circle cx="11" cy="18.25" r="1.75" />
+    <path d="M20.25 10.5v5.75" />
+  </Icon>
+);
+
+export const IconSwap = () => (
+  <Icon>
+    <path d="M4 8h14l-3.5-3.5M20 16H6l3.5 3.5" />
+  </Icon>
+);
+
+export const IconClock = () => (
+  <Icon>
+    <circle cx="12" cy="12" r="8.25" />
+    <path d="M12 7.5V12l3 2" />
+  </Icon>
+);
+
+export const IconEye = () => (
+  <Icon>
+    <path d="M2.75 12S6.25 5.75 12 5.75 21.25 12 21.25 12 17.75 18.25 12 18.25 2.75 12 2.75 12Z" />
+    <circle cx="12" cy="12" r="2.75" />
+  </Icon>
+);
