@@ -89,24 +89,21 @@ export default function Home() {
     <>
       {/* Bloque 1 · Hero */}
       <section className="relative isolate overflow-hidden bg-navy-950 text-white">
-        {/* Imagen de fondo: reemplazar placeholder por /images/hero/ cuando llegue la foto */}
+        {/* Imagen de fondo con overlay para legibilidad del texto */}
         <div className="hero-photo absolute inset-0 -z-10">
           <Photo
-            alt="Tráiler de MM Carga, empresa de logística y transporte de carga en México"
+            src="/images/hero/hero-transporte-de-carga-mexico.webp"
+            alt="Flota de tractocamiones de MM Carga, empresa de logística y transporte de carga en México"
             label="fondo del hero, tráiler MM Carga en carretera"
             className="size-full"
-            tone="dark"
-            showLabel={false}
+            sizes="100vw"
             priority
           />
         </div>
         <div
-          className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-r from-navy-950/95 via-navy-950/75 to-navy-950/25"
+          className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-r from-navy-950/95 via-navy-950/85 to-navy-950/65 lg:via-navy-950/75 lg:to-navy-950/25"
           aria-hidden="true"
         />
-        <span className="absolute right-5 bottom-5 rounded-tag bg-white/85 px-2.5 py-1 text-xs font-medium text-ink-soft">
-          Foto pendiente · fondo del hero
-        </span>
         <Container className="flex min-h-[clamp(560px,78vh,760px)] items-center py-20 lg:py-28">
           <div className="hero-in flex max-w-2xl flex-col items-start gap-7">
             <Badge dot={false}>+30 AÑOS DE EXPERIENCIA</Badge>
