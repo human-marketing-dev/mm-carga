@@ -191,7 +191,7 @@ export default function Home() {
         <Container className="flex flex-col gap-12">
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <SectionTitle
-              kicker="Soluciones"
+              kicker="Servicios"
               title="Soluciones integrales de logística y transporte de carga"
               intro="Ofrecemos el equipo adecuado para cada tipo de carga, con monitoreo permanente y coordinación de origen a destino."
             />
