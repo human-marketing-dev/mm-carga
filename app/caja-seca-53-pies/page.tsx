@@ -180,7 +180,10 @@ export default function CajaSeca() {
       <section className="py-20 md:py-28">
         <Container className="grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:gap-20">
           <div className="flex flex-col gap-6">
-            <SectionTitle title="Caja seca de 53 pies para carga nacional y de exportación" />
+            <SectionTitle
+              kicker="Sobre el servicio"
+              title="Caja seca de 53 pies para carga nacional y de exportación"
+            />
             <p
               data-reveal
               style={{ "--d": 1 } as CSSProperties}
@@ -241,7 +244,10 @@ export default function CajaSeca() {
       {/* Bloque 3 · Alcance */}
       <section className="bg-surface py-20 md:py-28">
         <Container className="flex flex-col gap-12">
-          <SectionTitle title="Alcance del servicio de transporte en caja seca" />
+          <SectionTitle
+            kicker="Qué incluye"
+            title="Alcance del servicio de transporte en caja seca"
+          />
           <ul className="grid gap-px overflow-hidden rounded-card border border-navy-800/10 bg-navy-800/10 md:grid-cols-2 lg:grid-cols-3">
             {scope.map((s, i) => (
               <li
@@ -285,7 +291,10 @@ export default function CajaSeca() {
       <section id="especificaciones" className="py-20 md:py-28">
         <Container className="grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
           <div className="flex flex-col gap-5">
-            <SectionTitle title="Caja seca de 53 pies: medidas y capacidad" />
+            <SectionTitle
+              kicker="Especificaciones técnicas"
+              title="Caja seca de 53 pies: medidas y capacidad"
+            />
             <p className="text-small text-muted">
               Valores de referencia. La capacidad final se confirma según el
               tipo de carga.
@@ -327,7 +336,10 @@ export default function CajaSeca() {
       <section className="bg-surface py-20 md:py-28">
         <Container className="grid items-center gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
           <div className="flex flex-col gap-6">
-            <SectionTitle title="Cobertura del servicio de caja seca" />
+            <SectionTitle
+              kicker="Rutas y bases"
+              title="Cobertura del servicio de caja seca"
+            />
             <p
               data-reveal
               style={{ "--d": 1 } as CSSProperties}
@@ -352,7 +364,7 @@ export default function CajaSeca() {
       <section className="py-20 md:py-28">
         <Container className="grid gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
           <SectionTitle
-            kicker="Por qué MM Carga"
+            kicker="Nuestra diferencia"
             title="¿Por qué elegir a MM Carga para el transporte en caja seca?"
           />
           <Points items={reasons} />
@@ -362,6 +374,7 @@ export default function CajaSeca() {
       {/* Bloque 7 · FAQ */}
       <div className="bg-surface">
         <Faq
+          kicker="Dudas comunes"
           title="Preguntas frecuentes sobre la caja seca de 53 pies"
           items={faq}
         />
@@ -370,7 +383,10 @@ export default function CajaSeca() {
       {/* Bloque 8 · Otros servicios */}
       <section className="py-20 md:py-28">
         <Container className="flex flex-col gap-10">
-          <SectionTitle title="Otros servicios de MM Carga" />
+          <SectionTitle
+            kicker="Soluciones logísticas"
+            title="Otros servicios de MM Carga"
+          />
           <ul className="grid gap-5.5 sm:grid-cols-2 lg:grid-cols-4">
             {others.map((s, i) => (
               <li
@@ -401,6 +417,7 @@ export default function CajaSeca() {
 
       {/* Bloque 9 · CTA */}
       <CtaBand
+        kicker="Contacto comercial"
         title="Solicita tu cotización de transporte en caja seca de 53 pies"
         text="Compártenos el origen, el destino y el tipo de carga, y te enviaremos una propuesta con la disponibilidad de equipo."
         service="Caja seca de 53 pies"
