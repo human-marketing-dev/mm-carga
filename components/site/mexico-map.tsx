@@ -1,4 +1,5 @@
 import { BASE_POINTS, MX_PATH, MX_VIEWBOX } from "@/lib/mexico-map";
+import { LocationTag } from "@/components/ui/location-tag";
 import { bases } from "@/lib/site";
 
 const [, , VW, VH] = MX_VIEWBOX.split(" ").map(Number);
@@ -48,22 +49,47 @@ export function MexicoMap() {
                 className="mx-pin absolute"
                 style={{ left: `${(x / VW) * 100}%`, top: `${(y / VH) * 100}%`, "--i": i } as React.CSSProperties}
               >
+                <a
+                  href={b.maps}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Ver la base de ${b.city} en Google Maps`}
+                  className="group/pin block"
+                >
                 <span className="absolute size-4 -translate-1/2 rounded-full border-[3px] border-white bg-brand-700 shadow-[0_0_0_5px_rgba(10,72,161,0.16)] max-sm:size-3 max-sm:border-2">
                   <span className="absolute -inset-2 animate-pulse-ring rounded-full bg-brand-700/22" aria-hidden="true" />
                 </span>
                 <span
-                  className={`mx-label absolute top-0 -translate-y-1/2 rounded-tag bg-white px-2.5 py-1 text-[13px] font-bold whitespace-nowrap text-brand-700 shadow-tag ring-1 ring-brand-700/12 max-sm:px-1.5 max-sm:py-0.5 max-sm:text-[10px] ${
+                  className={`mx-label absolute top-0 -translate-y-1/2 rounded-tag bg-white px-2.5 py-1 text-[13px] font-bold whitespace-nowrap text-brand-700 shadow-tag ring-1 ring-brand-700/12 transition group-hover/pin:bg-brand-700 group-hover/pin:text-white group-focus-visible/pin:bg-brand-700 group-focus-visible/pin:text-white max-sm:px-1.5 max-sm:py-0.5 max-sm:text-[10px] ${
                     left ? "right-3.5 max-sm:right-2.5" : "left-3.5 max-sm:left-2.5"
                   }`}
                 >
                   {b.city}
                 </span>
+                </a>
               </li>
             );
           })}
         </ul>
       </div>
-      <figcaption className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-[13px] text-muted">
+      <div className="mt-6 flex flex-col gap-3">
+        <p className="text-sm font-semibold text-navy-800">Cómo llegar a cada base</p>
+        <ul className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+          {bases.map((b) => (
+            <li key={b.city}>
+              <LocationTag href={b.maps} className="w-full">
+                <span className="flex items-center justify-between gap-1.5">
+                  {b.city}
+                  <svg viewBox="0 0 12 12" className="size-2.5" aria-hidden="true">
+                    <path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                  </svg>
+                </span>
+              </LocationTag>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <figcaption className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-[13px] text-muted">
         <span className="flex items-center gap-2">
           <span className="size-2.5 rounded-full bg-brand-700" aria-hidden="true" /> Base de operación propia
         </span>

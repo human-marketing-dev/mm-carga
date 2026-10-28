@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import type { CSSProperties } from "react";
+import { CountUp } from "@/components/site/count-up";
+import { IconCertified, IconFleet, IconIntegral, IconMonitoring } from "@/components/site/icons";
 import { MexicoMap } from "@/components/site/mexico-map";
 import { Photo } from "@/components/site/photo";
 import {
@@ -35,18 +37,22 @@ const figures = [
 const reasons = [
   {
     title: "Solución logística integral",
+    icon: <IconIntegral />,
     text: "Transporte, almacenamiento y maniobras gestionados por un solo proveedor.",
   },
   {
     title: "Capacidad operativa",
+    icon: <IconFleet />,
     text: "Flota full, más de 100 cajas secas de 53 pies y amplias áreas de almacenamiento para operaciones de gran volumen.",
   },
   {
     title: "Seguridad y monitoreo permanente",
+    icon: <IconMonitoring />,
     text: "Unidades con GPS y cámaras, operadores certificados e integración de información vía API.",
   },
   {
     title: "Procesos certificados",
+    icon: <IconCertified />,
     text: "Certificaciones C-TPAT, OEA e ISO 9001:2015 que respaldan la seguridad y la calidad de cada operación.",
   },
 ];
@@ -126,7 +132,7 @@ export default function Home() {
               >
                 <dt className="order-2 text-[15px] text-muted">{f.label}</dt>
                 <dd className="order-1 text-[28px] sm:text-[34px] leading-none font-heavy text-navy-800 tabular-nums md:text-[44px]">
-                  {f.value}
+                  <CountUp value={f.value} />
                   {f.unit && <span className="ml-1 text-xl font-bold md:text-2xl">{f.unit}</span>}
                 </dd>
               </div>

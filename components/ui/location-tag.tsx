@@ -1,8 +1,16 @@
 import type { ReactNode } from "react";
 
-export function LocationTag({ href, children }: { href?: string; children: ReactNode }) {
+export function LocationTag({
+  href,
+  children,
+  className: extra = "",
+}: {
+  href?: string;
+  children: ReactNode;
+  className?: string;
+}) {
   const className =
-    "inline-block rounded-tag border border-brand-700/18 bg-brand-50 px-3 py-1.75 text-[15px] font-bold text-brand-700 shadow-tag transition duration-200 hover:-translate-y-0.5 hover:bg-brand-700 hover:text-white hover:shadow-tag-hover max-sm:px-2.5 max-sm:py-1.5 max-sm:text-[13px]";
+    `${extra} inline-block rounded-tag border border-brand-700/18 bg-brand-50 px-3 py-1.75 text-[15px] font-bold text-brand-700 shadow-tag transition duration-200 hover:-translate-y-0.5 hover:bg-brand-700 hover:text-white hover:shadow-tag-hover max-sm:px-2.5 max-sm:py-1.5 max-sm:text-[13px]`;
   return href ? (
     <a href={href} target="_blank" rel="noopener noreferrer" className={className}>
       {children}

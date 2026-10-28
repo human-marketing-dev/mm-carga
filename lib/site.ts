@@ -56,12 +56,42 @@ export const otherServiceSummary: Record<string, string> = {
 };
 
 export const bases = [
-  { city: "Altamira", state: "Tamaulipas", region: "Puerto del Golfo" },
-  { city: "Coatzacoalcos", state: "Veracruz", region: "Puerto del Golfo" },
-  { city: "Manzanillo", state: "Colima", region: "Puerto del Pacífico" },
-  { city: "Nuevo Laredo", state: "Tamaulipas", region: "Frontera norte" },
-  { city: "Monterrey", state: "Nuevo León", region: "Noreste industrial" },
-  { city: "Silao", state: "Guanajuato", region: "Bajío" },
+  {
+    city: "Altamira",
+    state: "Tamaulipas",
+    region: "Puerto del Golfo",
+    maps: "https://www.google.com/search?kgmid=/g/11qq481sbx&q=MM+CARGA+Altamira",
+  },
+  {
+    city: "Coatzacoalcos",
+    state: "Veracruz",
+    region: "Puerto del Golfo",
+    maps: "https://www.google.com/maps/place/MM+CARGA/@18.1266741,-94.4356405,17z/data=!3m1!4b1!4m6!3m5!1s0x85e9835b934094d7:0x604769212dd3ccae!8m2!3d18.1266741!4d-94.4356405!16s%2Fg%2F11fsymp34p",
+  },
+  {
+    city: "Manzanillo",
+    state: "Colima",
+    region: "Puerto del Pacífico",
+    maps: "https://www.google.com/search?kgmid=/g/11mksq__7r&q=MM+CARGA+Manzanillo",
+  },
+  {
+    city: "Nuevo Laredo",
+    state: "Tamaulipas",
+    region: "Frontera norte",
+    maps: "https://www.google.com.mx/maps/place/MM+Carga+Nuevo+Laredo/@27.5715046,-99.6056105,17z/data=!3m1!4b1!4m6!3m5!1s0x86611f00073ba98f:0x6c0a8232040ea873!8m2!3d27.5714999!4d-99.6030356!16s%2Fg%2F11wqhpxwp0",
+  },
+  {
+    city: "Monterrey",
+    state: "Nuevo León",
+    region: "Noreste industrial",
+    maps: "https://www.google.com/search?kgmid=/g/11y0f6b1g8&q=MM+CARGA+Trabajo",
+  },
+  {
+    city: "Silao",
+    state: "Guanajuato",
+    region: "Bajío",
+    maps: "https://www.google.com/maps?q=20.9800509,-101.4777494&z=17&hl=es",
+  },
 ];
 
 export const certifications = [

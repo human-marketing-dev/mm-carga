@@ -38,7 +38,7 @@ export function TextLink({ href, children }: { href: string; children: ReactNode
   );
 }
 
-export function Points({ items }: { items: { title: string; text: string }[] }) {
+export function Points({ items }: { items: { title: string; text: string; icon?: ReactNode }[] }) {
   return (
     <div className="grid gap-x-10 gap-y-10 sm:grid-cols-2">
       {items.map((it, i) => (
@@ -48,6 +48,11 @@ export function Points({ items }: { items: { title: string; text: string }[] }) 
           style={{ "--d": i } as CSSProperties}
           className="flex flex-col gap-3 border-t-2 border-navy-800 pt-5"
         >
+          {it.icon && (
+            <span className="mb-1 grid size-12 place-items-center rounded-btn bg-brand-50 text-primary" aria-hidden="true">
+              {it.icon}
+            </span>
+          )}
           <h3 className="text-[19px] leading-snug font-bold text-navy-800">{it.title}</h3>
           <p className="text-small text-muted">{it.text}</p>
         </div>
@@ -72,7 +77,7 @@ export function Faq({ title, items }: { title: string; items: { q: string; a: st
         <SectionTitle title={title} />
         <div data-reveal style={{ "--d": 2 } as CSSProperties} className="divide-y divide-navy-800/10 border-y border-navy-800/10">
           {items.map((it) => (
-            <details key={it.q} className="group">
+            <details key={it.q} className="faq-item group">
               <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden">
                 <h3 className="text-[17px] leading-snug font-semibold text-navy-800">{it.q}</h3>
                 <span
@@ -84,7 +89,7 @@ export function Faq({ title, items }: { title: string; items: { q: string; a: st
                   </svg>
                 </span>
               </summary>
-              <p className="max-w-2xl pb-6 text-small text-muted">{it.a}</p>
+              <p className="faq-answer max-w-2xl pb-6 text-small text-muted">{it.a}</p>
             </details>
           ))}
         </div>
