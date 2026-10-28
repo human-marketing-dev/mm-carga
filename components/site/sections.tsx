@@ -102,7 +102,7 @@ export function Points({
 export function Faq({
   title,
   items,
-  kicker = "Preguntas frecuentes",
+  kicker = "FAQs",
 }: {
   title: string;
   items: { q: string; a: string }[];
