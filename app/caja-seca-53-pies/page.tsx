@@ -128,13 +128,16 @@ export default function CajaSeca() {
   return (
     <>
       {/* Bloque 1 · Hero */}
-      <section className="border-b border-navy-800/8">
+      <section className="bg-(image:--gradient-hero) text-white">
         <Container className="grid items-center gap-12 pt-10 pb-16 lg:grid-cols-[1fr_1.05fr] lg:gap-16 lg:pt-14 lg:pb-20">
           <div className="hero-in flex flex-col items-start gap-6">
-            <nav aria-label="Ruta de navegación" className="text-sm text-muted">
+            <nav
+              aria-label="Ruta de navegación"
+              className="text-sm text-white/65"
+            >
               <ol className="flex flex-wrap items-center gap-2">
                 <li>
-                  <Link href="/" className="hover:text-primary">
+                  <Link href="/" className="hover:text-white">
                     Inicio
                   </Link>
                 </li>
@@ -142,27 +145,27 @@ export default function CajaSeca() {
                 <li>
                   <Link
                     href="/transporte-de-carga/"
-                    className="hover:text-primary"
+                    className="hover:text-white"
                   >
                     Transporte de carga
                   </Link>
                 </li>
                 <li aria-hidden="true">/</li>
-                <li aria-current="page" className="font-semibold text-navy-800">
+                <li aria-current="page" className="font-semibold text-white">
                   Caja seca de 53 pies
                 </li>
               </ol>
             </nav>
-            <h1 className="text-[clamp(36px,4.2vw,56px)] leading-[1.08] font-heavy text-navy-ink">
+            <h1 className="text-[clamp(36px,4.2vw,56px)] leading-[1.08] font-heavy">
               Transporte en caja seca de 53 pies
             </h1>
-            <p className="max-w-xl text-lead text-muted">
+            <p className="max-w-xl text-lead text-white/78">
               Traslado seguro y monitoreado de carga seca en rutas nacionales y
               de exportación, con más de 100 cajas propias.
             </p>
             <div className="flex flex-wrap gap-4 pt-1">
               <Button href="/contacto/">Solicita una cotización</Button>
-              <Button href="#especificaciones" variant="secondary">
+              <Button href="#especificaciones" variant="outline">
                 Ver medidas y capacidad
               </Button>
             </div>

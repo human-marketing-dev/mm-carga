@@ -6,6 +6,12 @@ export const contact = {
   address: "Carretera a Huinala km 6.5, 66673 Pesquería, N.L.",
 };
 
+export const social = [
+  { name: "Facebook", href: "https://www.facebook.com/MMCargaSaDeCv" },
+  { name: "Instagram", href: "https://www.instagram.com/mmcarga/" },
+  { name: "LinkedIn", href: "https://www.linkedin.com/company/mm-carga/" },
+] as const;
+
 export type Service = {
   slug: string;
   name: string;
@@ -20,7 +26,8 @@ export const services: Service[] = [
     slug: "/caja-seca-53-pies/",
     name: "Transporte en caja seca de 53 pies",
     short: "Caja seca 53'",
-    summary: "Traslado de carga seca en rutas nacionales y de exportación a Estados Unidos.",
+    summary:
+      "Traslado de carga seca en rutas nacionales y de exportación a Estados Unidos.",
     image: "/images/servicios/transporte-caja-seca-53-pies-mm-carga.webp",
     imageAlt: "Tractocamión de MM Carga con caja seca de 53 pies en carretera",
   },
@@ -28,15 +35,18 @@ export const services: Service[] = [
     slug: "/transporte-tolva/",
     name: "Transporte en tolva",
     short: "Tolva a granel",
-    summary: "Traslado de materiales a granel en tolvas con capacidad de 140 m³.",
+    summary:
+      "Traslado de materiales a granel en tolvas con capacidad de 140 m³.",
     image: "/images/servicios/transporte-tolva-granel-mm-carga.webp",
-    imageAlt: "Tractocamión de MM Carga con tolvas para transporte de carga a granel",
+    imageAlt:
+      "Tractocamión de MM Carga con tolvas para transporte de carga a granel",
   },
   {
     slug: "/transporte-de-contenedores-maritimos/",
     name: "Transporte de contenedores marítimos",
     short: "Contenedores marítimos",
-    summary: "Movimientos de importación y exportación desde los principales puertos del país.",
+    summary:
+      "Movimientos de importación y exportación desde los principales puertos del país.",
     image: "/images/servicios/transporte-contenedores-maritimos-mm-carga.webp",
     imageAlt: "Tractocamión de MM Carga transportando un contenedor marítimo",
   },
@@ -44,15 +54,18 @@ export const services: Service[] = [
     slug: "/transporte-de-carga-suelta/",
     name: "Transporte de carga suelta en plataforma",
     short: "Carga suelta en plataforma",
-    summary: "Traslado de acero, maquinaria y madera con equipo especializado de amarre y sujeción.",
+    summary:
+      "Traslado de acero, maquinaria y madera con equipo especializado de amarre y sujeción.",
     image: "/images/servicios/transporte-carga-suelta-plataforma-mm-carga.webp",
-    imageAlt: "Plataforma de MM Carga transportando rollos de acero como carga suelta",
+    imageAlt:
+      "Plataforma de MM Carga transportando rollos de acero como carga suelta",
   },
   {
     slug: "/almacenamiento-de-mercancias/",
     name: "Almacenamiento de mercancías y maniobras",
     short: "Almacenamiento",
-    summary: "200,000 m² de almacén, control de inventarios con WMS y báscula certificada para VGM.",
+    summary:
+      "200,000 m² de almacén, control de inventarios con WMS y báscula certificada para VGM.",
     image: "/images/servicios/almacenamiento-de-mercancias-mm-carga.webp",
     imageAlt: "Almacén de MM Carga con mercancía paletizada",
   },
@@ -60,11 +73,15 @@ export const services: Service[] = [
 
 // Resumen corto usado en "Otros servicios" (bloque 8 compartido)
 export const otherServiceSummary: Record<string, string> = {
-  "/caja-seca-53-pies/": "Traslado de carga seca en rutas nacionales y de exportación.",
+  "/caja-seca-53-pies/":
+    "Traslado de carga seca en rutas nacionales y de exportación.",
   "/transporte-tolva/": "Traslado de materiales a granel en tolvas de 140 m³.",
-  "/transporte-de-contenedores-maritimos/": "Importación y exportación desde Altamira, Manzanillo y Coatzacoalcos.",
-  "/transporte-de-carga-suelta/": "Traslado de acero, maquinaria, madera y tubería.",
-  "/almacenamiento-de-mercancias/": "200,000 m², control de inventarios con WMS y báscula VGM.",
+  "/transporte-de-contenedores-maritimos/":
+    "Importación y exportación desde Altamira, Manzanillo y Coatzacoalcos.",
+  "/transporte-de-carga-suelta/":
+    "Traslado de acero, maquinaria, madera y tubería.",
+  "/almacenamiento-de-mercancias/":
+    "200,000 m², control de inventarios con WMS y báscula VGM.",
 };
 
 export const bases = [
@@ -107,10 +124,40 @@ export const bases = [
 ];
 
 export const certifications = [
-  { file: "certificado-6.webp", alt: "Certificación C-TPAT de MM Carga", width: 130, height: 90 },
-  { file: "certificado-5.webp", alt: "Certificación OEA, Operador Económico Autorizado, de MM Carga", width: 130, height: 90 },
-  { file: "certificado-4.webp", alt: "Certificación ISO 9001:2015 de MM Carga", width: 130, height: 90 },
-  { file: "certificado-3.webp", alt: "Programa Transporte Limpio de SEMARNAT", width: 130, height: 90 },
-  { file: "certificado-2.webp", alt: "MM Carga, empresa afiliada a CANACAR", width: 130, height: 90 },
-  { file: "certificado-1.webp", alt: "Registro Dun & Bradstreet de MM Carga", width: 280, height: 39 },
+  {
+    file: "certificado-6.webp",
+    alt: "Certificación C-TPAT de MM Carga",
+    width: 130,
+    height: 90,
+  },
+  {
+    file: "certificado-5.webp",
+    alt: "Certificación OEA, Operador Económico Autorizado, de MM Carga",
+    width: 130,
+    height: 90,
+  },
+  {
+    file: "certificado-4.webp",
+    alt: "Certificación ISO 9001:2015 de MM Carga",
+    width: 130,
+    height: 90,
+  },
+  {
+    file: "certificado-3.webp",
+    alt: "Programa Transporte Limpio de SEMARNAT",
+    width: 130,
+    height: 90,
+  },
+  {
+    file: "certificado-2.webp",
+    alt: "MM Carga, empresa afiliada a CANACAR",
+    width: 130,
+    height: 90,
+  },
+  {
+    file: "certificado-1.webp",
+    alt: "Registro Dun & Bradstreet de MM Carga",
+    width: 280,
+    height: 39,
+  },
 ];

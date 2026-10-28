@@ -2,8 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
 import { ArrowIcon } from "@/components/ui/arrow-icon";
-import { bases, certifications, contact } from "@/lib/site";
+import { bases, certifications, contact, social } from "@/lib/site";
 import { QuoteForm } from "./quote-form";
+import { SocialIcon } from "./icons";
 
 export function Container({
   children,
@@ -276,6 +277,25 @@ export function CtaBand({
               >
                 {contact.email}
               </a>
+            </li>
+            <li className="flex flex-col gap-2.5">
+              <span className="text-xs font-semibold tracking-[0.12em] text-white/55 uppercase">
+                Síguenos
+              </span>
+              <div className="flex gap-2.5">
+                {social.map((n) => (
+                  <a
+                    key={n.name}
+                    href={n.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`MM Carga en ${n.name}`}
+                    className="grid size-11 place-items-center rounded-btn-sm border border-white/15 bg-white/6 text-white transition hover:border-white/35 hover:bg-white/14"
+                  >
+                    <SocialIcon name={n.name} />
+                  </a>
+                ))}
+              </div>
             </li>
           </ul>
         </div>
