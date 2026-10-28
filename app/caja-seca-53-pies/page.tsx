@@ -168,8 +168,9 @@ export default function CajaSeca() {
             </div>
           </div>
           <Photo
-            alt="Caja seca de 53 pies de MM Carga en carretera"
-            label="caja seca de 53 pies en carretera"
+            src="/images/servicios/transporte-caja-seca-53-pies-mm-carga.webp"
+            alt="Tractocamión de MM Carga con caja seca de 53 pies en carretera"
+            sizes="(max-width: 1024px) 100vw, 45vw"
             className="hero-photo aspect-[4/3] rounded-dialog"
             priority
           />

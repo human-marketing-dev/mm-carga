@@ -25,14 +25,15 @@ export function HeaderShell({ children }: { children: ReactNode }) {
 
   const top = isHome && !scrolled && !menuOpen;
 
+  // Línea inferior como sombra interna: así el header mide exactamente h-18 y el hero del Home lo cubre sin hueco
   return (
     <header
       ref={ref}
       data-top={top}
-      className={`group/h sticky top-0 z-40 border-b transition-[background-color,border-color,backdrop-filter] duration-300 ${
+      className={`group/h sticky top-0 z-40 transition-[background-color,box-shadow] duration-300 ${
         top
-          ? "border-transparent bg-transparent"
-          : "border-navy-800/8 bg-white/95 backdrop-blur"
+          ? "bg-transparent"
+          : "bg-white/95 shadow-[inset_0_-1px_0_rgb(10_39_88/0.08)] backdrop-blur"
       }`}
     >
       {children}
