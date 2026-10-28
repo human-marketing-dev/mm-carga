@@ -6,7 +6,6 @@ const nav = [
   { href: "/almacenamiento-de-mercancias/", label: "Almacenamiento" },
   { href: "/cobertura/", label: "Cobertura" },
   { href: "/nosotros/", label: "Nosotros" },
-  { href: "/contacto/", label: "Contacto" },
 ];
 
 const transport = services.filter((s) => s.slug !== "/almacenamiento-de-mercancias/");
