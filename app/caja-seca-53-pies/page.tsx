@@ -346,9 +346,11 @@ export default function CajaSeca() {
               style={{ "--d": 1 } as CSSProperties}
               className="text-body text-muted"
             >
-              Operamos el servicio de caja seca desde nuestras bases en
-              Monterrey, Nuevo Laredo y Silao, con conexión entre la industria
-              del noreste, el Bajío y la frontera con Estados Unidos.
+              Operamos el servicio de caja seca desde nuestras seis bases en
+              Monterrey, Nuevo Laredo, Altamira, Silao, Manzanillo y
+              Coatzacoalcos, con conexión entre los principales corredores
+              industriales, los puertos del país y la frontera con Estados
+              Unidos.
             </p>
             <div className="flex flex-col gap-3 pt-2">
               <TextLink href="/cobertura/">Conoce nuestra cobertura</TextLink>
@@ -357,7 +359,7 @@ export default function CajaSeca() {
               </TextLink>
             </div>
           </div>
-          <MexicoMap highlight={["Monterrey", "Nuevo Laredo", "Silao"]} />
+          <MexicoMap />
         </Container>
       </section>
 
