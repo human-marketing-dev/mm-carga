@@ -88,7 +88,10 @@ export default function Home() {
   return (
     <>
       {/* Bloque 1 · Hero */}
-      <section className="relative isolate -mt-18 overflow-hidden bg-navy-950 pt-18 text-white">
+      <section
+        data-hero="dark"
+        className="relative isolate -mt-18 overflow-hidden bg-navy-950 pt-18 text-white"
+      >
         {/* Imagen de fondo con overlay para legibilidad del texto */}
         <div className="hero-photo absolute inset-0 -z-10">
           <Photo
@@ -166,7 +169,7 @@ export default function Home() {
           <div
             data-reveal
             style={{ "--d": 2 } as CSSProperties}
-            className="flex flex-col gap-6 text-body text-ink lg:pt-9"
+            className="flex flex-col gap-6 text-body text-muted lg:pt-9"
           >
             <p>
               MM Carga es una empresa mexicana especializada en logística,
@@ -175,7 +178,7 @@ export default function Home() {
               y bases de operación) que nos permite gestionar cada etapa de la
               operación, desde la recolección hasta la entrega.
             </p>
-            <p className="text-muted">
+            <p>
               Atendemos a la industria pesada y al comercio exterior con
               servicios para acero, maquinaria, materiales a granel y
               contenedores de importación y exportación. Nuestras unidades

@@ -79,10 +79,10 @@ export function SiteHeader() {
           className="hidden items-center gap-3 rounded-btn bg-linear-135 from-brand-500 to-[#1474ff] py-1.5 pr-1.5 pl-4.5 text-white shadow-btn-primary transition hover:from-[#0964e9] hover:to-[#197dff] lg:flex"
         >
           <span className="flex flex-col leading-tight">
+            <span className="text-sm font-heavy">Solicita una cotización</span>
             <span className="text-[11px] font-semibold text-white/80 tabular-nums">
               {contact.phone}
             </span>
-            <span className="text-sm font-heavy">Solicita una cotización</span>
           </span>
           <span
             className="grid size-9 place-items-center rounded-btn-sm bg-white/16"
@@ -139,11 +139,11 @@ export function SiteHeader() {
               href={QUOTE_HREF}
               className="mt-4 flex flex-col items-center rounded-btn bg-linear-135 from-brand-500 to-[#1474ff] px-4.5 py-3 text-white shadow-btn-primary"
             >
-              <span className="text-xs font-semibold text-white/80 tabular-nums">
-                {contact.phone}
-              </span>
               <span className="text-sm font-heavy">
                 Solicita una cotización
+              </span>
+              <span className="text-xs font-semibold text-white/80 tabular-nums">
+                {contact.phone}
               </span>
             </Link>
           </div>

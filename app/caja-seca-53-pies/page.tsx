@@ -128,7 +128,10 @@ export default function CajaSeca() {
   return (
     <>
       {/* Bloque 1 · Hero */}
-      <section className="bg-(image:--gradient-hero) text-white">
+      <section
+        data-hero="dark"
+        className="-mt-18 bg-(image:--gradient-hero) pt-18 text-white"
+      >
         <Container className="grid items-center gap-12 pt-10 pb-16 lg:grid-cols-[1fr_1.05fr] lg:gap-16 lg:pt-14 lg:pb-20">
           <div className="hero-in flex flex-col items-start gap-6">
             <nav
@@ -191,7 +194,7 @@ export default function CajaSeca() {
             <p
               data-reveal
               style={{ "--d": 1 } as CSSProperties}
-              className="text-body text-ink"
+              className="text-body text-muted"
             >
               La caja seca de 53 pies es un remolque cerrado que protege la
               mercancía de la intemperie, el polvo y el riesgo de robo durante

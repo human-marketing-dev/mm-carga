@@ -5,7 +5,10 @@ import { Container } from "./sections";
 // Página provisional para las rutas del menú que aún no tienen contenido
 export function UnderConstruction({ title }: { title: string }) {
   return (
-    <section className="bg-(image:--gradient-hero) text-white">
+    <section
+      data-hero="dark"
+      className="-mt-18 bg-(image:--gradient-hero) pt-18 text-white"
+    >
       <Container className="flex min-h-[clamp(480px,70vh,680px)] flex-col items-start justify-center gap-6 py-20">
         <p className="rounded-tag border border-white/20 px-3 py-1.5 text-xs font-bold tracking-[0.16em] text-brand-400 uppercase">
           Página en construcción

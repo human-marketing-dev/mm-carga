@@ -3,12 +3,24 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
-// En el Home el header empieza transparente sobre el hero y se vuelve blanco al hacer scroll
+// Sobre un hero oscuro (marcado con data-hero="dark") el header empieza transparente
+// y se vuelve blanco al hacer scroll. En cualquier otra página queda blanco.
 export function HeaderShell({ children }: { children: ReactNode }) {
-  const isHome = usePathname() === "/";
+  const pathname = usePathname();
+  // Valor inicial por ruta para que el primer render (SSR) ya salga correcto; luego se confirma en el DOM
+  const [overHero, setOverHero] = useState(
+    !pathname.startsWith("/design-system"),
+  );
   const ref = useRef<HTMLElement>(null);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() =>
+      setOverHero(!!document.querySelector('main > [data-hero="dark"]')),
+    );
+    return () => cancelAnimationFrame(id);
+  }, [pathname]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -23,7 +35,7 @@ export function HeaderShell({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  const top = isHome && !scrolled && !menuOpen;
+  const top = overHero && !scrolled && !menuOpen;
 
   // Línea inferior como sombra interna: así el header mide exactamente h-18 y el hero del Home lo cubre sin hueco
   return (
