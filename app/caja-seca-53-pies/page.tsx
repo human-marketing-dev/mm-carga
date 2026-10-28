@@ -338,7 +338,7 @@ export default function CajaSeca() {
         <Container className="grid items-center gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
           <div className="flex flex-col gap-6">
             <SectionTitle
-              kicker="Rutas y bases"
+              kicker="Cobertura"
               title="Cobertura del servicio de caja seca"
             />
             <p
@@ -367,7 +367,7 @@ export default function CajaSeca() {
       <section className="py-20 md:py-28">
         <Container className="grid gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
           <SectionTitle
-            kicker="Nuestra diferencia"
+            kicker="Por qué MM Carga"
             title="¿Por qué elegir a MM Carga para el transporte en caja seca?"
           />
           <Points items={reasons} />
@@ -377,7 +377,7 @@ export default function CajaSeca() {
       {/* Bloque 7 · FAQ */}
       <div className="bg-surface">
         <Faq
-          kicker="Dudas comunes"
+          kicker="FAQs"
           title="Preguntas frecuentes sobre la caja seca de 53 pies"
           items={faq}
         />
@@ -387,7 +387,7 @@ export default function CajaSeca() {
       <section className="py-20 md:py-28">
         <Container className="flex flex-col gap-10">
           <SectionTitle
-            kicker="Soluciones logísticas"
+            kicker="Servicios"
             title="Otros servicios de MM Carga"
           />
           <ul className="grid gap-5.5 sm:grid-cols-2 lg:grid-cols-4">
@@ -420,7 +420,7 @@ export default function CajaSeca() {
 
       {/* Bloque 9 · CTA */}
       <CtaBand
-        kicker="Contacto comercial"
+        kicker="Cotización"
         title="Solicita tu cotización de transporte en caja seca de 53 pies"
         text="Compártenos el origen, el destino y el tipo de carga, y te enviaremos una propuesta con la disponibilidad de equipo."
         service="Caja seca de 53 pies"
