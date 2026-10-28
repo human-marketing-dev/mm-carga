@@ -76,14 +76,8 @@ export function SiteHeader() {
         {/* Teléfono + cotización en un solo botón. Destino pendiente de definir: por ahora /contacto/ */}
         <Link
           href={QUOTE_HREF}
-          className="hidden items-center gap-3 rounded-btn bg-linear-135 from-brand-500 to-[#1474ff] py-1.5 pr-1.5 pl-4.5 text-white shadow-btn-primary transition hover:from-[#0964e9] hover:to-[#197dff] lg:flex"
+          className="hidden items-center gap-3 rounded-btn bg-linear-135 from-brand-500 to-[#1474ff] py-1.5 pr-4.5 pl-1.5 text-white shadow-btn-primary transition hover:from-[#0964e9] hover:to-[#197dff] lg:flex"
         >
-          <span className="flex flex-col leading-tight">
-            <span className="text-sm font-heavy">Solicita una cotización</span>
-            <span className="text-[11px] font-semibold text-white/80 tabular-nums">
-              {contact.phone}
-            </span>
-          </span>
           <span
             className="grid size-9 place-items-center rounded-btn-sm bg-white/16"
             aria-hidden="true"
@@ -97,6 +91,12 @@ export function SiteHeader() {
             >
               <path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z" />
             </svg>
+          </span>
+          <span className="flex flex-col leading-tight">
+            <span className="text-sm font-heavy">Solicita una cotización</span>
+            <span className="text-[11px] font-semibold text-white/80 tabular-nums">
+              {contact.phone}
+            </span>
           </span>
         </Link>
 
