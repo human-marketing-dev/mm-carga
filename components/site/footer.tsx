@@ -5,6 +5,10 @@ import { bases, contact, services } from "@/lib/site";
 export function SiteFooter() {
   return (
     <footer className="bg-navy-900 text-slate-300">
+      {/* Divisor con el CTA (mismo ancho que el contenido) */}
+      <div className="mx-auto max-w-7xl px-5 lg:px-8">
+        <div className="border-t border-white/12" />
+      </div>
       <div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 lg:grid-cols-[1.3fr_1fr_1fr_1.2fr] lg:px-8">
         <div className="flex flex-col gap-5">
           <Logo variant="white" className="h-9 self-start" />
