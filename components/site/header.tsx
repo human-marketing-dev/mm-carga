@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Logo } from "@/components/ui/logo";
+import { HeaderShell } from "./header-shell";
 import { contact, services } from "@/lib/site";
 
 const nav = [
@@ -17,20 +18,24 @@ const transport = services.filter(
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 border-b border-navy-800/8 bg-white/95 backdrop-blur">
+    <HeaderShell>
       <div className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-6 px-5 lg:px-8">
         <Link href="/" aria-label="MM Carga, inicio" className="shrink-0">
-          <Logo className="h-9" />
+          <Logo className="h-9 group-data-[top=true]/h:hidden" />
+          <Logo
+            variant="white"
+            className="hidden h-9 group-data-[top=true]/h:block"
+          />
         </Link>
 
         <nav
           aria-label="Principal"
-          className="hidden items-center gap-1 text-[15px] font-semibold text-navy-800 lg:flex"
+          className="hidden items-center gap-1 text-[15px] font-semibold text-navy-800 transition-colors group-data-[top=true]/h:text-white lg:flex"
         >
           <div className="group relative">
             <Link
               href="/transporte-de-carga/"
-              className="flex items-center gap-1.5 rounded-tag px-3 py-2 hover:text-primary"
+              className="flex items-center gap-1.5 rounded-tag px-3 py-2 hover:text-primary group-data-[top=true]/h:hover:text-brand-400"
             >
               Transporte de carga
               <svg viewBox="0 0 12 12" className="size-2.5" aria-hidden="true">
@@ -61,7 +66,7 @@ export function SiteHeader() {
             <Link
               key={n.href}
               href={n.href}
-              className="rounded-tag px-3 py-2 hover:text-primary"
+              className="rounded-tag px-3 py-2 hover:text-primary group-data-[top=true]/h:hover:text-brand-400"
             >
               {n.label}
             </Link>
@@ -96,7 +101,7 @@ export function SiteHeader() {
         </Link>
 
         <details className="group lg:hidden">
-          <summary className="flex size-11 cursor-pointer list-none items-center justify-center rounded-btn-sm border border-navy-800/12 text-navy-800 [&::-webkit-details-marker]:hidden">
+          <summary className="flex size-11 cursor-pointer list-none items-center justify-center rounded-btn-sm border border-navy-800/12 text-navy-800 transition-colors group-data-[top=true]/h:border-white/30 group-data-[top=true]/h:text-white [&::-webkit-details-marker]:hidden">
             <span className="sr-only">Abrir menú</span>
             <svg viewBox="0 0 20 20" className="size-5" aria-hidden="true">
               <path
@@ -144,6 +149,6 @@ export function SiteHeader() {
           </div>
         </details>
       </div>
-    </header>
+    </HeaderShell>
   );
 }

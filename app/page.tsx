@@ -88,7 +88,7 @@ export default function Home() {
   return (
     <>
       {/* Bloque 1 · Hero */}
-      <section className="relative isolate overflow-hidden bg-navy-950 text-white">
+      <section className="relative isolate -mt-18 overflow-hidden bg-navy-950 pt-18 text-white">
         {/* Imagen de fondo con overlay para legibilidad del texto */}
         <div className="hero-photo absolute inset-0 -z-10">
           <Photo
