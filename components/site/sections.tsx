@@ -242,7 +242,7 @@ export function CtaBand({
   return (
     <section
       id="cotizar"
-      className="bg-(image:--gradient-cta) py-20 text-white md:py-28"
+      className="bg-navy-900 bg-(image:--gradient-cta) py-20 text-white md:py-28"
     >
       <Container className="grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
         <div data-reveal className="flex flex-col gap-5">

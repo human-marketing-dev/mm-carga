@@ -91,7 +91,9 @@
   /* Degradados */
   --gradient-hero: linear-gradient(135deg, #062864 0%, #041d4e 55%, #03163d 100%);
   /* CTA: mismo degradado del hero, que se funde hacia abajo con el color del footer (navy-900) */
-  --gradient-cta: linear-gradient(180deg, rgb(3 22 61 / 0) 45%, #03163d 100%), var(--gradient-hero);
+  --gradient-cta:
+    linear-gradient(180deg, rgb(3 22 61 / 0) 45%, #03163d 100%),
+    linear-gradient(135deg, #062864 0%, #041d4e 55%, #03163d 100%);
 
   --animate-pulse-ring: pulse-ring 1.8s ease-out infinite;
 
