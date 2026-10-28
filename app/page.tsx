@@ -22,7 +22,6 @@ import {
 import { ArrowIcon } from "@/components/ui/arrow-icon";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { FloatingCard } from "@/components/ui/floating-card";
 import { services } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -89,14 +88,32 @@ export default function Home() {
   return (
     <>
       {/* Bloque 1 · Hero */}
-      <section className="relative overflow-hidden bg-(image:--gradient-hero) text-white">
-        <Container className="grid items-center gap-12 pt-16 pb-20 lg:grid-cols-[1.25fr_1fr] lg:gap-16 lg:pt-24 lg:pb-28">
-          <div className="hero-in flex flex-col items-start gap-7">
+      <section className="relative isolate overflow-hidden bg-navy-950 text-white">
+        {/* Imagen de fondo: reemplazar placeholder por /images/hero/ cuando llegue la foto */}
+        <div className="hero-photo absolute inset-0 -z-10">
+          <Photo
+            alt="Tráiler de MM Carga, empresa de logística y transporte de carga en México"
+            label="fondo del hero, tráiler MM Carga en carretera"
+            className="size-full"
+            tone="dark"
+            showLabel={false}
+            priority
+          />
+        </div>
+        <div
+          className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-r from-navy-950/95 via-navy-950/75 to-navy-950/25"
+          aria-hidden="true"
+        />
+        <span className="absolute right-5 bottom-5 rounded-tag bg-white/85 px-2.5 py-1 text-xs font-medium text-ink-soft">
+          Foto pendiente · fondo del hero
+        </span>
+        <Container className="flex min-h-[clamp(560px,78vh,760px)] items-center py-20 lg:py-28">
+          <div className="hero-in flex max-w-2xl flex-col items-start gap-7">
             <Badge dot={false}>+30 AÑOS DE EXPERIENCIA</Badge>
-            <h1 className="text-[clamp(36px,4vw,56px)] leading-[1.08] font-heavy">
+            <h1 className="text-[clamp(36px,4.4vw,60px)] leading-[1.08] font-heavy">
               Empresa líder en logística y transporte de carga en México
             </h1>
-            <p className="max-w-xl text-lead tracking-[.05px] text-white/78">
+            <p className="max-w-xl text-lead tracking-[.05px] text-white/80">
               Más de 30 años brindando soluciones de transporte y almacenamiento
               a la industria, con flota, almacenes y bases propias en la
               República Mexicana.
@@ -106,18 +123,6 @@ export default function Home() {
               <Button href="/transporte-de-carga/" variant="outline">
                 Conoce nuestros servicios
               </Button>
-            </div>
-          </div>
-          <div className="hero-photo relative">
-            <Photo
-              alt="Tráiler de MM Carga, empresa de logística y transporte de carga en México"
-              label="tráiler MM Carga en carretera"
-              className="aspect-[4/3.4] rounded-dialog lg:aspect-[4/4.2]"
-              tone="dark"
-              priority
-            />
-            <div className="absolute top-5 left-5">
-              <FloatingCard>Monitoreo 24/7 con GPS y cámaras</FloatingCard>
             </div>
           </div>
         </Container>

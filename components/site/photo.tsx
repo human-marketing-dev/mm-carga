@@ -8,6 +8,7 @@ type Props = {
   sizes?: string;
   priority?: boolean;
   tone?: "light" | "dark";
+  showLabel?: boolean;
 };
 
 // Foto con relleno: mientras no hay imagen, muestra un bloque neutro con la descripción de la toma
@@ -19,6 +20,7 @@ export function Photo({
   sizes = "100vw",
   priority,
   tone = "light",
+  showLabel = true,
 }: Props) {
   const dark = tone === "dark";
   return (
@@ -49,9 +51,11 @@ export function Photo({
             }}
             aria-hidden="true"
           />
-          <span className="relative rounded-tag bg-white/85 px-2.5 py-1 text-xs font-medium text-ink-soft">
-            Foto pendiente · {label ?? alt}
-          </span>
+          {showLabel && (
+            <span className="relative rounded-tag bg-white/85 px-2.5 py-1 text-xs font-medium text-ink-soft">
+              Foto pendiente · {label ?? alt}
+            </span>
+          )}
         </div>
       )}
     </div>
