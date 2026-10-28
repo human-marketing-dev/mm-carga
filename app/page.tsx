@@ -211,8 +211,8 @@ export default function Home() {
                   className="group flex h-full flex-col overflow-hidden rounded-card border border-brand-800/8 bg-white shadow-card transition hover:-translate-y-1 hover:border-brand-800/22 hover:shadow-card-hover"
                 >
                   <Photo
-                    alt={s.name}
-                    label={s.short.toLowerCase()}
+                    src={s.image}
+                    alt={s.imageAlt}
                     className="aspect-[16/10]"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
