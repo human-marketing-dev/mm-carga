@@ -2,11 +2,21 @@ import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
 import { ArrowIcon } from "@/components/ui/arrow-icon";
-import { Button } from "@/components/ui/button";
 import { bases, certifications, contact } from "@/lib/site";
+import { QuoteForm } from "./quote-form";
 
-export function Container({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <div className={`mx-auto w-full max-w-7xl px-5 lg:px-8 ${className}`}>{children}</div>;
+export function Container({
+  children,
+  className = "",
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={`mx-auto w-full max-w-7xl px-5 lg:px-8 ${className}`}>
+      {children}
+    </div>
+  );
 }
 
 export function SectionTitle({
@@ -22,23 +32,44 @@ export function SectionTitle({
 }) {
   return (
     <div data-reveal className={`flex max-w-3xl flex-col gap-4 ${className}`}>
-      {kicker && <p className="text-xs font-bold tracking-[0.16em] text-primary uppercase">{kicker}</p>}
-      <h2 className="text-[30px] leading-[1.15] font-semibold text-navy-ink md:text-[40px]">{title}</h2>
+      {kicker && (
+        <p className="text-xs font-bold tracking-[0.16em] text-primary uppercase">
+          {kicker}
+        </p>
+      )}
+      <h2 className="text-[30px] leading-[1.15] font-semibold text-navy-ink md:text-[40px]">
+        {title}
+      </h2>
       {intro && <p className="text-body text-muted">{intro}</p>}
     </div>
   );
 }
 
-export function TextLink({ href, children }: { href: string; children: ReactNode }) {
+export function TextLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: ReactNode;
+}) {
   return (
-    <Link href={href} className="group inline-flex items-center gap-2 text-[15px] font-bold text-primary">
-      <span className="underline decoration-primary/30 underline-offset-4 group-hover:decoration-primary">{children}</span>
+    <Link
+      href={href}
+      className="group inline-flex items-center gap-2 text-[15px] font-bold text-primary"
+    >
+      <span className="underline decoration-primary/30 underline-offset-4 group-hover:decoration-primary">
+        {children}
+      </span>
       <ArrowIcon className="size-3.5 transition group-hover:translate-x-0.5" />
     </Link>
   );
 }
 
-export function Points({ items }: { items: { title: string; text: string; icon?: ReactNode }[] }) {
+export function Points({
+  items,
+}: {
+  items: { title: string; text: string; icon?: ReactNode }[];
+}) {
   return (
     <div className="grid gap-x-10 gap-y-10 sm:grid-cols-2">
       {items.map((it, i) => (
@@ -48,12 +79,19 @@ export function Points({ items }: { items: { title: string; text: string; icon?:
           style={{ "--d": i } as CSSProperties}
           className="flex flex-col gap-3 border-t-2 border-navy-800 pt-5"
         >
-          {it.icon && (
-            <span className="mb-1 grid size-12 place-items-center rounded-btn bg-brand-50 text-primary" aria-hidden="true">
-              {it.icon}
-            </span>
-          )}
-          <h3 className="text-[19px] leading-snug font-bold text-navy-800">{it.title}</h3>
+          <div className="flex items-center gap-4">
+            {it.icon && (
+              <span
+                className="grid size-12 shrink-0 place-items-center rounded-btn bg-brand-50 text-primary"
+                aria-hidden="true"
+              >
+                {it.icon}
+              </span>
+            )}
+            <h3 className="text-[19px] leading-snug font-bold text-navy-800">
+              {it.title}
+            </h3>
+          </div>
           <p className="text-small text-muted">{it.text}</p>
         </div>
       ))}
@@ -61,7 +99,15 @@ export function Points({ items }: { items: { title: string; text: string; icon?:
   );
 }
 
-export function Faq({ title, items }: { title: string; items: { q: string; a: string }[] }) {
+export function Faq({
+  title,
+  items,
+  kicker = "Preguntas frecuentes",
+}: {
+  title: string;
+  items: { q: string; a: string }[];
+  kicker?: string;
+}) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -74,32 +120,53 @@ export function Faq({ title, items }: { title: string; items: { q: string; a: st
   return (
     <section className="py-20 md:py-28">
       <Container className="grid gap-10 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
-        <SectionTitle title={title} />
-        <div data-reveal style={{ "--d": 2 } as CSSProperties} className="divide-y divide-navy-800/10 border-y border-navy-800/10">
+        <SectionTitle kicker={kicker} title={title} />
+        <div
+          data-reveal
+          style={{ "--d": 2 } as CSSProperties}
+          className="divide-y divide-navy-800/10 border-y border-navy-800/10"
+        >
           {items.map((it) => (
             <details key={it.q} className="faq-item group">
               <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden">
-                <h3 className="text-[17px] leading-snug font-semibold text-navy-800">{it.q}</h3>
+                <h3 className="text-[17px] leading-snug font-semibold text-navy-800">
+                  {it.q}
+                </h3>
                 <span
                   className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full border border-navy-800/20 text-navy-800 transition group-open:rotate-45"
                   aria-hidden="true"
                 >
                   <svg viewBox="0 0 12 12" className="size-2.5">
-                    <path d="M6 1v10M1 6h10" stroke="currentColor" strokeWidth="1.6" />
+                    <path
+                      d="M6 1v10M1 6h10"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                    />
                   </svg>
                 </span>
               </summary>
-              <p className="faq-answer max-w-2xl pb-6 text-small text-muted">{it.a}</p>
+              <p className="faq-answer max-w-2xl pb-6 text-small text-muted">
+                {it.a}
+              </p>
             </details>
           ))}
         </div>
       </Container>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
     </section>
   );
 }
 
-export function Certifications({ title, intro }: { title: string; intro?: string }) {
+export function Certifications({
+  title,
+  intro,
+}: {
+  title: string;
+  intro?: string;
+}) {
   return (
     <section className="border-y border-navy-800/8 py-16">
       <Container className="flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between">
@@ -136,8 +203,15 @@ export function BaseList({ highlight }: { highlight?: string[] }) {
       {bases.map((b, i) => {
         const on = highlight?.includes(b.city);
         return (
-          <li key={b.city} data-reveal="fade" style={{ "--d": i } as CSSProperties} className={`flex flex-col gap-1 p-6 ${on ? "bg-brand-50" : "bg-white"}`}>
-            <span className="text-xs font-bold tracking-[0.14em] text-muted uppercase">{b.region}</span>
+          <li
+            key={b.city}
+            data-reveal="fade"
+            style={{ "--d": i } as CSSProperties}
+            className={`flex flex-col gap-1 p-6 ${on ? "bg-brand-50" : "bg-white"}`}
+          >
+            <span className="text-xs font-bold tracking-[0.14em] text-muted uppercase">
+              {b.region}
+            </span>
             <span className="flex items-center gap-2.5 text-lg font-bold text-navy-800">
               <span
                 className={`size-2.5 rounded-full ${on || !highlight ? "bg-primary" : "bg-slate-300"}`}
@@ -153,21 +227,60 @@ export function BaseList({ highlight }: { highlight?: string[] }) {
   );
 }
 
-export function CtaBand({ title, text, whatsapp = true }: { title: string; text: string; whatsapp?: boolean }) {
+export function CtaBand({
+  title,
+  text,
+  kicker = "Cotización",
+  service,
+}: {
+  title: string;
+  text: string;
+  kicker?: string;
+  service?: string;
+}) {
   return (
-    <section className="bg-(image:--gradient-hero) py-20 text-white md:py-24">
-      <Container className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
-        <div data-reveal className="flex max-w-2xl flex-col gap-4">
-          <h2 className="text-[30px] leading-[1.15] font-semibold md:text-[40px]">{title}</h2>
-          <p className="text-lead text-white/78">{text}</p>
+    <section
+      id="cotizar"
+      className="bg-(image:--gradient-hero) py-20 text-white md:py-28"
+    >
+      <Container className="grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
+        <div data-reveal className="flex flex-col gap-5">
+          <p className="text-xs font-bold tracking-[0.16em] text-brand-400 uppercase">
+            {kicker}
+          </p>
+          <h2 className="text-[30px] leading-[1.15] font-semibold md:text-[40px]">
+            {title}
+          </h2>
+          <p className="max-w-lg text-lead text-white/78">{text}</p>
+          <ul className="mt-4 flex flex-col gap-4 border-t border-white/12 pt-8 text-[15px]">
+            <li className="flex flex-col gap-0.5">
+              <span className="text-xs font-semibold tracking-[0.12em] text-white/55 uppercase">
+                WhatsApp y teléfono
+              </span>
+              <a
+                href={contact.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold tabular-nums hover:text-brand-400"
+              >
+                {contact.phone}
+              </a>
+            </li>
+            <li className="flex flex-col gap-0.5">
+              <span className="text-xs font-semibold tracking-[0.12em] text-white/55 uppercase">
+                Correo
+              </span>
+              <a
+                href={`mailto:${contact.email}`}
+                className="font-semibold hover:text-brand-400"
+              >
+                {contact.email}
+              </a>
+            </li>
+          </ul>
         </div>
-        <div data-reveal style={{ "--d": 2 } as CSSProperties} className="flex flex-wrap gap-4">
-          <Button href="/contacto/">Solicita una cotización</Button>
-          {whatsapp && (
-            <Button href={contact.whatsapp} variant="outline" target="_blank" rel="noopener noreferrer">
-              Contáctanos por WhatsApp
-            </Button>
-          )}
+        <div data-reveal style={{ "--d": 2 } as CSSProperties}>
+          <QuoteForm service={service} />
         </div>
       </Container>
     </section>

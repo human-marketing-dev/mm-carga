@@ -9,13 +9,15 @@ export function SiteFooter() {
         <div className="flex flex-col gap-5">
           <Logo variant="white" className="h-9 self-start" />
           <p className="max-w-xs text-[15px] leading-relaxed">
-            Logística, transporte de carga y almacenamiento con infraestructura propia en México desde hace más de 30
-            años.
+            Logística, transporte de carga y almacenamiento con infraestructura
+            propia en México desde hace más de 30 años.
           </p>
         </div>
 
         <div>
-          <h2 className="text-xs font-bold tracking-[0.14em] text-white uppercase">Servicios</h2>
+          <h2 className="text-xs font-bold tracking-[0.14em] text-white uppercase">
+            Servicios
+          </h2>
           <ul className="mt-5 flex flex-col gap-3 text-[15px]">
             {services.map((s) => (
               <li key={s.slug}>
@@ -28,23 +30,53 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <h2 className="text-xs font-bold tracking-[0.14em] text-white uppercase">Empresa</h2>
+          <h2 className="text-xs font-bold tracking-[0.14em] text-white uppercase">
+            Empresa
+          </h2>
           <ul className="mt-5 flex flex-col gap-3 text-[15px]">
-            <li><Link href="/nosotros/" className="hover:text-white">Nosotros</Link></li>
-            <li><Link href="/cobertura/" className="hover:text-white">Cobertura</Link></li>
-            <li><Link href="/transporte-de-carga-en-monterrey/" className="hover:text-white">Transporte de carga en Monterrey</Link></li>
-            <li><Link href="/contacto/" className="hover:text-white">Contacto</Link></li>
+            <li>
+              <Link href="/nosotros/" className="hover:text-white">
+                Nosotros
+              </Link>
+            </li>
+            <li>
+              <Link href="/cobertura/" className="hover:text-white">
+                Cobertura
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/transporte-de-carga-en-monterrey/"
+                className="hover:text-white"
+              >
+                Transporte de carga en Monterrey
+              </Link>
+            </li>
+            <li>
+              <Link href="/contacto/" className="hover:text-white">
+                Contacto
+              </Link>
+            </li>
           </ul>
         </div>
 
         <div>
-          <h2 className="text-xs font-bold tracking-[0.14em] text-white uppercase">Contacto</h2>
+          <h2 className="text-xs font-bold tracking-[0.14em] text-white uppercase">
+            Contacto
+          </h2>
           <ul className="mt-5 flex flex-col gap-3 text-[15px]">
             <li>
-              <a href={contact.phoneHref} className="tabular-nums hover:text-white">{contact.phone}</a>
+              <a
+                href={contact.phoneHref}
+                className="tabular-nums hover:text-white"
+              >
+                {contact.phone}
+              </a>
             </li>
             <li>
-              <a href={`mailto:${contact.email}`} className="hover:text-white">{contact.email}</a>
+              <a href={`mailto:${contact.email}`} className="hover:text-white">
+                {contact.email}
+              </a>
             </li>
             <li className="leading-relaxed">{contact.address}</li>
           </ul>
@@ -56,7 +88,9 @@ export function SiteFooter() {
           <p>Bases: {bases.map((b) => b.city).join(" · ")}</p>
           <p className="flex gap-5">
             <span>© 2026 MM Carga</span>
-            <Link href="/aviso-de-privacidad/" className="hover:text-white">Aviso de privacidad</Link>
+            <Link href="/aviso-de-privacidad/" className="hover:text-white">
+              Aviso de privacidad
+            </Link>
           </p>
         </div>
       </div>

@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { CountUp } from "@/components/site/count-up";
-import { IconCertified, IconFleet, IconIntegral, IconMonitoring } from "@/components/site/icons";
+import {
+  IconCertified,
+  IconFleet,
+  IconIntegral,
+  IconMonitoring,
+} from "@/components/site/icons";
 import { MexicoMap } from "@/components/site/mexico-map";
 import { Photo } from "@/components/site/photo";
 import {
@@ -87,13 +92,14 @@ export default function Home() {
       <section className="relative overflow-hidden bg-(image:--gradient-hero) text-white">
         <Container className="grid items-center gap-12 pt-16 pb-20 lg:grid-cols-[1.25fr_1fr] lg:gap-16 lg:pt-24 lg:pb-28">
           <div className="hero-in flex flex-col items-start gap-7">
-            <Badge>+30 AÑOS DE EXPERIENCIA</Badge>
+            <Badge dot={false}>+30 AÑOS DE EXPERIENCIA</Badge>
             <h1 className="text-[clamp(36px,4vw,56px)] leading-[1.08] font-heavy">
               Empresa líder en logística y transporte de carga en México
             </h1>
             <p className="max-w-xl text-lead tracking-[.05px] text-white/78">
-              Más de 30 años brindando soluciones de transporte y almacenamiento a la industria, con flota, almacenes y
-              bases propias en la República Mexicana.
+              Más de 30 años brindando soluciones de transporte y almacenamiento
+              a la industria, con flota, almacenes y bases propias en la
+              República Mexicana.
             </p>
             <div className="flex flex-wrap gap-4 pt-1">
               <Button href="/contacto/">Solicita una cotización</Button>
@@ -118,7 +124,10 @@ export default function Home() {
       </section>
 
       {/* Bloque 2 · Cifras */}
-      <section aria-label="MM Carga en cifras" className="border-b border-navy-800/8">
+      <section
+        aria-label="MM Carga en cifras"
+        className="border-b border-navy-800/8"
+      >
         <Container>
           <dl className="grid grid-cols-2 lg:grid-cols-4">
             {figures.map((f, i) => (
@@ -133,7 +142,11 @@ export default function Home() {
                 <dt className="order-2 text-[15px] text-muted">{f.label}</dt>
                 <dd className="order-1 text-[28px] sm:text-[34px] leading-none font-heavy text-navy-800 tabular-nums md:text-[44px]">
                   <CountUp value={f.value} />
-                  {f.unit && <span className="ml-1 text-xl font-bold md:text-2xl">{f.unit}</span>}
+                  {f.unit && (
+                    <span className="ml-1 text-xl font-bold md:text-2xl">
+                      {f.unit}
+                    </span>
+                  )}
                 </dd>
               </div>
             ))}
@@ -144,17 +157,28 @@ export default function Home() {
       {/* Bloque 3 · Presentación */}
       <section className="py-20 md:py-28">
         <Container className="grid gap-10 lg:grid-cols-2 lg:gap-20">
-          <SectionTitle kicker="Quiénes somos" title="Empresa de logística con infraestructura propia en México" />
-          <div data-reveal style={{ "--d": 2 } as CSSProperties} className="flex flex-col gap-6 text-body text-ink lg:pt-9">
+          <SectionTitle
+            kicker="Quiénes somos"
+            title="Empresa de logística con infraestructura propia en México"
+          />
+          <div
+            data-reveal
+            style={{ "--d": 2 } as CSSProperties}
+            className="flex flex-col gap-6 text-body text-ink lg:pt-9"
+          >
             <p>
-              MM Carga es una empresa mexicana especializada en logística, transporte terrestre de carga y
-              almacenamiento de mercancías. Contamos con infraestructura propia (flota, cajas secas, almacenes y bases de
-              operación) que nos permite gestionar cada etapa de la operación, desde la recolección hasta la entrega.
+              MM Carga es una empresa mexicana especializada en logística,
+              transporte terrestre de carga y almacenamiento de mercancías.
+              Contamos con infraestructura propia (flota, cajas secas, almacenes
+              y bases de operación) que nos permite gestionar cada etapa de la
+              operación, desde la recolección hasta la entrega.
             </p>
             <p className="text-muted">
-              Atendemos a la industria pesada y al comercio exterior con servicios para acero, maquinaria, materiales a
-              granel y contenedores de importación y exportación. Nuestras unidades operan con rastreo GPS y cámaras,
-              supervisadas por un centro de monitoreo que funciona las 24 horas.
+              Atendemos a la industria pesada y al comercio exterior con
+              servicios para acero, maquinaria, materiales a granel y
+              contenedores de importación y exportación. Nuestras unidades
+              operan con rastreo GPS y cámaras, supervisadas por un centro de
+              monitoreo que funciona las 24 horas.
             </p>
           </div>
         </Container>
@@ -169,17 +193,13 @@ export default function Home() {
               title="Nuestros servicios de transporte de carga y almacenamiento"
               intro="Ofrecemos el equipo adecuado para cada tipo de carga, con monitoreo permanente y coordinación de origen a destino."
             />
-            <div className="shrink-0">
-              <TextLink href="/transporte-de-carga/">Ver servicios de transporte</TextLink>
-            </div>
           </div>
-          <ul className="grid gap-5.5 md:grid-cols-6">
+          <ul className="grid gap-5.5 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((s, i) => (
               <li
                 key={s.slug}
                 data-reveal
                 style={{ "--d": i } as CSSProperties}
-                className={i < 2 ? "md:col-span-3" : "md:col-span-2"}
               >
                 <Link
                   href={s.slug}
@@ -188,11 +208,13 @@ export default function Home() {
                   <Photo
                     alt={s.name}
                     label={s.short.toLowerCase()}
-                    className={i < 2 ? "aspect-[16/8]" : "aspect-[16/10]"}
-                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="aspect-[16/10]"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                   <div className="flex flex-1 flex-col gap-3 p-6">
-                    <h3 className="text-card-title font-extrabold text-brand-800">{s.name}</h3>
+                    <h3 className="text-card-title font-extrabold text-brand-800">
+                      {s.name}
+                    </h3>
                     <p className="flex-1 text-small text-muted">{s.summary}</p>
                     <span className="inline-flex items-center gap-2 pt-2 text-sm font-bold text-primary">
                       Ver servicio
@@ -202,6 +224,28 @@ export default function Home() {
                 </Link>
               </li>
             ))}
+            <li data-reveal style={{ "--d": services.length } as CSSProperties}>
+              <Link
+                href="/transporte-de-carga/"
+                className="group flex h-full min-h-72 flex-col justify-between gap-8 overflow-hidden rounded-card bg-(image:--gradient-hero) p-8 text-white shadow-card transition hover:-translate-y-1 hover:shadow-card-hover"
+              >
+                <span className="text-xs font-bold tracking-[0.16em] text-white/70 uppercase">
+                  Todos los servicios
+                </span>
+                <span className="flex flex-col gap-3">
+                  <span className="text-[26px] leading-tight font-bold">
+                    Ver servicios de transporte de carga
+                  </span>
+                  <span className="text-small text-white/75">
+                    Conoce el equipo, el alcance y la cobertura de cada
+                    servicio.
+                  </span>
+                </span>
+                <span className="grid size-12 place-items-center rounded-btn bg-white/14 transition group-hover:bg-white/22">
+                  <ArrowIcon className="size-4.5 transition group-hover:translate-x-0.5" />
+                </span>
+              </Link>
+            </li>
           </ul>
         </Container>
       </section>
@@ -214,14 +258,22 @@ export default function Home() {
               kicker="Cobertura"
               title="Presencia en los principales puertos, la frontera norte y el Bajío"
             />
-            <p data-reveal style={{ "--d": 1 } as CSSProperties} className="text-body text-muted">
-              Contamos con bases de operación propias en Altamira, Manzanillo, Coatzacoalcos, Nuevo Laredo, Silao y
-              Monterrey. Esta red nos permite atender con oportunidad las operaciones portuarias del Golfo y del
-              Pacífico, el comercio con Estados Unidos y el corredor industrial del centro del país.
+            <p
+              data-reveal
+              style={{ "--d": 1 } as CSSProperties}
+              className="text-body text-muted"
+            >
+              Contamos con bases de operación propias en Altamira, Manzanillo,
+              Coatzacoalcos, Nuevo Laredo, Silao y Monterrey. Esta red nos
+              permite atender con oportunidad las operaciones portuarias del
+              Golfo y del Pacífico, el comercio con Estados Unidos y el corredor
+              industrial del centro del país.
             </p>
             <div className="flex flex-col gap-3 pt-2">
               <TextLink href="/cobertura/">Conoce nuestra cobertura</TextLink>
-              <TextLink href="/transporte-de-carga-en-monterrey/">Transporte de carga en Monterrey</TextLink>
+              <TextLink href="/transporte-de-carga-en-monterrey/">
+                Transporte de carga en Monterrey
+              </TextLink>
             </div>
           </div>
           <MexicoMap />
@@ -231,7 +283,10 @@ export default function Home() {
       {/* Bloque 6 · Por qué MM Carga */}
       <section className="bg-surface py-20 md:py-28">
         <Container className="grid gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
-          <SectionTitle title="¿Por qué elegir a MM Carga como tu empresa de logística?" />
+          <SectionTitle
+            kicker="Por qué MM Carga"
+            title="¿Por qué elegir a MM Carga como tu empresa de logística?"
+          />
           <Points items={reasons} />
         </Container>
       </section>
@@ -243,7 +298,10 @@ export default function Home() {
       />
 
       {/* Bloque 8 · FAQ */}
-      <Faq title="Preguntas frecuentes sobre logística y transporte de carga" items={faq} />
+      <Faq
+        title="Preguntas frecuentes sobre logística y transporte de carga"
+        items={faq}
+      />
 
       {/* Bloque 9 · CTA */}
       <CtaBand

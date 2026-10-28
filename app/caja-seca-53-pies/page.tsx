@@ -351,7 +351,10 @@ export default function CajaSeca() {
       {/* Bloque 6 · Por qué */}
       <section className="py-20 md:py-28">
         <Container className="grid gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
-          <SectionTitle title="¿Por qué elegir a MM Carga para el transporte en caja seca?" />
+          <SectionTitle
+            kicker="Por qué MM Carga"
+            title="¿Por qué elegir a MM Carga para el transporte en caja seca?"
+          />
           <Points items={reasons} />
         </Container>
       </section>
@@ -400,7 +403,7 @@ export default function CajaSeca() {
       <CtaBand
         title="Solicita tu cotización de transporte en caja seca de 53 pies"
         text="Compártenos el origen, el destino y el tipo de carga, y te enviaremos una propuesta con la disponibilidad de equipo."
-        whatsapp={false}
+        service="Caja seca de 53 pies"
       />
     </>
   );
