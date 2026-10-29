@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import type { CSSProperties } from "react";
 import {
   IconBorder,
   IconCertified,
@@ -12,19 +10,10 @@ import {
   IconSwap,
   IconTrailer,
 } from "@/components/site/icons";
-import { MexicoMap } from "@/components/site/mexico-map";
-import { Photo } from "@/components/site/photo";
 import {
-  Container,
-  CtaBand,
-  Faq,
-  Points,
-  SectionTitle,
-  TextLink,
-} from "@/components/site/sections";
-import { ArrowIcon } from "@/components/ui/arrow-icon";
-import { Button } from "@/components/ui/button";
-import { otherServiceSummary, services } from "@/lib/site";
+  ServicePage,
+  type ServicePageData,
+} from "@/components/site/service-page";
 
 const SLUG = "/caja-seca-53-pies/";
 
@@ -70,7 +59,7 @@ const scope = [
   },
 ];
 
-const specs = [
+const specs: ServicePageData["specs"]["rows"] = [
   ["Largo exterior", "53 pies (16.15 m)"],
   [
     "Medidas interiores aprox.",
@@ -123,314 +112,55 @@ const faq = [
   },
 ];
 
+const data: ServicePageData = {
+  slug: SLUG,
+  parent: { href: "/transporte-de-carga/", label: "Transporte de carga" },
+  crumb: "Caja seca de 53 pies",
+  h1: "Transporte en caja seca de 53 pies",
+  subtitle:
+    "Traslado seguro y monitoreado de carga seca en rutas nacionales y de exportación, con más de 100 cajas propias.",
+  image: {
+    src: "/images/servicios/transporte-caja-seca-53-pies-mm-carga.webp",
+    alt: "Tractocamión de MM Carga con caja seca de 53 pies en carretera",
+  },
+  specsButton: "Ver medidas y capacidad",
+  about: {
+    title: "Caja seca de 53 pies para carga nacional y de exportación",
+    paragraphs: [
+      "La caja seca de 53 pies es un remolque cerrado que protege la mercancía de la intemperie, el polvo y el riesgo de robo durante el trayecto. Es el equipo de mayor uso para carga seca paletizada o empacada, ya que combina gran capacidad volumétrica con altos niveles de seguridad.",
+      "MM Carga cuenta con más de 100 cajas de 53 pies propias, que operan en rutas nacionales y en servicio de exportación a Estados Unidos vía Laredo. Todas las unidades cuentan con rastreo GPS y cámaras, supervisadas por nuestro centro de monitoreo las 24 horas.",
+    ],
+    audience,
+  },
+  scope: {
+    title: "Alcance del servicio de transporte en caja seca",
+    items: scope,
+  },
+  specs: {
+    title: "Caja seca de 53 pies: medidas y capacidad",
+    caption: "Medidas y capacidad de la caja seca de 53 pies",
+    note: "Valores de referencia. La capacidad final se confirma según el tipo de carga.",
+    rows: specs,
+  },
+  coverage: {
+    title: "Cobertura del servicio de caja seca",
+    text: "Operamos el servicio de caja seca desde nuestras seis bases en Monterrey, Nuevo Laredo, Altamira, Silao, Manzanillo y Coatzacoalcos, con conexión entre los principales corredores industriales, los puertos del país y la frontera con Estados Unidos.",
+  },
+  reasons: {
+    title: "¿Por qué elegir a MM Carga para el transporte en caja seca?",
+    items: reasons,
+  },
+  faq: {
+    title: "Preguntas frecuentes sobre la caja seca de 53 pies",
+    items: faq,
+  },
+  cta: {
+    title: "Solicita tu cotización de transporte en caja seca de 53 pies",
+    text: "Compártenos el origen, el destino y el tipo de carga, y te enviaremos una propuesta con la disponibilidad de equipo.",
+    service: "Caja seca de 53 pies",
+  },
+};
+
 export default function CajaSeca() {
-  const others = services.filter((s) => s.slug !== SLUG);
-  return (
-    <>
-      {/* Bloque 1 · Hero */}
-      <section
-        data-hero="dark"
-        className="-mt-18 bg-(image:--gradient-hero) pt-18 text-white"
-      >
-        <Container className="grid items-center gap-12 pt-10 pb-16 lg:grid-cols-[1fr_1.05fr] lg:gap-16 lg:pt-14 lg:pb-20">
-          <div className="hero-in flex flex-col items-start gap-6">
-            <nav
-              aria-label="Ruta de navegación"
-              className="text-sm text-white/65"
-            >
-              <ol className="flex flex-wrap items-center gap-2">
-                <li>
-                  <Link href="/" className="hover:text-white">
-                    Inicio
-                  </Link>
-                </li>
-                <li aria-hidden="true">/</li>
-                <li>
-                  <Link
-                    href="/transporte-de-carga/"
-                    className="hover:text-white"
-                  >
-                    Transporte de carga
-                  </Link>
-                </li>
-                <li aria-hidden="true">/</li>
-                <li aria-current="page" className="font-semibold text-white">
-                  Caja seca de 53 pies
-                </li>
-              </ol>
-            </nav>
-            <h1 className="text-[clamp(36px,4.2vw,56px)] leading-[1.08] font-heavy">
-              Transporte en caja seca de 53 pies
-            </h1>
-            <p className="max-w-xl text-lead text-white/78">
-              Traslado seguro y monitoreado de carga seca en rutas nacionales y
-              de exportación, con más de 100 cajas propias.
-            </p>
-            <div className="flex flex-wrap gap-4 pt-1">
-              <Button href="/contacto/">Solicita una cotización</Button>
-              <Button href="#especificaciones" variant="outline">
-                Ver medidas y capacidad
-              </Button>
-            </div>
-          </div>
-          <Photo
-            src="/images/servicios/transporte-caja-seca-53-pies-mm-carga.webp"
-            alt="Tractocamión de MM Carga con caja seca de 53 pies en carretera"
-            sizes="(max-width: 1024px) 100vw, 45vw"
-            className="hero-photo aspect-[4/3] rounded-dialog"
-            priority
-          />
-        </Container>
-      </section>
-
-      {/* Bloque 2 · Sobre el servicio */}
-      <section className="py-20 md:py-28">
-        <Container className="grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:gap-20">
-          <div className="flex flex-col gap-6">
-            <SectionTitle
-              kicker="Sobre el servicio"
-              title="Caja seca de 53 pies para carga nacional y de exportación"
-            />
-            <p
-              data-reveal
-              style={{ "--d": 1 } as CSSProperties}
-              className="text-body text-muted"
-            >
-              La caja seca de 53 pies es un remolque cerrado que protege la
-              mercancía de la intemperie, el polvo y el riesgo de robo durante
-              el trayecto. Es el equipo de mayor uso para carga seca paletizada
-              o empacada, ya que combina gran capacidad volumétrica con altos
-              niveles de seguridad.
-            </p>
-            <p
-              data-reveal
-              style={{ "--d": 2 } as CSSProperties}
-              className="text-body text-muted"
-            >
-              MM Carga cuenta con más de 100 cajas de 53 pies propias, que
-              operan en rutas nacionales y en servicio de exportación a Estados
-              Unidos vía Laredo. Todas las unidades cuentan con rastreo GPS y
-              cámaras, supervisadas por nuestro centro de monitoreo las 24
-              horas.
-            </p>
-          </div>
-          <aside
-            data-reveal
-            style={{ "--d": 2 } as CSSProperties}
-            className="self-start rounded-card bg-surface p-8"
-          >
-            <p className="text-sm font-bold text-navy-800">
-              Este servicio está dirigido a:
-            </p>
-            <ul className="mt-5 flex flex-col gap-4">
-              {audience.map((a) => (
-                <li
-                  key={a}
-                  className="flex gap-3 text-[15px] leading-relaxed text-ink"
-                >
-                  <svg
-                    viewBox="0 0 16 16"
-                    className="mt-1 size-4 shrink-0 text-primary"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M3 8.5l3 3 7-7"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    />
-                  </svg>
-                  {a}
-                </li>
-              ))}
-            </ul>
-          </aside>
-        </Container>
-      </section>
-
-      {/* Bloque 3 · Alcance */}
-      <section className="bg-surface py-20 md:py-28">
-        <Container className="flex flex-col gap-12">
-          <SectionTitle
-            kicker="Qué incluye"
-            title="Alcance del servicio de transporte en caja seca"
-          />
-          <ul className="grid gap-px overflow-hidden rounded-card border border-navy-800/10 bg-navy-800/10 md:grid-cols-2 lg:grid-cols-3">
-            {scope.map((s, i) => (
-              <li
-                key={s.title}
-                data-reveal="fade"
-                style={{ "--d": i } as CSSProperties}
-                className="flex flex-col gap-3 bg-white p-7"
-              >
-                <span
-                  className="mb-1 grid size-12 place-items-center rounded-btn bg-brand-50 text-primary"
-                  aria-hidden="true"
-                >
-                  {s.icon}
-                </span>
-                <h3 className="text-[19px] font-bold text-navy-800">
-                  {s.title}
-                </h3>
-                <p className="text-small text-muted">{s.text}</p>
-              </li>
-            ))}
-            <li
-              data-reveal="fade"
-              style={{ "--d": 5 } as CSSProperties}
-              className="flex flex-col justify-between gap-6 bg-navy-800 p-7 text-white"
-            >
-              <p className="text-[19px] font-bold">
-                ¿Tu operación requiere otro esquema?
-              </p>
-              <Link
-                href="/contacto/"
-                className="inline-flex items-center gap-2 self-start text-sm font-bold text-white underline decoration-white/40 underline-offset-4 hover:decoration-white"
-              >
-                Cuéntanos tu operación <ArrowIcon className="size-3.5" />
-              </Link>
-            </li>
-          </ul>
-        </Container>
-      </section>
-
-      {/* Bloque 4 · Especificaciones */}
-      <section id="especificaciones" className="py-20 md:py-28">
-        <Container className="grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
-          <div className="flex flex-col gap-5">
-            <SectionTitle
-              kicker="Especificaciones técnicas"
-              title="Caja seca de 53 pies: medidas y capacidad"
-            />
-            <p className="text-small text-muted">
-              Valores de referencia. La capacidad final se confirma según el
-              tipo de carga.
-            </p>
-          </div>
-          <div
-            data-reveal
-            style={{ "--d": 2 } as CSSProperties}
-            className="overflow-x-auto"
-          >
-            <table className="w-full min-w-[480px] border-collapse text-left">
-              <caption className="sr-only">
-                Medidas y capacidad de la caja seca de 53 pies
-              </caption>
-              <tbody>
-                {specs.map(([k, v]) => (
-                  <tr
-                    key={k}
-                    className="border-b border-navy-800/10 first:border-t"
-                  >
-                    <th
-                      scope="row"
-                      className="w-2/5 py-5 pr-6 text-[15px] font-semibold text-muted"
-                    >
-                      {k}
-                    </th>
-                    <td className="py-5 text-[17px] font-semibold text-navy-800 tabular-nums">
-                      {v}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </Container>
-      </section>
-
-      {/* Bloque 5 · Cobertura */}
-      <section className="bg-surface py-20 md:py-28">
-        <Container className="grid items-center gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
-          <div className="flex flex-col gap-6">
-            <SectionTitle
-              kicker="Cobertura"
-              title="Cobertura del servicio de caja seca"
-            />
-            <p
-              data-reveal
-              style={{ "--d": 1 } as CSSProperties}
-              className="text-body text-muted"
-            >
-              Operamos el servicio de caja seca desde nuestras seis bases en
-              Monterrey, Nuevo Laredo, Altamira, Silao, Manzanillo y
-              Coatzacoalcos, con conexión entre los principales corredores
-              industriales, los puertos del país y la frontera con Estados
-              Unidos.
-            </p>
-            <div className="flex flex-col gap-3 pt-2">
-              <TextLink href="/cobertura/">Conoce nuestra cobertura</TextLink>
-              <TextLink href="/transporte-de-carga-en-monterrey/">
-                Transporte de carga en Monterrey
-              </TextLink>
-            </div>
-          </div>
-          <MexicoMap />
-        </Container>
-      </section>
-
-      {/* Bloque 6 · Por qué */}
-      <section className="py-20 md:py-28">
-        <Container className="grid gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
-          <SectionTitle
-            kicker="Por qué MM Carga"
-            title="¿Por qué elegir a MM Carga para el transporte en caja seca?"
-          />
-          <Points items={reasons} />
-        </Container>
-      </section>
-
-      {/* Bloque 7 · FAQ */}
-      <div className="bg-surface">
-        <Faq
-          kicker="FAQs"
-          title="Preguntas frecuentes sobre la caja seca de 53 pies"
-          items={faq}
-        />
-      </div>
-
-      {/* Bloque 8 · Otros servicios */}
-      <section className="py-20 md:py-28">
-        <Container className="flex flex-col gap-10">
-          <SectionTitle
-            kicker="Servicios"
-            title="Otros servicios de MM Carga"
-          />
-          <ul className="grid gap-5.5 sm:grid-cols-2 lg:grid-cols-4">
-            {others.map((s, i) => (
-              <li
-                key={s.slug}
-                data-reveal
-                style={{ "--d": i } as CSSProperties}
-              >
-                <Link
-                  href={s.slug}
-                  className="group flex h-full flex-col gap-3 rounded-card border border-brand-800/8 bg-white p-6 shadow-card transition hover:-translate-y-1 hover:border-brand-800/22 hover:shadow-card-hover"
-                >
-                  <h3 className="text-[19px] leading-snug font-extrabold text-brand-800">
-                    {s.name}
-                  </h3>
-                  <p className="flex-1 text-small text-muted">
-                    {otherServiceSummary[s.slug]}
-                  </p>
-                  <span className="inline-flex items-center gap-2 pt-2 text-sm font-bold text-primary">
-                    Ver servicio{" "}
-                    <ArrowIcon className="size-3.5 transition group-hover:translate-x-0.5" />
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </section>
-
-      {/* Bloque 9 · CTA */}
-      <CtaBand
-        kicker="Cotización"
-        title="Solicita tu cotización de transporte en caja seca de 53 pies"
-        text="Compártenos el origen, el destino y el tipo de carga, y te enviaremos una propuesta con la disponibilidad de equipo."
-        service="Caja seca de 53 pies"
-      />
-    </>
-  );
+  return <ServicePage data={data} />;
 }

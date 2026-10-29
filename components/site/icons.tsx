@@ -93,6 +93,116 @@ export const IconEye = () => (
   </Icon>
 );
 
+// Tolva: remolque abierto arriba
+export const IconHopper = () => (
+  <Icon>
+    <path d="M2.75 6.75h15.5l-2 8.5H4.75l-2-8.5ZM18.25 12.25h3" />
+    <circle cx="7" cy="17.75" r="1.75" />
+    <circle cx="14" cy="17.75" r="1.75" />
+  </Icon>
+);
+
+// Material a granel en capas
+export const IconLayers = () => (
+  <Icon>
+    <path d="m12 3.75 8.25 4.25L12 12.25 3.75 8 12 3.75Z" />
+    <path d="m3.75 12 8.25 4.25L20.25 12M3.75 16l8.25 4.25L20.25 16" />
+  </Icon>
+);
+
+export const IconWeight = () => (
+  <Icon>
+    <circle cx="12" cy="6.25" r="2.25" />
+    <path d="M7.25 9.5h9.5l2.5 10.75H4.75L7.25 9.5Z" />
+  </Icon>
+);
+
+export const IconCost = () => (
+  <Icon>
+    <path d="M3.75 12.6V4.75a1 1 0 0 1 1-1h7.85l8.15 8.15a1 1 0 0 1 0 1.4l-7.45 7.45a1 1 0 0 1-1.4 0L3.75 12.6Z" />
+    <circle cx="8.25" cy="8.25" r="1.5" />
+  </Icon>
+);
+
+export const IconContainer = () => (
+  <Icon>
+    <path d="M2.75 6.75h18.5v10.5H2.75z" />
+    <path d="M7 9.25v5.5M11 9.25v5.5M15 9.25v5.5M19 9.25v5.5" />
+  </Icon>
+);
+
+// Importación: entra al almacén
+export const IconImport = () => (
+  <Icon>
+    <path d="M12 3.75v10M8 10l4 4 4-4" />
+    <path d="M4.75 15.5v3.75h14.5V15.5" />
+  </Icon>
+);
+
+// Exportación: sale hacia el puerto
+export const IconExport = () => (
+  <Icon>
+    <path d="M12 14V4M8 7.75l4-4 4 4" />
+    <path d="M4.75 15.5v3.75h14.5V15.5" />
+  </Icon>
+);
+
+// Báscula certificada (VGM)
+export const IconScale = () => (
+  <Icon>
+    <path d="M12 3.75v15.5M7.5 19.25h9M5.25 6.75h13.5" />
+    <path d="m5.25 6.75-2.5 6a2.5 2.5 0 0 0 5 0l-2.5-6ZM18.75 6.75l-2.5 6a2.5 2.5 0 0 0 5 0l-2.5-6Z" />
+  </Icon>
+);
+
+export const IconWarehouse = () => (
+  <Icon>
+    <path d="M2.75 9 12 4.25 21.25 9v11H2.75V9Z" />
+    <path d="M6.75 20v-7.25h10.5V20M6.75 16.25h10.5" />
+  </Icon>
+);
+
+// Puerto: grúa sobre el muelle
+export const IconPort = () => (
+  <Icon>
+    <path d="M5.75 20.25V4.75h12.5M5.75 8.25l3.5-3.5M16.25 4.75v4" />
+    <path d="M14 8.75h4.5v3.75H14zM2.75 20.25h18.5" />
+  </Icon>
+);
+
+// Plataforma abierta
+export const IconFlatbed = () => (
+  <Icon>
+    <path d="M2.75 15.25h12.5M15.25 15.25V9.75h3.5l2.5 3v2.5h-6" />
+    <circle cx="8.75" cy="11.25" r="3.25" />
+    <circle cx="6" cy="18.25" r="1.75" />
+    <circle cx="17.75" cy="18.25" r="1.75" />
+  </Icon>
+);
+
+// Amarre y sujeción
+export const IconStrap = () => (
+  <Icon>
+    <path d="M4.25 10.75h15.5v8.5H4.25z" />
+    <path d="M9.5 19.25V6.75h5v12.5M11 4.75h2v2h-2z" />
+  </Icon>
+);
+
+export const IconInventory = () => (
+  <Icon>
+    <path d="M8.75 4.25h6.5v2.5h-6.5z" />
+    <path d="M15.25 5.5h2.5v14.75H6.25V5.5h2.5M9 11h6M9 14.5h6M9 18h3" />
+  </Icon>
+);
+
+export const IconForklift = () => (
+  <Icon>
+    <path d="M3.75 17V8.75h5.5L12 13v4M12 13h-8.25M15.75 4.75V18.5h5" />
+    <circle cx="6" cy="18.25" r="1.75" />
+    <circle cx="11" cy="18.25" r="1.75" />
+  </Icon>
+);
+
 // Redes sociales (relleno, 20px)
 export function SocialIcon({
   name,
