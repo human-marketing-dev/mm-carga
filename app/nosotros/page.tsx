@@ -78,8 +78,8 @@ export default function Nosotros() {
           label: "Conoce nuestros servicios",
         }}
         image={{
-          alt: "Instalaciones y flota de MM Carga",
-          label: "instalaciones o equipo de MM Carga",
+          src: "/images/nosotros/flota-propia-tractocamiones-mm-carga.webp",
+          alt: "Flota propia de tractocamiones de MM Carga, empresa de transporte de carga en México",
         }}
       />
 
