@@ -55,7 +55,7 @@ export default function Cobertura() {
         subtitle="Seis bases propias en puertos, la frontera norte y el Bajío para atender con oportunidad cada operación."
         secondary={{ href: "#bases", label: "Ver bases de operación" }}
         image={{
-          src: "/images/cobertura/bases-de-operacion-transporte-de-carga-mm-carga-mexico.webp",
+          src: "/images/cobertura/patio-bases-de-operacion-transporte-de-carga-mm-carga.webp",
           alt: "Patio de MM Carga con tractocamiones y plataformas propias en una base de operación",
         }}
       />

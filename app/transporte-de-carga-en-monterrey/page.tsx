@@ -124,7 +124,7 @@ export default function TransporteMonterrey() {
         subtitle="Soluciones de transporte y almacenamiento para la industria de Nuevo León, con flota propia y monitoreo las 24 horas."
         secondary={{ href: "#servicios", label: "Ver servicios en Monterrey" }}
         image={{
-          src: "/images/monterrey/transporte-de-carga-en-monterrey-nuevo-leon-mm-carga.webp",
+          src: "/images/monterrey/empresa-de-transporte-de-carga-en-monterrey-mm-carga.webp",
           alt: "Tractocamiones de MM Carga para transporte de carga en Monterrey, Nuevo León",
         }}
       />
