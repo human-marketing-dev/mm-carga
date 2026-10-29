@@ -78,7 +78,7 @@ export function Points({
           key={it.title}
           data-reveal
           style={{ "--d": i } as CSSProperties}
-          className="flex flex-col gap-3 border-t-2 border-navy-800 pt-5"
+          className="flex flex-col gap-3 border-t border-navy-800 pt-5"
         >
           <div className="flex items-center gap-4">
             {it.icon && (
