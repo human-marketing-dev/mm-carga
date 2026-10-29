@@ -1,18 +1,18 @@
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
 import { MexicoMap } from "@/components/site/mexico-map";
-import { Photo } from "@/components/site/photo";
+import { PageHero } from "@/components/site/page-hero";
 import {
   Container,
   CtaBand,
   Faq,
   Points,
   SectionTitle,
+  ServiceCards,
   TextLink,
 } from "@/components/site/sections";
 import { ArrowIcon } from "@/components/ui/arrow-icon";
-import { Button } from "@/components/ui/button";
-import { otherServiceSummary, services } from "@/lib/site";
+import { services } from "@/lib/site";
 
 type Item = { title: string; text: string; icon: ReactNode };
 
@@ -67,61 +67,14 @@ export function ServicePage({ data }: { data: ServicePageData }) {
   return (
     <>
       {/* Bloque 1 · Hero */}
-      <section
-        data-hero="dark"
-        className="-mt-18 bg-(image:--gradient-hero) pt-18 text-white"
-      >
-        <Container className="grid items-center gap-12 pt-10 pb-16 lg:grid-cols-[1fr_1.05fr] lg:gap-16 lg:pt-14 lg:pb-20">
-          <div className="hero-in flex flex-col items-start gap-6">
-            <nav
-              aria-label="Ruta de navegación"
-              className="text-sm text-white/65"
-            >
-              <ol className="flex flex-wrap items-center gap-2">
-                <li>
-                  <Link href="/" className="hover:text-white">
-                    Inicio
-                  </Link>
-                </li>
-                {data.parent && (
-                  <>
-                    <li aria-hidden="true">/</li>
-                    <li>
-                      <Link
-                        href={data.parent.href}
-                        className="hover:text-white"
-                      >
-                        {data.parent.label}
-                      </Link>
-                    </li>
-                  </>
-                )}
-                <li aria-hidden="true">/</li>
-                <li aria-current="page" className="font-semibold text-white">
-                  {data.crumb}
-                </li>
-              </ol>
-            </nav>
-            <h1 className="text-[clamp(36px,4.2vw,56px)] leading-[1.08] font-heavy">
-              {data.h1}
-            </h1>
-            <p className="max-w-xl text-lead text-white/78">{data.subtitle}</p>
-            <div className="flex flex-wrap gap-4 pt-1">
-              <Button href="/contacto/">Solicita una cotización</Button>
-              <Button href="#especificaciones" variant="outline">
-                {data.specsButton}
-              </Button>
-            </div>
-          </div>
-          <Photo
-            src={data.image.src}
-            alt={data.image.alt}
-            sizes="(max-width: 1024px) 100vw, 45vw"
-            className="hero-photo aspect-[4/3] rounded-dialog"
-            priority
-          />
-        </Container>
-      </section>
+      <PageHero
+        parents={data.parent ? [data.parent] : []}
+        crumb={data.crumb}
+        h1={data.h1}
+        subtitle={data.subtitle}
+        secondary={{ href: "#especificaciones", label: data.specsButton }}
+        image={data.image}
+      />
 
       {/* Bloque 2 · Sobre el servicio */}
       <section className="py-20 md:py-28">
@@ -321,31 +274,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
             kicker="Servicios"
             title="Otros servicios de MM Carga"
           />
-          <ul className="grid gap-5.5 sm:grid-cols-2 lg:grid-cols-4">
-            {others.map((s, i) => (
-              <li
-                key={s.slug}
-                data-reveal
-                style={{ "--d": i } as CSSProperties}
-              >
-                <Link
-                  href={s.slug}
-                  className="group flex h-full flex-col gap-3 rounded-card border border-brand-800/8 bg-white p-6 shadow-card transition hover:-translate-y-1 hover:border-brand-800/22 hover:shadow-card-hover"
-                >
-                  <h3 className="text-[19px] leading-snug font-extrabold text-brand-800">
-                    {s.name}
-                  </h3>
-                  <p className="flex-1 text-small text-muted">
-                    {otherServiceSummary[s.slug]}
-                  </p>
-                  <span className="inline-flex items-center gap-2 pt-2 text-sm font-bold text-primary">
-                    Ver servicio{" "}
-                    <ArrowIcon className="size-3.5 transition group-hover:translate-x-0.5" />
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <ServiceCards items={others} />
         </Container>
       </section>
 

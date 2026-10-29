@@ -4,6 +4,10 @@ export const contact = {
   whatsapp: "https://wa.me/528119851429",
   email: "info@mmcarga.com",
   address: "Carretera a Huinala km 6.5, 66673 Pesquería, N.L.",
+  // ⚠️ Uso por confirmar con el cliente (viene del sitio actual)
+  phoneAlt: "+52 81 2320 5781",
+  phoneAltHref: "tel:+528123205781",
+  purchasing: "comprasmty@mmcarga.com",
 };
 
 export const social = [
@@ -89,36 +93,49 @@ export const bases = [
     city: "Altamira",
     state: "Tamaulipas",
     region: "Puerto del Golfo",
+    role: "Base de operación en el puerto de Altamira, Golfo de México.",
+    address: "G35W+RJ, 89630 Altamira, Tamps.",
     maps: "https://www.google.com/search?kgmid=/g/11qq481sbx&q=MM+CARGA+Altamira",
   },
   {
     city: "Coatzacoalcos",
     state: "Veracruz",
     region: "Puerto del Golfo",
+    role: "Base de operación en el sur del Golfo de México.",
+    address:
+      "Av. del Puente 123, Adolfo López Mateos, 96490 Coatzacoalcos, Ver.",
     maps: "https://www.google.com/maps/place/MM+CARGA/@18.1266741,-94.4356405,17z/data=!3m1!4b1!4m6!3m5!1s0x85e9835b934094d7:0x604769212dd3ccae!8m2!3d18.1266741!4d-94.4356405!16s%2Fg%2F11fsymp34p",
   },
   {
     city: "Manzanillo",
     state: "Colima",
     region: "Puerto del Pacífico",
+    role: "Base de operación en el principal puerto del Pacífico mexicano.",
+    address: "Parcela 228, 28800 El Colomo, Col.",
     maps: "https://www.google.com/search?kgmid=/g/11mksq__7r&q=MM+CARGA+Manzanillo",
   },
   {
     city: "Nuevo Laredo",
     state: "Tamaulipas",
     region: "Frontera norte",
+    role: "Base de operación en la frontera con Estados Unidos.",
+    address: "H9CW+HQ, 88350 La Cruz, Tamps.",
     maps: "https://www.google.com.mx/maps/place/MM+Carga+Nuevo+Laredo/@27.5715046,-99.6056105,17z/data=!3m1!4b1!4m6!3m5!1s0x86611f00073ba98f:0x6c0a8232040ea873!8m2!3d27.5714999!4d-99.6030356!16s%2Fg%2F11wqhpxwp0",
   },
   {
     city: "Monterrey",
     state: "Nuevo León",
     region: "Noreste industrial",
+    role: "Oficina corporativa y base para el noreste del país.",
+    address: "Carretera a Huinala km 6.5, 66673 Pesquería, N.L.",
     maps: "https://www.google.com/search?kgmid=/g/11y0f6b1g8&q=MM+CARGA+Trabajo",
   },
   {
     city: "Silao",
     state: "Guanajuato",
     region: "Bajío",
+    role: "Base de operación en el corredor industrial del Bajío.",
+    address: "XGJC+2WC, Colonias Nuevo México, Gto.",
     maps: "https://www.google.com/maps?q=20.9800509,-101.4777494&z=17&hl=es",
   },
 ];

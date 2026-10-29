@@ -17,8 +17,17 @@ const field =
 const label = "flex flex-col gap-1.5 text-[13px] font-semibold text-navy-800";
 
 // Pendiente: definir a dónde se envía (correo, CRM o WhatsApp). Por ahora no envía nada.
-export function QuoteForm({ service }: { service?: string }) {
+// withReason (página de Contacto): agrega "Motivo"; para proveedores se ocultan servicio, origen y destino
+export function QuoteForm({
+  service,
+  withReason = false,
+}: {
+  service?: string;
+  withReason?: boolean;
+}) {
   const [sent, setSent] = useState(false);
+  const [reason, setReason] = useState("Cotización");
+  const isQuote = reason === "Cotización";
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -72,41 +81,60 @@ export function QuoteForm({ service }: { service?: string }) {
             className={field}
           />
         </label>
-        <label className={`${label} sm:col-span-2`}>
-          Servicio de interés
-          <select
-            id="cot-servicio"
-            name="servicio"
-            defaultValue={service ?? ""}
-            required
-            className={field}
-          >
-            <option value="" disabled>
-              Selecciona un servicio
-            </option>
-            {serviceOptions.map((o) => (
-              <option key={o}>{o}</option>
-            ))}
-          </select>
-        </label>
-        <label className={label}>
-          Origen
-          <input
-            id="cot-origen"
-            name="origen"
-            placeholder="Ciudad o planta"
-            className={field}
-          />
-        </label>
-        <label className={label}>
-          Destino
-          <input
-            id="cot-destino"
-            name="destino"
-            placeholder="Ciudad o planta"
-            className={field}
-          />
-        </label>
+        {withReason && (
+          <label className={`${label} sm:col-span-2`}>
+            Motivo
+            <select
+              id="cot-motivo"
+              name="motivo"
+              value={reason}
+              onChange={(e) => setReason(e.target.value)}
+              className={field}
+            >
+              <option>Cotización</option>
+              <option>Proveedores</option>
+            </select>
+          </label>
+        )}
+        {isQuote && (
+          <>
+            <label className={`${label} sm:col-span-2`}>
+              Servicio de interés
+              <select
+                id="cot-servicio"
+                name="servicio"
+                defaultValue={service ?? ""}
+                required
+                className={field}
+              >
+                <option value="" disabled>
+                  Selecciona un servicio
+                </option>
+                {serviceOptions.map((o) => (
+                  <option key={o}>{o}</option>
+                ))}
+              </select>
+            </label>
+            <label className={label}>
+              Origen
+              <input
+                id="cot-origen"
+                name="origen"
+                placeholder="Ciudad o planta"
+                className={field}
+              />
+            </label>
+            <label className={label}>
+              Destino
+              <input
+                id="cot-destino"
+                name="destino"
+                placeholder="Ciudad o planta"
+                className={field}
+              />
+            </label>
+          </>
+        )}
         <label className={`${label} sm:col-span-2`}>
           Mensaje
           <textarea

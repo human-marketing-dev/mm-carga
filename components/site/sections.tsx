@@ -2,7 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
 import { ArrowIcon } from "@/components/ui/arrow-icon";
-import { bases, certifications, contact, social } from "@/lib/site";
+import {
+  bases,
+  certifications,
+  contact,
+  otherServiceSummary,
+  social,
+  type Service,
+} from "@/lib/site";
+import { CountUp } from "./count-up";
 import { QuoteForm } from "./quote-form";
 import { SocialIcon } from "./icons";
 
@@ -304,5 +312,79 @@ export function CtaBand({
         </div>
       </Container>
     </section>
+  );
+}
+
+export type Figure = { value: string; unit?: string; label: string };
+
+// Franja de cifras (Home y Nosotros); los valores tipo "24/7" no se animan
+export function Figures({ items, label }: { items: Figure[]; label: string }) {
+  // 6 cifras (Nosotros) van en 2 filas de 3 para que los números grandes no se encimen
+  const six = items.length > 4;
+  return (
+    <section aria-label={label} className="border-b border-navy-800/8">
+      <Container>
+        <dl
+          className={
+            six
+              ? "grid grid-cols-2 gap-px bg-navy-800/10 lg:grid-cols-3"
+              : "grid grid-cols-2 lg:grid-cols-4"
+          }
+        >
+          {items.map((f, i) => (
+            <div
+              key={f.label}
+              data-reveal
+              style={{ "--d": i } as CSSProperties}
+              className={
+                six
+                  ? `flex flex-col gap-1 bg-white py-8 lg:py-10 ${i % 2 ? "pl-6" : "pr-6"} lg:px-8 ${i % 3 === 0 ? "lg:pl-0" : ""}`
+                  : `flex flex-col gap-1 py-8 lg:py-10 ${i % 2 ? "pl-6" : "pr-6"} lg:px-8 ${
+                      i > 0 ? "lg:border-l lg:border-navy-800/10" : "lg:pl-0"
+                    } ${i % 2 ? "border-l border-navy-800/10" : ""} ${i > 1 ? "border-t border-navy-800/10 lg:border-t-0" : ""}`
+              }
+            >
+              <dt className="order-2 text-[15px] text-muted">{f.label}</dt>
+              <dd className="order-1 text-[28px] leading-none font-heavy text-navy-800 tabular-nums sm:text-[34px] md:text-[44px]">
+                {f.value.includes("/") ? f.value : <CountUp value={f.value} />}
+                {f.unit && (
+                  <span className="ml-1 text-xl font-bold md:text-2xl">
+                    {f.unit}
+                  </span>
+                )}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </Container>
+    </section>
+  );
+}
+
+// Tarjetas de servicios con resumen corto (Otros servicios, Cobertura)
+export function ServiceCards({ items }: { items: Service[] }) {
+  const cols = items.length > 4 ? "lg:grid-cols-5" : "lg:grid-cols-4";
+  return (
+    <ul className={`grid gap-5.5 sm:grid-cols-2 ${cols}`}>
+      {items.map((s, i) => (
+        <li key={s.slug} data-reveal style={{ "--d": i } as CSSProperties}>
+          <Link
+            href={s.slug}
+            className="group flex h-full flex-col gap-3 rounded-card border border-brand-800/8 bg-white p-6 shadow-card transition hover:-translate-y-1 hover:border-brand-800/22 hover:shadow-card-hover"
+          >
+            <h3 className="text-[19px] leading-snug font-extrabold text-brand-800">
+              {s.name}
+            </h3>
+            <p className="flex-1 text-small text-muted">
+              {otherServiceSummary[s.slug]}
+            </p>
+            <span className="inline-flex items-center gap-2 pt-2 text-sm font-bold text-primary">
+              Ver servicio{" "}
+              <ArrowIcon className="size-3.5 transition group-hover:translate-x-0.5" />
+            </span>
+          </Link>
+        </li>
+      ))}
+    </ul>
   );
 }

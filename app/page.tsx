@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { CountUp } from "@/components/site/count-up";
 import {
   IconCertified,
   IconFleet,
@@ -15,6 +14,7 @@ import {
   Container,
   CtaBand,
   Faq,
+  Figures,
   Points,
   SectionTitle,
   TextLink,
@@ -129,35 +129,7 @@ export default function Home() {
       </section>
 
       {/* Bloque 2 · Cifras */}
-      <section
-        aria-label="MM Carga en cifras"
-        className="border-b border-navy-800/8"
-      >
-        <Container>
-          <dl className="grid grid-cols-2 lg:grid-cols-4">
-            {figures.map((f, i) => (
-              <div
-                key={f.label}
-                data-reveal
-                style={{ "--d": i } as CSSProperties}
-                className={`flex flex-col gap-1 py-8 lg:py-10 ${i % 2 ? "pl-6" : "pr-6"} lg:px-8 ${
-                  i > 0 ? "lg:border-l lg:border-navy-800/10" : "lg:pl-0"
-                } ${i % 2 ? "border-l border-navy-800/10" : ""} ${i > 1 ? "border-t border-navy-800/10 lg:border-t-0" : ""}`}
-              >
-                <dt className="order-2 text-[15px] text-muted">{f.label}</dt>
-                <dd className="order-1 text-[28px] sm:text-[34px] leading-none font-heavy text-navy-800 tabular-nums md:text-[44px]">
-                  <CountUp value={f.value} />
-                  {f.unit && (
-                    <span className="ml-1 text-xl font-bold md:text-2xl">
-                      {f.unit}
-                    </span>
-                  )}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </Container>
-      </section>
+      <Figures items={figures} label="MM Carga en cifras" />
 
       {/* Bloque 3 · Presentación */}
       <section className="py-20 md:py-28">
