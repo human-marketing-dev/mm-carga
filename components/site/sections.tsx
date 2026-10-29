@@ -362,7 +362,13 @@ export function Figures({ items, label }: { items: Figure[]; label: string }) {
 }
 
 // Tarjetas de servicios con resumen corto (Otros servicios, Cobertura)
-export function ServiceCards({ items }: { items: Service[] }) {
+export function ServiceCards({
+  items,
+  summaries = otherServiceSummary,
+}: {
+  items: Service[];
+  summaries?: Record<string, string>;
+}) {
   const cols = items.length > 4 ? "lg:grid-cols-5" : "lg:grid-cols-4";
   return (
     <ul className={`grid gap-5.5 sm:grid-cols-2 ${cols}`}>
@@ -375,9 +381,7 @@ export function ServiceCards({ items }: { items: Service[] }) {
             <h3 className="text-[19px] leading-snug font-extrabold text-brand-800">
               {s.name}
             </h3>
-            <p className="flex-1 text-small text-muted">
-              {otherServiceSummary[s.slug]}
-            </p>
+            <p className="flex-1 text-small text-muted">{summaries[s.slug]}</p>
             <span className="inline-flex items-center gap-2 pt-2 text-sm font-bold text-primary">
               Ver servicio{" "}
               <ArrowIcon className="size-3.5 transition group-hover:translate-x-0.5" />

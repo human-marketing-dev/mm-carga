@@ -8,7 +8,16 @@ const HQ = "Monterrey";
 const labelLeft = new Set(["Manzanillo", "Silao", "Monterrey"]);
 
 // highlight: bases que operan el servicio; las demás se muestran en gris
-export function MexicoMap({ highlight }: { highlight?: string[] }) {
+export function MexicoMap({
+  highlight,
+  activeLabel = "Base que opera este servicio",
+  linksLabel = "Cómo llegar a las bases de este servicio",
+}: {
+  highlight?: string[];
+  /** Textos de la leyenda cuando hay highlight (por defecto, páginas de servicio) */
+  activeLabel?: string;
+  linksLabel?: string;
+}) {
   const hq = BASE_POINTS[HQ];
   const active = (city: string) => !highlight || highlight.includes(city);
   const linked = bases.filter((b) => active(b.city));
@@ -114,9 +123,7 @@ export function MexicoMap({ highlight }: { highlight?: string[] }) {
       </div>
       <div className="mt-6 flex flex-col gap-3">
         <p className="text-sm font-semibold text-navy-800">
-          {highlight
-            ? "Cómo llegar a las bases de este servicio"
-            : "Cómo llegar a cada base"}
+          {highlight ? linksLabel : "Cómo llegar a cada base"}
         </p>
         <ul className="grid grid-cols-2 gap-2 sm:grid-cols-3">
           {linked.map((b) => (
@@ -148,9 +155,7 @@ export function MexicoMap({ highlight }: { highlight?: string[] }) {
             className="size-2.5 rounded-full bg-brand-700"
             aria-hidden="true"
           />{" "}
-          {highlight
-            ? "Base que opera este servicio"
-            : "Base de operación propia"}
+          {highlight ? activeLabel : "Base de operación propia"}
         </span>
         {highlight && (
           <span className="flex items-center gap-2">
