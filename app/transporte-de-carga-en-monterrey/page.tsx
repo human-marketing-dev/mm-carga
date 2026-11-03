@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import type { CSSProperties } from "react";
 import {
   IconCertified,
@@ -153,6 +154,17 @@ export default function TransporteMonterrey() {
               región, lo que nos permite planear cada traslado de acero,
               maquinaria, granel o mercancía de importación con precisión.
             </p>
+            <p>
+              La base de Pesquería cuenta con almacén propio para el{" "}
+              <Link
+                href="/almacenamiento-de-mercancias/"
+                className="font-semibold text-primary underline decoration-primary/30 underline-offset-4 hover:decoration-primary"
+              >
+                resguardo de mercancías
+              </Link>
+              , y desde ella ofrecemos cobertura nacional hacia el resto de
+              nuestras bases.
+            </p>
           </div>
         </Container>
       </section>
@@ -305,7 +317,7 @@ export default function TransporteMonterrey() {
       {/* Bloque 8 · CTA */}
       <CtaBand
         kicker="Cotización"
-        title="Transporte de carga en Monterrey con respaldo de más de 30 años"
+        title="Transporte de carga en Monterrey con respaldo de 20 años"
         text="Nuestro equipo está listo para analizar tu operación y presentarte una propuesta."
       />
 

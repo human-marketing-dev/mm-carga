@@ -40,6 +40,7 @@ const data: ServicePageData = {
     paragraphs: [
       "Se denomina carga suelta a la mercancía que se transporta sin contenedor ni caja, como rollos y placas de acero, vigas, tubería, maquinaria o madera. Por sus dimensiones y peso, se traslada en plataformas abiertas que facilitan las maniobras con grúa o montacargas y se asegura mediante equipo de amarre.",
       "MM Carga cuenta con más de 200 unidades full para carga suelta y equipo propio de amarre y sujeción. Asimismo, realizamos maniobras de carga y descarga en puerto para mercancía de importación y exportación.",
+      "Las plataformas en full son el equipo principal de MM Carga: con ellas transportamos acero, carga suelta, maquinaria y también contenedores marítimos.",
     ],
     audience: [
       "Industria siderúrgica, acereras y centros de servicio de acero",
@@ -86,7 +87,7 @@ const data: ServicePageData = {
   },
   coverage: {
     title: "Cobertura del servicio de transporte en plataforma",
-    text: "Operamos el servicio de transporte en plataforma desde nuestras seis bases en Monterrey, Nuevo Laredo, Altamira, Silao, Manzanillo y Coatzacoalcos, con conexión entre los puertos de importación, la zona industrial del noreste y el Bajío.",
+    text: "Ofrecemos el transporte en plataforma con cobertura nacional, desde y hacia nuestras bases en Monterrey, Nuevo Laredo, Altamira, Silao, Manzanillo y Coatzacoalcos.",
   },
   reasons: {
     title: "¿Por qué elegir a MM Carga para el transporte de carga suelta?",
@@ -94,7 +95,7 @@ const data: ServicePageData = {
       {
         title: "Especialización en carga pesada",
         icon: <IconWeight />,
-        text: "Más de 30 años atendiendo a la industria del acero y la maquinaria.",
+        text: "20 años atendiendo a la industria del acero y la maquinaria.",
       },
       {
         title: "Capacidad para grandes volúmenes",

@@ -32,13 +32,22 @@ export type ServicePageData = {
   about: { title: string; paragraphs: string[]; audience: string[] };
   scope: { title: string; items: Item[] };
   specs: {
+    /** Oculta el bloque mientras el cliente no confirme los datos */
+    hidden?: boolean;
     title: string;
     caption: string;
     note?: string;
     head?: string[];
     rows: Cell[][];
   };
-  coverage: { title: string; text: string };
+  coverage: {
+    title: string;
+    text: string;
+    /** Bases que se destacan en el mapa; sin valor, las 6 */
+    highlight?: string[];
+    activeLabel?: string;
+    linksLabel?: string;
+  };
   reasons: { title: string; items: Item[] };
   faq: { title: string; items: { q: string; a: string }[] };
   cta: { title: string; text: string; service: string };
@@ -63,6 +72,10 @@ export function ServicePage({ data }: { data: ServicePageData }) {
   const others = services.filter((s) => s.slug !== data.slug);
   const n = data.scope.items.length;
   const { head, rows } = data.specs;
+  const showSpecs = !data.specs.hidden;
+  // Sin especificaciones, los fondos alternos se recorren un bloque para no juntar dos grises
+  const tone = (surface: boolean) =>
+    surface !== !showSpecs ? "bg-surface" : "";
 
   return (
     <>
@@ -72,7 +85,11 @@ export function ServicePage({ data }: { data: ServicePageData }) {
         crumb={data.crumb}
         h1={data.h1}
         subtitle={data.subtitle}
-        secondary={{ href: "#especificaciones", label: data.specsButton }}
+        secondary={
+          showSpecs
+            ? { href: "#especificaciones", label: data.specsButton }
+            : { href: "#cobertura", label: "Ver cobertura" }
+        }
         image={data.image}
       />
 
@@ -170,69 +187,74 @@ export function ServicePage({ data }: { data: ServicePageData }) {
       </section>
 
       {/* Bloque 4 · Especificaciones */}
-      <section id="especificaciones" className="py-20 md:py-28">
-        <Container className="grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
-          <div className="flex flex-col gap-5">
-            <SectionTitle
-              kicker="Especificaciones técnicas"
-              title={data.specs.title}
-            />
-            {data.specs.note && (
-              <p className="text-small text-muted">{data.specs.note}</p>
-            )}
-          </div>
-          <div
-            data-reveal
-            style={{ "--d": 2 } as CSSProperties}
-            className="overflow-x-auto"
-          >
-            <table className="w-full min-w-[480px] border-collapse text-left">
-              <caption className="sr-only">{data.specs.caption}</caption>
-              {head && (
-                <thead>
-                  <tr>
-                    {head.map((h) => (
-                      <th
-                        key={h}
-                        scope="col"
-                        className="pr-6 pb-4 text-xs font-bold tracking-[0.12em] text-muted uppercase"
-                      >
-                        {h}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
+      {showSpecs && (
+        <section id="especificaciones" className="py-20 md:py-28">
+          <Container className="grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
+            <div className="flex flex-col gap-5">
+              <SectionTitle
+                kicker="Especificaciones técnicas"
+                title={data.specs.title}
+              />
+              {data.specs.note && (
+                <p className="text-small text-muted">{data.specs.note}</p>
               )}
-              <tbody>
-                {rows.map(([k, ...vals]) => (
-                  <tr
-                    key={k}
-                    className="border-b border-navy-800/10 first:border-t"
-                  >
-                    <th
-                      scope="row"
-                      className={`py-5 pr-6 text-[15px] font-semibold ${head ? "text-navy-800" : "w-2/5 text-muted"}`}
+            </div>
+            <div
+              data-reveal
+              style={{ "--d": 2 } as CSSProperties}
+              className="overflow-x-auto"
+            >
+              <table className="w-full min-w-[480px] border-collapse text-left">
+                <caption className="sr-only">{data.specs.caption}</caption>
+                {head && (
+                  <thead>
+                    <tr>
+                      {head.map((h) => (
+                        <th
+                          key={h}
+                          scope="col"
+                          className="pr-6 pb-4 text-xs font-bold tracking-[0.12em] text-muted uppercase"
+                        >
+                          {h}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                )}
+                <tbody>
+                  {rows.map(([k, ...vals]) => (
+                    <tr
+                      key={k}
+                      className="border-b border-navy-800/10 first:border-t"
                     >
-                      {k}
-                    </th>
-                    {vals.map((v, i) => (
-                      <td
-                        key={i}
-                        className={`py-5 pr-6 tabular-nums ${head ? "text-[15px] text-muted" : "text-[17px] font-semibold text-navy-800"}`}
+                      <th
+                        scope="row"
+                        className={`py-5 pr-6 text-[15px] font-semibold ${head ? "text-navy-800" : "w-2/5 text-muted"}`}
                       >
-                        <SpecValue value={v} />
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </Container>
-      </section>
+                        {k}
+                      </th>
+                      {vals.map((v, i) => (
+                        <td
+                          key={i}
+                          className={`py-5 pr-6 tabular-nums ${head ? "text-[15px] text-muted" : "text-[17px] font-semibold text-navy-800"}`}
+                        >
+                          <SpecValue value={v} />
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Container>
+        </section>
+      )}
 
       {/* Bloque 5 · Cobertura */}
-      <section className="bg-surface py-20 md:py-28">
+      <section
+        id="cobertura"
+        className={`scroll-mt-24 py-20 md:py-28 ${tone(true)}`}
+      >
         <Container className="grid items-center gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
           <div className="flex flex-col gap-6">
             <SectionTitle kicker="Cobertura" title={data.coverage.title} />
@@ -250,12 +272,16 @@ export function ServicePage({ data }: { data: ServicePageData }) {
               </TextLink>
             </div>
           </div>
-          <MexicoMap />
+          <MexicoMap
+            highlight={data.coverage.highlight}
+            activeLabel={data.coverage.activeLabel}
+            linksLabel={data.coverage.linksLabel}
+          />
         </Container>
       </section>
 
       {/* Bloque 6 · Por qué */}
-      <section className="py-20 md:py-28">
+      <section className={`py-20 md:py-28 ${tone(false)}`}>
         <Container className="grid gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
           <SectionTitle kicker="Por qué MM Carga" title={data.reasons.title} />
           <Points items={data.reasons.items} />
@@ -263,12 +289,12 @@ export function ServicePage({ data }: { data: ServicePageData }) {
       </section>
 
       {/* Bloque 7 · FAQ */}
-      <div className="bg-surface">
+      <div className={tone(true)}>
         <Faq kicker="FAQs" title={data.faq.title} items={data.faq.items} />
       </div>
 
       {/* Bloque 8 · Otros servicios */}
-      <section className="py-20 md:py-28">
+      <section className={`py-20 md:py-28 ${tone(false)}`}>
         <Container className="flex flex-col gap-10">
           <SectionTitle
             kicker="Servicios"

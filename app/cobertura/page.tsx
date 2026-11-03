@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import type { CSSProperties } from "react";
+import { IconWarehouse } from "@/components/site/icons";
 import { MexicoMap } from "@/components/site/mexico-map";
 import { PageHero } from "@/components/site/page-hero";
 import {
@@ -24,6 +25,9 @@ const ordered = [
   ...bases.filter((b) => b.city === "Monterrey"),
   ...bases.filter((b) => b.city !== "Monterrey"),
 ];
+
+// Bases con almacén propio (confirmado por el cliente el 3 nov; Monterrey = Pesquería)
+const withWarehouse = new Set(["Altamira", "Manzanillo", "Monterrey"]);
 
 // Schema LocalBusiness por base, con la misma dirección que se muestra en la ficha
 const jsonLd = {
@@ -79,6 +83,14 @@ export default function Cobertura() {
               industrial del Bajío. Esta presencia nos permite coordinar cada
               movimiento con equipo propio y tiempos de respuesta oportunos.
             </p>
+            <p
+              data-reveal
+              style={{ "--d": 2 } as CSSProperties}
+              className="text-body text-muted"
+            >
+              Ofrecemos cobertura nacional desde y hacia cada una de nuestras
+              bases. Contamos con almacenes en Altamira, Manzanillo y Pesquería.
+            </p>
           </div>
           <MexicoMap />
         </Container>
@@ -106,6 +118,14 @@ export default function Cobertura() {
                   MM Carga {b.city}
                 </h3>
                 <p className="text-small text-muted">{b.role}</p>
+                {withWarehouse.has(b.city) && (
+                  <p className="inline-flex items-center gap-2 self-start rounded-tag bg-brand-50 px-2.5 py-1 text-xs font-semibold text-primary">
+                    <span className="[&_svg]:size-4" aria-hidden="true">
+                      <IconWarehouse />
+                    </span>
+                    Cuenta con almacén
+                  </p>
+                )}
                 <p className="flex gap-2.5 text-small text-ink">
                   <svg
                     viewBox="0 0 24 24"

@@ -88,7 +88,7 @@ const faq = [
   },
   {
     q: "¿Realizan transporte de carga pesada?",
-    a: "Sí. Contamos con más de 30 años de experiencia en el traslado de carga para la industria pesada.",
+    a: "Sí. Contamos con 20 años de experiencia en el traslado de carga para la industria pesada.",
   },
   {
     q: "¿Las unidades son propias?",

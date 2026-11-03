@@ -10,6 +10,13 @@ export const contact = {
   purchasing: "comprasmty@mmcarga.com",
 };
 
+// ⚠️ Botón flotante de WhatsApp: el cliente aún no envía el número definitivo.
+// Para cambiarlo, edita solo este valor (formato internacional, sin "+" ni espacios).
+// Provisional: el teléfono de contacto actual.
+export const WHATSAPP_NUMBER = "528119851429";
+export const WHATSAPP_MESSAGE =
+  "Hola, me gustaría solicitar una cotización con MM Carga.";
+
 export const social = [
   { name: "Facebook", href: "https://www.facebook.com/MMCargaSaDeCv" },
   { name: "Instagram", href: "https://www.instagram.com/mmcarga/" },
@@ -29,7 +36,7 @@ export const services: Service[] = [
   {
     slug: "/caja-seca-53-pies/",
     name: "Transporte en caja seca de 53 pies",
-    short: "Caja seca 53'",
+    short: "Transporte en caja seca de 53 pies",
     summary:
       "Traslado de carga seca en rutas nacionales y de exportación a Estados Unidos.",
     image: "/images/servicios/transporte-caja-seca-53-pies-mm-carga.webp",
@@ -38,7 +45,7 @@ export const services: Service[] = [
   {
     slug: "/transporte-tolva/",
     name: "Transporte en tolva",
-    short: "Tolva a granel",
+    short: "Transporte en tolva",
     summary:
       "Traslado de materiales a granel en tolvas con capacidad de 140 m³.",
     image: "/images/servicios/transporte-tolva-granel-mm-carga.webp",
@@ -48,7 +55,7 @@ export const services: Service[] = [
   {
     slug: "/transporte-de-contenedores-maritimos/",
     name: "Transporte de contenedores marítimos",
-    short: "Contenedores marítimos",
+    short: "Transporte de contenedores marítimos",
     summary:
       "Movimientos de importación y exportación desde los principales puertos del país.",
     image: "/images/servicios/transporte-contenedores-maritimos-mm-carga.webp",
@@ -57,7 +64,7 @@ export const services: Service[] = [
   {
     slug: "/transporte-de-carga-suelta/",
     name: "Transporte de carga suelta en plataforma",
-    short: "Carga suelta en plataforma",
+    short: "Transporte de carga suelta en plataforma",
     summary:
       "Traslado de acero, maquinaria y madera con equipo especializado de amarre y sujeción.",
     image: "/images/servicios/transporte-carga-suelta-plataforma-mm-carga.webp",
@@ -67,9 +74,9 @@ export const services: Service[] = [
   {
     slug: "/almacenamiento-de-mercancias/",
     name: "Almacenamiento de mercancías y maniobras",
-    short: "Almacenamiento",
+    short: "Almacenamiento de mercancías",
     summary:
-      "200,000 m² de almacén, control de inventarios con WMS y báscula certificada para VGM.",
+      "200,000 m² de almacén en Altamira, Manzanillo y Pesquería, control de inventarios con WMS y báscula certificada para VGM.",
     image: "/images/servicios/almacenamiento-de-mercancias-mm-carga.webp",
     imageAlt: "Almacén de MM Carga con mercancía paletizada",
   },

@@ -127,7 +127,7 @@ const data: ServicePageData = {
   about: {
     title: "Caja seca de 53 pies para carga nacional y de exportación",
     paragraphs: [
-      "La caja seca de 53 pies es un remolque cerrado que protege la mercancía de la intemperie, el polvo y el riesgo de robo durante el trayecto. Es el equipo de mayor uso para carga seca paletizada o empacada, ya que combina gran capacidad volumétrica con altos niveles de seguridad.",
+      "El transporte en caja seca protege la mercancía de la intemperie, el polvo y el riesgo de robo durante el trayecto. Es la opción más utilizada para carga seca paletizada o empacada, ya que combina gran capacidad volumétrica con altos niveles de seguridad.",
       "MM Carga cuenta con más de 100 cajas de 53 pies propias, que operan en rutas nacionales y en servicio de exportación a Estados Unidos vía Laredo. Todas las unidades cuentan con rastreo GPS y cámaras, supervisadas por nuestro centro de monitoreo las 24 horas.",
     ],
     audience,
@@ -144,7 +144,7 @@ const data: ServicePageData = {
   },
   coverage: {
     title: "Cobertura del servicio de caja seca",
-    text: "Operamos el servicio de caja seca desde nuestras seis bases en Monterrey, Nuevo Laredo, Altamira, Silao, Manzanillo y Coatzacoalcos, con conexión entre los principales corredores industriales, los puertos del país y la frontera con Estados Unidos.",
+    text: "Ofrecemos el transporte en caja seca con cobertura nacional, desde y hacia nuestras bases en Monterrey, Nuevo Laredo, Altamira, Silao, Manzanillo y Coatzacoalcos.",
   },
   reasons: {
     title: "¿Por qué elegir a MM Carga para el transporte en caja seca?",

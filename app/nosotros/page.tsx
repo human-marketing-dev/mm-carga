@@ -13,14 +13,14 @@ import {
 import { certifications } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Nosotros | MM Carga, más de 30 años en transporte de carga",
+  title: "Nosotros | MM Carga, 20 años en transporte de carga",
   description:
-    "Conoce a MM Carga (Transportes MM), empresa mexicana con más de 30 años en transporte de carga y almacenamiento, certificada C-TPAT, OEA e ISO 9001.",
+    "Conoce a MM Carga, empresa mexicana con 20 años en transporte de carga y almacenamiento, certificada C-TPAT, OEA e ISO 9001.",
   alternates: { canonical: "/nosotros/" },
 };
 
 const figures = [
-  { value: "+30", label: "años de experiencia" },
+  { value: "20", label: "años de experiencia" },
   { value: "+200", label: "unidades full" },
   { value: "+100", label: "cajas secas de 53 pies" },
   { value: "200,000", unit: "m²", label: "de almacenamiento" },
@@ -35,7 +35,7 @@ const identity = [
   },
   {
     title: "Visión",
-    text: "Ser la empresa de transporte y logística de referencia en México, reconocida por un servicio seguro, rentable y de alta calidad.",
+    text: "Ser la empresa de transporte y almacenaje de mercancías de referencia en México, reconocida por un servicio seguro, rentable y de alta calidad.",
   },
   {
     title: "Valores",
@@ -71,7 +71,7 @@ export default function Nosotros() {
       {/* Bloque 1 · Hero */}
       <PageHero
         crumb="Nosotros"
-        h1="MM Carga: más de 30 años en transporte de carga y logística en México"
+        h1="MM Carga: 20 años en transporte de carga y almacenaje en México"
         subtitle="Somos una empresa mexicana de transporte y almacenamiento con flota, almacenes y bases de operación propias."
         secondary={{
           href: "/transporte-de-carga/",
@@ -96,10 +96,10 @@ export default function Nosotros() {
             className="flex flex-col gap-6 text-body text-muted lg:pt-9"
           >
             <p>
-              MM Carga S.A. de C.V., también conocida como Transportes MM, es
-              una empresa mexicana especializada en el transporte terrestre y el
-              almacenamiento de carga para la industria pesada y el comercio
-              exterior.
+              MM Carga S.A. de C.V. es una empresa mexicana especializada en el
+              transporte terrestre y el almacenamiento de carga para la
+              industria pesada y el comercio exterior. Fundada en 2006, en 2026
+              cumple 20 años de operación.
             </p>
             <p>
               Operamos desde nuestra oficina en Pesquería, Nuevo León, y seis
@@ -224,7 +224,7 @@ export default function Nosotros() {
       {/* Bloque 7 · CTA */}
       <CtaBand
         kicker="Cotización"
-        title="Un socio logístico con experiencia en la industria"
+        title="Un aliado con 20 años de experiencia en transporte y almacenaje"
         text="Nuestro equipo está listo para analizar tus necesidades de transporte y almacenamiento y presentarte una propuesta."
       />
     </>

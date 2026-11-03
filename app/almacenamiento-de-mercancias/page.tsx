@@ -96,7 +96,10 @@ const data: ServicePageData = {
   },
   coverage: {
     title: "Cobertura del servicio de almacenamiento de mercancías",
-    text: "Integramos el almacenamiento con nuestro servicio de transporte desde las seis bases de MM Carga en Monterrey, Nuevo Laredo, Altamira, Silao, Manzanillo y Coatzacoalcos, para coordinar la recolección, el resguardo y la entrega de cada operación.",
+    text: "Contamos con almacenes propios en Altamira, Manzanillo y Pesquería (Monterrey), integrados con nuestro servicio de transporte para coordinar la recolección, el resguardo y la entrega de cada operación.",
+    highlight: ["Altamira", "Manzanillo", "Monterrey"],
+    activeLabel: "Base con almacén",
+    linksLabel: "Cómo llegar a nuestros almacenes",
   },
   reasons: {
     title: "¿Por qué elegir a MM Carga para el almacenamiento de mercancías?",

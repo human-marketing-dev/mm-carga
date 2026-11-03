@@ -74,6 +74,8 @@ const data: ServicePageData = {
     ],
   },
   specs: {
+    // Oculto: el cliente aún no tiene estas especificaciones (3 nov)
+    hidden: true,
     title: "Capacidad del tráiler con tolva",
     caption: "Capacidad y equipo del tráiler con tolva",
     rows: [
@@ -86,7 +88,7 @@ const data: ServicePageData = {
   },
   coverage: {
     title: "Cobertura del servicio de transporte en tolva",
-    text: "Operamos el servicio de transporte en tolva desde nuestras seis bases en Monterrey, Nuevo Laredo, Altamira, Silao, Manzanillo y Coatzacoalcos, con conexión entre la industria del noreste, el Bajío y los principales puertos del país.",
+    text: "Ofrecemos el transporte en tolva con cobertura nacional, desde y hacia nuestras bases en Monterrey, Nuevo Laredo, Altamira, Silao, Manzanillo y Coatzacoalcos.",
   },
   reasons: {
     title: "¿Por qué elegir a MM Carga para el transporte en tolva?",
@@ -99,7 +101,7 @@ const data: ServicePageData = {
       {
         title: "Experiencia en carga pesada",
         icon: <IconWeight />,
-        text: "Más de 30 años en el traslado de granel, acero y mercancía ferrosa.",
+        text: "20 años en el traslado de granel, acero y mercancía ferrosa.",
       },
       {
         title: "Optimización de costos",

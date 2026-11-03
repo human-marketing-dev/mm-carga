@@ -11,8 +11,8 @@ export function SiteFooter() {
         <div className="flex flex-col gap-5">
           <Logo variant="white" className="h-9 self-start" />
           <p className="max-w-xs text-[15px] leading-relaxed">
-            Logística, transporte de carga y almacenamiento con infraestructura
-            propia en México desde hace más de 30 años.
+            MM Carga ofrece transporte de carga y almacenaje de mercancías con
+            flota, almacenes y bases propias. 20 años de experiencia en México.
           </p>
         </div>
 

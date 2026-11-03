@@ -58,10 +58,9 @@ export default function AvisoDePrivacidad() {
 
             <Block title="Identidad y domicilio del responsable">
               <p>
-                <strong>MM Carga S.A. de C.V.</strong>, también conocida como
-                Transportes MM (en adelante, “MM Carga”), con domicilio en{" "}
-                {contact.address}, es responsable del tratamiento de los datos
-                personales que nos proporcionas.
+                <strong>MM Carga S.A. de C.V.</strong> (en adelante, “MM
+                Carga”), con domicilio en {contact.address}, es responsable del
+                tratamiento de los datos personales que nos proporcionas.
               </p>
             </Block>
 

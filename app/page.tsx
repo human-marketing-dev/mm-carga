@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import {
-  IconCertified,
   IconFleet,
   IconIntegral,
+  IconLayers,
   IconMonitoring,
 } from "@/components/site/icons";
 import { MexicoMap } from "@/components/site/mexico-map";
@@ -25,14 +25,14 @@ import { Button } from "@/components/ui/button";
 import { services } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Empresa de logística y transporte de carga en México | MM Carga",
+  title: "Transporte de carga y almacenaje de mercancías en México | MM Carga",
   description:
-    "Más de 30 años ofreciendo soluciones de logística, transporte de carga y almacenamiento con flota, almacenes y bases propias en México.",
+    "20 años en el transporte de carga y almacenaje de mercancías, con flota, almacenes y bases propias en México. Solicita tu cotización.",
   alternates: { canonical: "/" },
 };
 
 const figures = [
-  { value: "+30", label: "años de experiencia" },
+  { value: "20", label: "años de experiencia" },
   { value: "+200", label: "unidades full" },
   { value: "+100", label: "cajas secas de 53 pies" },
   { value: "200,000", unit: "m²", label: "de almacenamiento" },
@@ -42,33 +42,33 @@ const reasons = [
   {
     title: "Solución logística integral",
     icon: <IconIntegral />,
-    text: "Transporte, almacenamiento y maniobras gestionados por un solo proveedor.",
+    text: "Centralizamos los servicios que tu mercancía necesita y coordinamos cada etapa de la operación, desde el origen hasta el destino, con distintas modalidades y equipos dentro de una misma empresa.",
   },
   {
-    title: "Capacidad operativa",
+    title: "Capacidad para grandes operaciones",
     icon: <IconFleet />,
-    text: "Flota full, más de 100 cajas secas de 53 pies y amplias áreas de almacenamiento para operaciones de gran volumen.",
+    text: "Más de 200 unidades para operación full, más de 100 cajas secas de 53 pies, 100,000 m² de almacén techado y 100,000 m² de almacenamiento al aire libre.",
   },
   {
-    title: "Seguridad y monitoreo permanente",
+    title: "Control, tecnología y servicio 24/7",
     icon: <IconMonitoring />,
-    text: "Unidades con GPS y cámaras, operadores certificados e integración de información vía API.",
+    text: "Unidades propias de modelos recientes con GPS y cámaras, un centro de monitoreo que opera las 24 horas, operadores certificados e integraciones vía API.",
   },
   {
-    title: "Procesos certificados",
-    icon: <IconCertified />,
-    text: "Certificaciones C-TPAT, OEA e ISO 9001:2015 que respaldan la seguridad y la calidad de cada operación.",
+    title: "Todo lo que tu operación necesita, en un solo lugar",
+    icon: <IconLayers />,
+    text: "Integramos transporte, almacenamiento y servicios especializados con un solo proveedor, desde el origen hasta el destino.",
   },
 ];
 
 const faq = [
   {
     q: "¿Qué tipos de carga transportan?",
-    a: "Transportamos carga seca en caja de 53 pies, materiales a granel en tolva, contenedores marítimos y carga suelta en plataforma, como acero, maquinaria y madera.",
+    a: "Nuestro equipo principal son las plataformas en full, con las que transportamos contenedores marítimos, carga suelta, acero y maquinaria. Además, contamos con tolvas para materiales a granel y con cajas secas de 53 pies para carga seca.",
   },
   {
     q: "¿Cuentan con cobertura nacional?",
-    a: "Operamos desde seis bases ubicadas en puertos, la frontera norte y el Bajío, y realizamos traslados a distintos destinos del país.",
+    a: "Sí. Ofrecemos cobertura nacional desde y hacia nuestras bases en Monterrey, Altamira, Manzanillo, Nuevo Laredo, Silao y Coatzacoalcos.",
   },
   {
     q: "¿Cómo se da seguimiento a la carga?",
@@ -76,7 +76,7 @@ const faq = [
   },
   {
     q: "¿Ofrecen servicio de almacenamiento?",
-    a: "Sí. Contamos con 100,000 m² techados y 100,000 m² al aire libre, con control de inventarios mediante sistema WMS.",
+    a: "Sí. Contamos con almacenes en Altamira, Manzanillo y Pesquería, con 100,000 m² techados y 100,000 m² al aire libre, y control de inventarios mediante sistema WMS.",
   },
   {
     q: "¿Cómo puedo solicitar una cotización?",
@@ -96,7 +96,7 @@ export default function Home() {
         <div className="hero-photo absolute inset-0 -z-10">
           <Photo
             src="/images/hero/hero-transporte-de-carga-mexico.webp"
-            alt="Flota de tractocamiones de MM Carga, empresa de logística y transporte de carga en México"
+            alt="Tráiler de MM Carga, empresa de transporte de carga y almacenaje de mercancías en México"
             label="fondo del hero, tráiler MM Carga en carretera"
             className="size-full"
             sizes="100vw"
@@ -109,14 +109,14 @@ export default function Home() {
         />
         <Container className="flex min-h-[clamp(560px,78vh,760px)] items-center py-20 lg:py-28">
           <div className="hero-in flex max-w-2xl flex-col items-start gap-7">
-            <Badge dot={false}>+30 AÑOS DE EXPERIENCIA</Badge>
+            <Badge dot={false}>20 AÑOS DE EXPERIENCIA</Badge>
             <h1 className="text-[clamp(36px,4.4vw,60px)] leading-[1.08] font-heavy">
-              Empresa líder en logística y transporte de carga en México
+              Transporte de carga y almacenaje de mercancías en México
             </h1>
             <p className="max-w-xl text-lead tracking-[.05px] text-white/80">
-              Más de 30 años brindando soluciones de transporte y almacenamiento
-              a la industria, con flota, almacenes y bases propias en la
-              República Mexicana.
+              Servicio integral para el manejo, almacenaje y transporte de tu
+              mercancía, con flota, almacenes y bases propias y 20 años de
+              experiencia.
             </p>
             <div className="flex flex-wrap gap-4 pt-1">
               <Button href="/contacto/">Solicita una cotización</Button>
@@ -136,7 +136,7 @@ export default function Home() {
         <Container className="grid gap-10 lg:grid-cols-2 lg:gap-20">
           <SectionTitle
             kicker="Quiénes somos"
-            title="Empresa de logística con infraestructura propia en México"
+            title="Empresa de transporte y almacenaje con infraestructura propia en México"
           />
           <div
             data-reveal
@@ -144,18 +144,20 @@ export default function Home() {
             className="flex flex-col gap-6 text-body text-muted lg:pt-9"
           >
             <p>
-              MM Carga es una empresa mexicana especializada en logística,
-              transporte terrestre de carga y almacenamiento de mercancías.
-              Contamos con infraestructura propia (flota, cajas secas, almacenes
-              y bases de operación) que nos permite gestionar cada etapa de la
-              operación, desde la recolección hasta la entrega.
+              MM Carga es una empresa mexicana dedicada al transporte terrestre
+              de carga y al almacenaje de mercancías. Desde hace 20 años
+              facilitamos las operaciones de nuestros clientes con un servicio
+              integral para el manejo, almacenaje y transporte de su mercancía,
+              respaldado por infraestructura propia: flota, cajas secas,
+              almacenes y bases de operación.
             </p>
             <p>
-              Atendemos a la industria pesada y al comercio exterior con
-              servicios para acero, maquinaria, materiales a granel y
-              contenedores de importación y exportación. Nuestras unidades
-              operan con rastreo GPS y cámaras, supervisadas por un centro de
-              monitoreo que funciona las 24 horas.
+              Nuestra principal fortaleza es el transporte en plataformas en
+              full, con el que movemos acero, carga suelta y contenedores de
+              importación y exportación. Además, operamos cajas secas de 53 pies
+              y tolvas para materiales a granel. Nuestras unidades cuentan con
+              rastreo GPS y cámaras, supervisadas por un centro de monitoreo que
+              opera las 24 horas.
             </p>
           </div>
         </Container>
@@ -167,7 +169,7 @@ export default function Home() {
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <SectionTitle
               kicker="Servicios"
-              title="Soluciones integrales de logística y transporte de carga"
+              title="Soluciones integrales de transporte de carga y almacenamiento"
               intro="Ofrecemos el equipo adecuado para cada tipo de carga, con monitoreo permanente y coordinación de origen a destino."
             />
           </div>
@@ -241,7 +243,8 @@ export default function Home() {
               className="text-body text-muted"
             >
               Contamos con bases de operación propias en Altamira, Manzanillo,
-              Coatzacoalcos, Nuevo Laredo, Silao y Monterrey. Esta red nos
+              Coatzacoalcos, Nuevo Laredo, Silao y Monterrey, y ofrecemos
+              cobertura nacional desde y hacia cada una de ellas. Esta red nos
               permite atender con oportunidad las operaciones portuarias del
               Golfo y del Pacífico, el comercio con Estados Unidos y el corredor
               industrial del centro del país.
@@ -262,9 +265,23 @@ export default function Home() {
         <Container className="grid gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
           <SectionTitle
             kicker="Por qué MM Carga"
-            title="¿Por qué elegir a MM Carga como tu empresa de logística?"
+            title="¿Por qué elegir a MM Carga para el transporte y almacenaje de tu mercancía?"
+            intro="Nos encargamos de tu mercancía de principio a fin."
           />
           <Points items={reasons} />
+          {/* Cierre destacado: frase del sitio actual, a petición del cliente */}
+          <div
+            data-reveal
+            className="flex flex-col gap-3 rounded-card bg-(image:--gradient-hero) p-8 text-white md:flex-row md:items-center md:gap-10 md:p-10 lg:col-span-2"
+          >
+            <p className="shrink-0 text-[clamp(24px,2.4vw,32px)] leading-tight font-bold">
+              Una sola operación. Todo bajo control.
+            </p>
+            <p className="text-body text-white/78">
+              Integramos transporte, almacenamiento y coordinación logística
+              para simplificar tus procesos de principio a fin.
+            </p>
+          </div>
         </Container>
       </section>
 
@@ -276,13 +293,13 @@ export default function Home() {
 
       {/* Bloque 8 · FAQ */}
       <Faq
-        title="Preguntas frecuentes sobre logística y transporte de carga"
+        title="Preguntas frecuentes sobre transporte de carga y almacenaje"
         items={faq}
       />
 
       {/* Bloque 9 · CTA */}
       <CtaBand
-        title="Soluciones logísticas a la medida de tu operación"
+        title="Soluciones de transporte y almacenaje a la medida de tu operación"
         text="Nuestro equipo está listo para analizar tus necesidades de transporte y almacenamiento y presentarte una propuesta."
       />
     </>
