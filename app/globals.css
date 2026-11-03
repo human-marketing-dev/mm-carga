@@ -242,3 +242,29 @@ html {
     transform: scale(1.04);
   }
 }
+
+/* Mini chat de WhatsApp: puntos de "escribiendo" y entrada de mensajes */
+.wa-dot {
+  animation: wa-dot 1s ease-in-out infinite;
+}
+.wa-msg {
+  animation: wa-msg 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes wa-dot {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.45;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+@keyframes wa-msg {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+}

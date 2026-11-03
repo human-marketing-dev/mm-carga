@@ -10,9 +10,8 @@ export const contact = {
   purchasing: "comprasmty@mmcarga.com",
 };
 
-// ⚠️ Botón flotante de WhatsApp: el cliente aún no envía el número definitivo.
+// Botón flotante de WhatsApp (confirmado el 3 nov: +52 81 1985 1429).
 // Para cambiarlo, edita solo este valor (formato internacional, sin "+" ni espacios).
-// Provisional: el teléfono de contacto actual.
 export const WHATSAPP_NUMBER = "528119851429";
 export const WHATSAPP_MESSAGE =
   "Hola, me gustaría solicitar una cotización con MM Carga.";
