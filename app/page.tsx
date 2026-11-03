@@ -163,8 +163,33 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* Bloque 4 · Servicios */}
+      {/* Bloque 4 · Por qué MM Carga */}
       <section className="bg-surface py-20 md:py-28">
+        <Container className="grid gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
+          <SectionTitle
+            kicker="Por qué MM Carga"
+            title="¿Por qué elegir a MM Carga para el transporte y almacenaje de tu mercancía?"
+            intro="Nos encargamos de tu mercancía de principio a fin."
+          />
+          <Points items={reasons} />
+          {/* Cierre destacado: frase del sitio actual, a petición del cliente */}
+          <div
+            data-reveal
+            className="flex flex-col gap-3 rounded-card bg-(image:--gradient-hero) p-8 text-white md:flex-row md:items-center md:gap-10 md:p-10 lg:col-span-2"
+          >
+            <p className="shrink-0 text-[clamp(24px,2.4vw,32px)] leading-tight font-bold">
+              Una sola operación. Todo bajo control.
+            </p>
+            <p className="text-body text-white/78">
+              Integramos transporte, almacenamiento y coordinación logística
+              para simplificar tus procesos de principio a fin.
+            </p>
+          </div>
+        </Container>
+      </section>
+
+      {/* Bloque 5 · Servicios */}
+      <section className="py-20 md:py-28">
         <Container className="flex flex-col gap-12">
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <SectionTitle
@@ -229,8 +254,8 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* Bloque 5 · Cobertura */}
-      <section className="py-20 md:py-28">
+      {/* Bloque 6 · Cobertura */}
+      <section className="bg-surface py-20 md:py-28">
         <Container className="grid items-center gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
           <div className="flex flex-col gap-6">
             <SectionTitle
@@ -260,31 +285,6 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* Bloque 6 · Por qué MM Carga */}
-      <section className="bg-surface py-20 md:py-28">
-        <Container className="grid gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
-          <SectionTitle
-            kicker="Por qué MM Carga"
-            title="¿Por qué elegir a MM Carga para el transporte y almacenaje de tu mercancía?"
-            intro="Nos encargamos de tu mercancía de principio a fin."
-          />
-          <Points items={reasons} />
-          {/* Cierre destacado: frase del sitio actual, a petición del cliente */}
-          <div
-            data-reveal
-            className="flex flex-col gap-3 rounded-card bg-(image:--gradient-hero) p-8 text-white md:flex-row md:items-center md:gap-10 md:p-10 lg:col-span-2"
-          >
-            <p className="shrink-0 text-[clamp(24px,2.4vw,32px)] leading-tight font-bold">
-              Una sola operación. Todo bajo control.
-            </p>
-            <p className="text-body text-white/78">
-              Integramos transporte, almacenamiento y coordinación logística
-              para simplificar tus procesos de principio a fin.
-            </p>
-          </div>
-        </Container>
-      </section>
-
       {/* Bloque 7 · Certificaciones */}
       <Certifications
         title="Certificaciones y afiliaciones"
@@ -292,10 +292,12 @@ export default function Home() {
       />
 
       {/* Bloque 8 · FAQ */}
-      <Faq
-        title="Preguntas frecuentes sobre transporte de carga y almacenaje"
-        items={faq}
-      />
+      <div className="bg-surface">
+        <Faq
+          title="Preguntas frecuentes sobre transporte de carga y almacenaje"
+          items={faq}
+        />
+      </div>
 
       {/* Bloque 9 · CTA */}
       <CtaBand
