@@ -94,7 +94,7 @@ export function Points({
           className="group relative flex flex-col gap-4 overflow-hidden rounded-card border border-brand-800/8 bg-white p-7 shadow-card transition duration-300 hover:-translate-y-1 hover:border-brand-800/18 hover:shadow-card-hover"
         >
           <span
-            className="pointer-events-none absolute -top-3 right-4 text-[88px] leading-none font-heavy text-navy-800/[0.05] tabular-nums transition group-hover:text-primary/10"
+            className="pointer-events-none absolute top-7 right-7 text-[56px] leading-[56px] tracking-tight font-heavy text-navy-800/[0.07] tabular-nums transition group-hover:text-primary/10"
             aria-hidden="true"
           >
             {String(i + 1).padStart(2, "0")}
