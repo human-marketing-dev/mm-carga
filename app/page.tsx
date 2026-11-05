@@ -157,18 +157,18 @@ export default function Home() {
       <Figures items={figures} label="MM Carga en cifras" />
 
       {/* Bloque 3 · Presentación */}
-      <section className="py-20 md:py-28">
-        <Container className="grid gap-10 lg:grid-cols-2 lg:gap-20">
-          <SectionTitle
-            kicker="Quiénes somos"
-            title="Empresa de transporte y almacenaje con infraestructura propia en México"
-          />
-          <div
-            data-reveal
-            style={{ "--d": 2 } as CSSProperties}
-            className="flex flex-col gap-6 text-body text-muted lg:pt-9"
-          >
-            <p>
+      <section className="overflow-hidden py-20 md:py-28">
+        <Container className="grid items-center gap-14 lg:grid-cols-[1fr_1.05fr] lg:gap-20">
+          <div className="flex flex-col gap-6">
+            <SectionTitle
+              kicker="Quiénes somos"
+              title="Empresa de transporte y almacenaje con infraestructura propia en México"
+            />
+            <p
+              data-reveal
+              style={{ "--d": 1 } as CSSProperties}
+              className="text-body text-muted"
+            >
               MM Carga es una empresa mexicana dedicada al transporte terrestre
               de carga y al almacenaje de mercancías. Desde hace 20 años
               facilitamos las operaciones de nuestros clientes con un servicio
@@ -176,7 +176,11 @@ export default function Home() {
               respaldado por infraestructura propia: flota, cajas secas,
               almacenes y bases de operación.
             </p>
-            <p>
+            <p
+              data-reveal
+              style={{ "--d": 2 } as CSSProperties}
+              className="text-body text-muted"
+            >
               Nuestra principal fortaleza es el transporte en plataformas en
               full, con el que movemos acero, carga suelta y contenedores de
               importación y exportación. Además, operamos cajas secas de 53 pies
@@ -184,6 +188,51 @@ export default function Home() {
               rastreo GPS y cámaras, supervisadas por un centro de monitoreo que
               opera las 24 horas.
             </p>
+            <div
+              data-reveal
+              style={{ "--d": 3 } as CSSProperties}
+              className="pt-2"
+            >
+              <TextLink href="/nosotros/">Conoce más sobre MM Carga</TextLink>
+            </div>
+          </div>
+
+          {/* Foto del patio con dos datos flotantes */}
+          <div
+            data-reveal="scale"
+            style={{ "--d": 1 } as CSSProperties}
+            className="relative pb-10 lg:pb-0 lg:pl-10"
+          >
+            <span
+              className="absolute -top-6 -right-6 -z-10 hidden size-40 rounded-card [background-image:radial-gradient(var(--color-primary)_1.3px,transparent_1.6px)] [background-size:14px_14px] opacity-30 lg:block"
+              aria-hidden="true"
+            />
+            <Photo
+              src="/images/cobertura/patio-bases-de-operacion-transporte-de-carga-mm-carga.webp"
+              alt="Patio de MM Carga con tractocamiones en una de sus bases de operación"
+              className="aspect-[5/4] rounded-dialog shadow-card-hover"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+            <div className="absolute bottom-0 left-4 flex items-center gap-4 rounded-card bg-navy-800 py-4 pr-6 pl-4 text-white shadow-dialog lg:-bottom-8 lg:left-0">
+              <span className="grid size-12 place-items-center rounded-btn bg-primary">
+                <IconFleet />
+              </span>
+              <span className="flex flex-col">
+                <span className="text-[28px] leading-none font-heavy tabular-nums">
+                  6
+                </span>
+                <span className="text-sm text-white/70">
+                  bases de operación propias
+                </span>
+              </span>
+            </div>
+            <div className="absolute top-5 right-5 hidden items-center gap-2.5 rounded-full bg-white/92 py-2 pr-4 pl-2.5 text-sm font-semibold text-navy-800 shadow-tag backdrop-blur sm:flex">
+              <span className="relative grid size-2.5 place-items-center">
+                <span className="absolute size-2.5 animate-pulse-ring rounded-full bg-success" />
+                <span className="size-2 rounded-full bg-success" />
+              </span>
+              Monitoreo 24/7
+            </div>
           </div>
         </Container>
       </section>

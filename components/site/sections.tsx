@@ -42,7 +42,11 @@ export function SectionTitle({
   return (
     <div data-reveal className={`flex max-w-3xl flex-col gap-4 ${className}`}>
       {kicker && (
-        <p className="text-xs font-bold tracking-[0.16em] text-primary uppercase">
+        <p className="flex items-center gap-3 text-xs font-bold tracking-[0.16em] text-primary uppercase">
+          <span
+            className="h-0.5 w-6 rounded-full bg-primary"
+            aria-hidden="true"
+          />
           {kicker}
         </p>
       )}
@@ -254,7 +258,11 @@ export function CtaBand({
     >
       <Container className="grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
         <div data-reveal className="flex flex-col gap-5">
-          <p className="text-xs font-bold tracking-[0.16em] text-brand-400 uppercase">
+          <p className="flex items-center gap-3 text-xs font-bold tracking-[0.16em] text-brand-400 uppercase">
+            <span
+              className="h-0.5 w-6 rounded-full bg-brand-400"
+              aria-hidden="true"
+            />
             {kicker}
           </p>
           <h2 className="text-[30px] leading-[1.15] font-semibold md:text-[40px]">
@@ -376,16 +384,29 @@ export function ServiceCards({
         <li key={s.slug} data-reveal style={{ "--d": i } as CSSProperties}>
           <Link
             href={s.slug}
-            className="group flex h-full flex-col gap-3 rounded-card border border-brand-800/8 bg-white p-6 shadow-card transition hover:-translate-y-1 hover:border-brand-800/22 hover:shadow-card-hover"
+            className="group flex h-full flex-col overflow-hidden rounded-card border border-brand-800/8 bg-white shadow-card transition hover:-translate-y-1 hover:border-brand-800/22 hover:shadow-card-hover"
           >
-            <h3 className="text-[19px] leading-snug font-extrabold text-brand-800">
-              {s.name}
-            </h3>
-            <p className="flex-1 text-small text-muted">{summaries[s.slug]}</p>
-            <span className="inline-flex items-center gap-2 pt-2 text-sm font-bold text-primary">
-              Ver servicio{" "}
-              <ArrowIcon className="size-3.5 transition group-hover:translate-x-0.5" />
-            </span>
+            <div className="relative aspect-[16/10] overflow-hidden bg-[#dfe6f0]">
+              <Image
+                src={s.image}
+                alt={s.imageAlt}
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                className="object-cover transition duration-700 group-hover:scale-105"
+              />
+            </div>
+            <div className="flex flex-1 flex-col gap-3 p-6">
+              <h3 className="text-[19px] leading-snug font-extrabold text-brand-800">
+                {s.name}
+              </h3>
+              <p className="flex-1 text-small text-muted">
+                {summaries[s.slug]}
+              </p>
+              <span className="inline-flex items-center gap-2 pt-2 text-sm font-bold text-primary">
+                Ver servicio{" "}
+                <ArrowIcon className="size-3.5 transition group-hover:translate-x-0.5" />
+              </span>
+            </div>
           </Link>
         </li>
       ))}
