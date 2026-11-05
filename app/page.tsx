@@ -16,7 +16,7 @@ import {
   CtaBand,
   Faq,
   Figures,
-  Points,
+  ReasonsSection,
   SectionTitle,
   TextLink,
 } from "@/components/site/sections";
@@ -238,29 +238,12 @@ export default function Home() {
       </section>
 
       {/* Bloque 4 · Por qué MM Carga */}
-      <section className="bg-surface py-20 md:py-28">
-        <Container className="grid gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
-          <SectionTitle
-            kicker="Por qué MM Carga"
-            title="¿Por qué elegir a MM Carga para el transporte y almacenaje de tu mercancía?"
-            intro="Nos encargamos de tu mercancía de principio a fin."
-          />
-          <Points items={reasons} />
-          {/* Cierre destacado: frase del sitio actual, a petición del cliente */}
-          <div
-            data-reveal
-            className="flex flex-col gap-3 rounded-card bg-(image:--gradient-hero) p-8 text-white md:flex-row md:items-center md:gap-10 md:p-10 lg:col-span-2"
-          >
-            <p className="shrink-0 text-[clamp(24px,2.4vw,32px)] leading-tight font-bold">
-              Una sola operación. Todo bajo control.
-            </p>
-            <p className="text-body text-white/78">
-              Integramos transporte, almacenamiento y coordinación logística
-              para simplificar tus procesos de principio a fin.
-            </p>
-          </div>
-        </Container>
-      </section>
+      <ReasonsSection
+        className="bg-surface"
+        title="¿Por qué elegir a MM Carga para el transporte y almacenaje de tu mercancía?"
+        intro="Nos encargamos de tu mercancía de principio a fin."
+        items={reasons}
+      />
 
       {/* Bloque 5 · Servicios */}
       <section className="py-20 md:py-28">

@@ -78,37 +78,112 @@ export function TextLink({
   );
 }
 
+// Tarjetas de "Por qué MM Carga": icono en bloque azul, número de fondo y línea de acento al pasar el cursor
 export function Points({
   items,
 }: {
   items: { title: string; text: string; icon?: ReactNode }[];
 }) {
   return (
-    <div className="grid gap-x-10 gap-y-10 sm:grid-cols-2">
+    <ul className="grid gap-5 sm:grid-cols-2">
       {items.map((it, i) => (
-        <div
+        <li
           key={it.title}
           data-reveal
           style={{ "--d": i } as CSSProperties}
-          className="flex flex-col gap-3 border-t border-navy-800 pt-5"
+          className="group relative flex flex-col gap-4 overflow-hidden rounded-card border border-brand-800/8 bg-white p-7 shadow-card transition duration-300 hover:-translate-y-1 hover:border-brand-800/18 hover:shadow-card-hover"
         >
-          <div className="flex items-center gap-4">
-            {it.icon && (
-              <span
-                className="grid size-12 shrink-0 place-items-center rounded-btn bg-brand-50 text-primary"
-                aria-hidden="true"
-              >
-                {it.icon}
-              </span>
-            )}
-            <h3 className="text-[19px] leading-snug font-bold text-navy-800">
-              {it.title}
-            </h3>
-          </div>
+          <span
+            className="pointer-events-none absolute -top-3 right-4 text-[88px] leading-none font-heavy text-navy-800/[0.05] tabular-nums transition group-hover:text-primary/10"
+            aria-hidden="true"
+          >
+            {String(i + 1).padStart(2, "0")}
+          </span>
+          {it.icon && (
+            <span
+              className="grid size-14 place-items-center rounded-btn bg-linear-135 from-brand-500 to-brand-550 text-white shadow-btn-solid transition group-hover:shadow-btn-primary [&_svg]:size-6"
+              aria-hidden="true"
+            >
+              {it.icon}
+            </span>
+          )}
+          <h3 className="pr-10 text-[19px] leading-snug font-bold text-navy-800">
+            {it.title}
+          </h3>
           <p className="text-small text-muted">{it.text}</p>
-        </div>
+          <span
+            className="absolute inset-x-0 bottom-0 h-[3px] origin-left scale-x-0 bg-linear-to-r from-primary to-brand-400 transition duration-500 group-hover:scale-x-100"
+            aria-hidden="true"
+          />
+        </li>
       ))}
+    </ul>
+  );
+}
+
+// Cierre de "Por qué MM Carga": frase del sitio actual, a petición del cliente
+function ClosingCard({ className = "" }: { className?: string }) {
+  return (
+    <div
+      data-reveal
+      style={{ "--d": 2 } as CSSProperties}
+      className={`relative flex flex-col gap-4 overflow-hidden rounded-card bg-(image:--gradient-hero) p-7 text-white shadow-card-hover ${className}`}
+    >
+      <span
+        className="absolute -right-10 -bottom-16 size-48 rounded-full bg-brand-500/35 blur-3xl"
+        aria-hidden="true"
+      />
+      <p className="relative text-[24px] leading-tight font-bold">
+        Una sola operación. Todo bajo control.
+      </p>
+      <p className="relative text-small text-white/75">
+        Integramos transporte, almacenamiento y coordinación logística para
+        simplificar tus procesos de principio a fin.
+      </p>
+      <Link
+        href="/contacto/"
+        className="relative inline-flex items-center gap-2 self-start pt-1 text-sm font-bold text-white underline decoration-white/40 underline-offset-4 hover:decoration-white"
+      >
+        Solicita una cotización <ArrowIcon className="size-3.5" />
+      </Link>
     </div>
+  );
+}
+
+// Sección "Por qué MM Carga": título fijo a la izquierda con tarjeta de cierre y tarjetas a la derecha
+export function ReasonsSection({
+  title,
+  intro,
+  items,
+  className = "",
+  aside,
+}: {
+  title: string;
+  intro?: string;
+  items: { title: string; text: string; icon?: ReactNode }[];
+  className?: string;
+  /** Contenido extra bajo el título (p. ej. un enlace) */
+  aside?: ReactNode;
+}) {
+  return (
+    <section
+      className={`relative isolate overflow-hidden py-20 md:py-28 ${className}`}
+    >
+      <div
+        className="absolute top-0 left-0 -z-10 h-80 w-1/2 opacity-40 [background-image:radial-gradient(var(--color-primary)_1px,transparent_1.3px)] [background-size:18px_18px] [mask-image:radial-gradient(ellipse_at_top_left,black,transparent_70%)]"
+        aria-hidden="true"
+      />
+      <Container className="grid gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
+        <div className="flex flex-col gap-8 lg:sticky lg:top-28 lg:self-start">
+          <SectionTitle kicker="Por qué MM Carga" title={title} intro={intro} />
+          {aside}
+          {/* En móvil la tarjeta de cierre va después de las razones */}
+          <ClosingCard className="max-lg:hidden" />
+        </div>
+        <Points items={items} />
+        <ClosingCard className="lg:hidden" />
+      </Container>
+    </section>
   );
 }
 

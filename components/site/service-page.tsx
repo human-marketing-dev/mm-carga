@@ -6,7 +6,7 @@ import {
   Container,
   CtaBand,
   Faq,
-  Points,
+  ReasonsSection,
   SectionTitle,
   ServiceCards,
 } from "@/components/site/sections";
@@ -202,12 +202,11 @@ export function ServicePage({ data }: { data: ServicePageData }) {
       />
 
       {/* Bloque 5 · Por qué */}
-      <section className={`py-20 md:py-28 ${tone(false)}`}>
-        <Container className="grid gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
-          <SectionTitle kicker="Por qué MM Carga" title={data.reasons.title} />
-          <Points items={data.reasons.items} />
-        </Container>
-      </section>
+      <ReasonsSection
+        className={tone(false)}
+        title={data.reasons.title}
+        items={data.reasons.items}
+      />
 
       {/* Bloque 6 · FAQ */}
       <div className={tone(true)}>

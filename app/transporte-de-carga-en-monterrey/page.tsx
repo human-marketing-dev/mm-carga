@@ -13,7 +13,7 @@ import {
   Container,
   CtaBand,
   Faq,
-  Points,
+  ReasonsSection,
   SectionTitle,
   ServiceCards,
 } from "@/components/site/sections";
@@ -224,15 +224,11 @@ export default function TransporteMonterrey() {
       </section>
 
       {/* Bloque 5 · Por qué */}
-      <section className="bg-surface py-20 md:py-28">
-        <Container className="grid gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
-          <SectionTitle
-            kicker="Por qué MM Carga"
-            title="¿Por qué elegir a MM Carga en Nuevo León?"
-          />
-          <Points items={reasons} />
-        </Container>
-      </section>
+      <ReasonsSection
+        className="bg-surface"
+        title="¿Por qué elegir a MM Carga en Nuevo León?"
+        items={reasons}
+      />
 
       {/* Bloque 6 · Ubicación */}
       <section className="py-20 md:py-28">

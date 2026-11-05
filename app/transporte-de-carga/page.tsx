@@ -14,7 +14,7 @@ import {
   Container,
   CtaBand,
   Faq,
-  Points,
+  ReasonsSection,
   SectionTitle,
   TextLink,
 } from "@/components/site/sections";
@@ -262,22 +262,17 @@ export default function TransporteDeCarga() {
       </section>
 
       {/* Bloque 6 · Por qué MM Carga */}
-      <section className="py-20 md:py-28">
-        <Container className="grid gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
-          <div className="flex flex-col gap-6">
-            <SectionTitle
-              kicker="Por qué MM Carga"
-              title="¿Por qué elegir a MM Carga como empresa de transporte de carga?"
-            />
-            <div className="pt-2">
-              <TextLink href="/almacenamiento-de-mercancias/">
-                Conoce nuestro servicio de almacenamiento
-              </TextLink>
-            </div>
+      <ReasonsSection
+        title="¿Por qué elegir a MM Carga como empresa de transporte de carga?"
+        items={reasons}
+        aside={
+          <div data-reveal style={{ "--d": 1 } as CSSProperties}>
+            <TextLink href="/almacenamiento-de-mercancias/">
+              Conoce nuestro servicio de almacenamiento
+            </TextLink>
           </div>
-          <Points items={reasons} />
-        </Container>
-      </section>
+        }
+      />
 
       {/* Bloque 7 · FAQ */}
       <div className="bg-surface">
