@@ -25,6 +25,8 @@ export type BasePageData = {
   label: string;
   /** Solo Altamira, Manzanillo y Pesquería tienen almacén (cliente, 3 nov) */
   warehouse: boolean;
+  /** Foto del hero; sin valor muestra el relleno "Foto pendiente" */
+  image?: { src: string; alt: string };
   intro: { title: string; paragraphs: string[] };
   facilities: { title: string; text: string }[];
   services: { title: string; summaries: Record<string, string> };
@@ -100,10 +102,12 @@ export function BasePage({ data }: { data: BasePageData }) {
         h1={data.h1}
         subtitle={data.subtitle}
         secondary={{ href: "#ubicacion", label: "Ver ubicación de la base" }}
-        image={{
-          alt: `Base de operación de MM Carga en ${data.label}`,
-          label: `base de MM Carga en ${data.label}`,
-        }}
+        image={
+          data.image ?? {
+            alt: `Base de operación de MM Carga en ${data.label}`,
+            label: `base de MM Carga en ${data.label}`,
+          }
+        }
       />
 
       {/* Bloque 2 · Presentación local */}

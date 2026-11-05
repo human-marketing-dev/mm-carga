@@ -16,6 +16,7 @@ type Seed = {
   subtitle: string;
   intro: string;
   warehouse: boolean;
+  image?: { src: string; alt: string };
   routes: string[];
   extraFaq: { q: string; a: string };
 };
@@ -32,6 +33,7 @@ function build(s: Seed): BasePageData & { title: string } {
     title: s.title,
     subtitle: s.subtitle,
     warehouse: s.warehouse,
+    image: s.image,
     intro: {
       title: `Empresa de transporte en ${s.label} con base propia`,
       paragraphs: [
@@ -177,6 +179,10 @@ export const basePages = {
     intro:
       "Nuestra base de Coatzacoalcos se ubica en el sur del Golfo de México y forma parte de la red de seis bases propias de MM Carga, con cobertura nacional desde y hacia el resto de nuestras bases.",
     warehouse: false,
+    image: {
+      src: "/images/bases/transporte-de-carga-en-coatzacoalcos-mm-carga.webp",
+      alt: "Tractocamión de MM Carga con tolvas en su base de transporte de carga en Coatzacoalcos, Veracruz",
+    },
     routes: ["Altamira", "Bajío (Silao)", "Monterrey"],
     extraFaq: {
       q: "¿Trasladan contenedores desde el puerto de Coatzacoalcos?",
