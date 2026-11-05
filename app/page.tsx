@@ -7,6 +7,7 @@ import {
   IconLayers,
   IconMonitoring,
 } from "@/components/site/icons";
+import { HeroSlider, type HeroSlide } from "@/components/site/hero-slider";
 import { MexicoMap } from "@/components/site/mexico-map";
 import { Photo } from "@/components/site/photo";
 import {
@@ -30,6 +31,35 @@ export const metadata: Metadata = {
     "20 años en el transporte de carga y almacenaje de mercancías, con flota, almacenes y bases propias en México. Solicita tu cotización.",
   alternates: { canonical: "/" },
 };
+
+// Hero: fotos de los distintos servicios para que no se lea solo como flota de camiones.
+// ⚠️ Contenedores y carga suelta son fotos de 630 px: reemplazar por versiones de 2000 px o más.
+const heroSlides: HeroSlide[] = [
+  {
+    src: "/images/hero/hero-transporte-de-carga-mexico.webp",
+    alt: "Flota de tractocamiones de MM Carga, empresa de transporte de carga y almacenaje de mercancías en México",
+    label: "Transporte de carga",
+    position: "60% 50%",
+  },
+  {
+    src: "/images/servicios/almacenamiento-de-mercancias-mm-carga.webp",
+    alt: "Almacén de MM Carga con mercancía paletizada",
+    label: "Almacenaje de mercancías",
+    position: "50% 60%",
+  },
+  {
+    src: "/images/servicios/transporte-contenedores-maritimos-mm-carga.webp",
+    alt: "Tractocamión de MM Carga transportando un contenedor marítimo",
+    label: "Contenedores marítimos",
+    position: "70% 50%",
+  },
+  {
+    src: "/images/servicios/transporte-carga-suelta-plataforma-mm-carga.webp",
+    alt: "Plataforma de MM Carga transportando rollos de acero",
+    label: "Carga suelta en plataforma",
+    position: "75% 50%",
+  },
+];
 
 const figures = [
   { value: "20", label: "años de experiencia" },
@@ -92,22 +122,17 @@ export default function Home() {
         data-hero="dark"
         className="relative isolate -mt-18 overflow-hidden bg-navy-950 pt-18 text-white"
       >
-        {/* Imagen de fondo con overlay para legibilidad del texto */}
-        <div className="hero-photo absolute inset-0 -z-10">
-          <Photo
-            src="/images/hero/hero-transporte-de-carga-mexico.webp"
-            alt="Tráiler de MM Carga, empresa de transporte de carga y almacenaje de mercancías en México"
-            label="fondo del hero, tráiler MM Carga en carretera"
-            className="size-full"
-            sizes="100vw"
-            priority
-          />
-        </div>
+        {/* Fotos de fondo que rotan (transporte, almacén, contenedores, carga suelta) con overlay para legibilidad */}
+        <HeroSlider slides={heroSlides} />
         <div
-          className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-r from-navy-950/95 via-navy-950/85 to-navy-950/65 lg:via-navy-950/75 lg:to-navy-950/25"
+          className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-r from-navy-950/90 via-navy-950/72 to-navy-950/45 lg:from-navy-950/95 lg:via-navy-950/75 lg:to-navy-950/25"
           aria-hidden="true"
         />
-        <Container className="flex min-h-[clamp(560px,78vh,760px)] items-center py-20 lg:py-28">
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-48 bg-linear-to-t from-navy-950/80 to-transparent"
+          aria-hidden="true"
+        />
+        <Container className="flex min-h-[clamp(600px,84vh,800px)] items-center pt-16 pb-36 lg:pt-24 lg:pb-40">
           <div className="hero-in flex max-w-2xl flex-col items-start gap-7">
             <Badge dot={false}>20 AÑOS DE EXPERIENCIA</Badge>
             <h1 className="text-[clamp(36px,4.4vw,60px)] leading-[1.08] font-heavy">

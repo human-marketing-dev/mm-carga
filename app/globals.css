@@ -268,3 +268,28 @@ html {
     transform: translateY(8px) scale(0.96);
   }
 }
+
+/* Hero del Home: zoom lento de la foto activa y barra de avance de cada pestaña */
+.hero-kb {
+  transform: scale(1.02);
+  transition: transform 1.4s ease-out;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-kb.is-active {
+    transform: scale(1.1);
+    transition: transform 9s linear;
+  }
+}
+.hero-progress {
+  animation-name: hero-progress;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+}
+@keyframes hero-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
