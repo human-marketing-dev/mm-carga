@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 };
 
 // Hero: fotos de los distintos servicios para que no se lea solo como flota de camiones.
-// ⚠️ Contenedores y carga suelta son fotos de 630 px: reemplazar por versiones de 2000 px o más.
+// ⚠️ Carga suelta es una foto de 630 px: reemplazar por una versión de 2000 px o más.
 const heroSlides: HeroSlide[] = [
   {
     src: "/images/hero/hero-transporte-de-carga-mexico.webp",
@@ -48,10 +48,10 @@ const heroSlides: HeroSlide[] = [
     position: "50% 60%",
   },
   {
-    src: "/images/servicios/transporte-contenedores-maritimos-mm-carga.webp",
-    alt: "Tractocamión de MM Carga transportando un contenedor marítimo",
+    src: "/images/hero/transporte-de-contenedores-y-acero-mm-carga.webp",
+    alt: "Patio de MM Carga en Altamira con contenedores marítimos, rollos de acero y plataforma en maniobra de carga",
     label: "Contenedores marítimos",
-    position: "70% 50%",
+    position: "65% 50%",
   },
   {
     src: "/images/servicios/transporte-carga-suelta-plataforma-mm-carga.webp",

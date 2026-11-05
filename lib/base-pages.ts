@@ -132,6 +132,10 @@ export const basePages = {
     intro:
       "Nuestra base de Manzanillo se ubica en el principal puerto del Pacífico mexicano y forma parte de la red de seis bases propias de MM Carga. Cuenta con almacén propio y ofrece cobertura nacional desde y hacia el resto de nuestras bases.",
     warehouse: true,
+    image: {
+      src: "/images/bases/transporte-de-contenedores-en-manzanillo-mm-carga.webp",
+      alt: "Vista aérea de la base de MM Carga en Manzanillo con almacén, contenedores marítimos y plataformas",
+    },
     routes: ["Bajío (Silao)", "Monterrey"],
     extraFaq: {
       q: "¿La base de Manzanillo cuenta con almacén?",
