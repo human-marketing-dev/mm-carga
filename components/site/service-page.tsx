@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
-import { MexicoMap } from "@/components/site/mexico-map";
 import { PageHero } from "@/components/site/page-hero";
+import { ServiceBases } from "@/components/site/service-bases";
 import {
   Container,
   CtaBand,
@@ -9,7 +9,6 @@ import {
   Points,
   SectionTitle,
   ServiceCards,
-  TextLink,
 } from "@/components/site/sections";
 import { ArrowIcon } from "@/components/ui/arrow-icon";
 import { bases, services } from "@/lib/site";
@@ -35,6 +34,8 @@ export type ServicePageData = {
     mainNote?: string;
     /** Bases principales del servicio; sin valor, las 6 */
     highlight?: string[];
+    /** true: el servicio solo opera en esas bases (no se listan las demás en Cobertura) */
+    exclusive?: boolean;
     activeLabel?: string;
     linksLabel?: string;
   };
@@ -130,7 +131,9 @@ export function ServicePage({ data }: { data: ServicePageData }) {
                   </svg>
                   <span className="flex flex-col">
                     <span className="text-[17px] font-bold text-navy-800">
-                      {b.city === "Monterrey" ? "Monterrey (Pesquería)" : b.city}
+                      {b.city === "Monterrey"
+                        ? "Monterrey (Pesquería)"
+                        : b.city}
                     </span>
                     <span className="text-small text-muted">{b.state}</span>
                   </span>
@@ -190,34 +193,13 @@ export function ServicePage({ data }: { data: ServicePageData }) {
       </section>
 
       {/* Bloque 4 · Cobertura */}
-      <section
-        id="cobertura"
-        className={`scroll-mt-24 py-20 md:py-28 ${tone(true)}`}
-      >
-        <Container className="grid items-center gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
-          <div className="flex flex-col gap-6">
-            <SectionTitle kicker="Cobertura" title={data.coverage.title} />
-            <p
-              data-reveal
-              style={{ "--d": 1 } as CSSProperties}
-              className="text-body text-muted"
-            >
-              {data.coverage.text}
-            </p>
-            <div className="flex flex-col gap-3 pt-2">
-              <TextLink href="/cobertura/">Conoce nuestra cobertura</TextLink>
-              <TextLink href="/transporte-de-carga-en-monterrey/">
-                Transporte de carga en Monterrey
-              </TextLink>
-            </div>
-          </div>
-          <MexicoMap
-            highlight={data.coverage.highlight}
-            activeLabel={data.coverage.activeLabel}
-            linksLabel={data.coverage.linksLabel}
-          />
-        </Container>
-      </section>
+      {/* Mapa solo en el Home: aquí, tarjetas con las bases principales del servicio */}
+      <ServiceBases
+        title={data.coverage.title}
+        text={data.coverage.text}
+        highlight={data.coverage.highlight}
+        exclusive={data.coverage.exclusive}
+      />
 
       {/* Bloque 5 · Por qué */}
       <section className={`py-20 md:py-28 ${tone(false)}`}>

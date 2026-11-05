@@ -80,6 +80,7 @@ const data: ServicePageData = {
     title: "Cobertura del servicio de almacenamiento de mercancías",
     text: "Contamos con almacenes propios en Altamira, Manzanillo y Pesquería (Monterrey), integrados con nuestro servicio de transporte para coordinar la recolección, el resguardo y la entrega de cada operación.",
     highlight: ["Altamira", "Manzanillo", "Monterrey"],
+    exclusive: true,
     activeLabel: "Base con almacén",
     mainLabel: "Almacenes propios en",
     mainNote:
