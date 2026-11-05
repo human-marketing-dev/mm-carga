@@ -30,23 +30,16 @@ const data: ServicePageData = {
   crumb: "Contenedores marítimos",
   h1: "Transporte de contenedores marítimos",
   subtitle:
-    "Traslado de contenedores de importación y exportación entre puertos, plantas y almacenes, con bases propias en Altamira, Manzanillo y Coatzacoalcos.",
+    "Traslado de contenedores de importación y exportación entre puertos, plantas y almacenes, con operación principal en Altamira, Manzanillo y Monterrey.",
   image: {
     src: "/images/servicios/transporte-contenedores-maritimos-mm-carga.webp",
     alt: "Transporte de contenedor marítimo de MM Carga en puerto",
   },
-  specsButton: "Ver tipos de contenedores",
   about: {
     title: "Traslado de contenedores de importación y exportación",
     paragraphs: [
       "El transporte de contenedores marítimos enlaza la operación portuaria con las plantas y almacenes de nuestros clientes. En importación, trasladamos el contenedor desde el puerto hasta su destino final; en exportación, lo llevamos desde la planta hasta la terminal portuaria.",
       "MM Carga traslada los contenedores en plataformas en full, nuestro equipo principal, y ofrece movimientos One Way (solo ida) y Round Trip (ida y retorno del contenedor vacío). Para operaciones de exportación contamos con báscula certificada para la obtención del VGM (peso bruto verificado) que requieren las navieras.",
-    ],
-    audience: [
-      "Importadores y exportadores",
-      "Agentes aduanales y agentes de carga",
-      "Plantas industriales que reciben insumos por vía marítima",
-      "Navieras y operadores logísticos que requieren arrastre terrestre",
     ],
   },
   scope: {
@@ -84,20 +77,12 @@ const data: ServicePageData = {
       },
     ],
   },
-  specs: {
-    title: "Tipos de contenedores que transportamos",
-    caption: "Tipos de contenedores marítimos que transporta MM Carga",
-    note: "Equipo: portacontenedor o chasis · Movimientos: One Way y Round Trip · Báscula certificada VGM.",
-    head: ["Contenedor", "Medidas exteriores aprox.", "Uso común"],
-    rows: [
-      ["20 pies (20’ DV)", "6.1 × 2.44 × 2.59 m", "Carga pesada y densa"],
-      ["40 pies (40’ DV)", "12.2 × 2.44 × 2.59 m", "Carga general"],
-      ["40 pies High Cube (40’ HC)", "12.2 × 2.44 × 2.9 m", "Carga voluminosa"],
-    ],
-  },
   coverage: {
     title: "Transporte de contenedores desde los principales puertos de México",
-    text: "Ofrecemos cobertura nacional desde y hacia nuestras bases en los puertos de Altamira, Manzanillo y Coatzacoalcos, además de Monterrey, Nuevo Laredo y Silao. Trasladamos contenedores entre los puertos y las plantas y almacenes del interior del país.",
+    text: "El transporte de contenedores opera principalmente desde nuestras bases en Altamira, Manzanillo y Monterrey, con cobertura nacional desde y hacia el resto de nuestras bases en Nuevo Laredo, Silao y Coatzacoalcos. Trasladamos contenedores entre los puertos y las plantas y almacenes del interior del país.",
+    highlight: ["Altamira", "Manzanillo", "Monterrey"],
+    activeLabel: "Base principal del servicio",
+    linksLabel: "Cómo llegar a las bases principales",
   },
   reasons: {
     title: "¿Por qué elegir a MM Carga para el transporte de contenedores?",

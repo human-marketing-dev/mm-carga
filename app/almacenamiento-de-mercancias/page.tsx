@@ -34,18 +34,11 @@ const data: ServicePageData = {
     src: "/images/servicios/almacenamiento-de-mercancias-mm-carga.webp",
     alt: "Almacén de mercancías de MM Carga con mercancía paletizada",
   },
-  specsButton: "Ver instalaciones",
   about: {
     title: "Servicio de almacenamiento de mercancías con control de inventario",
     paragraphs: [
       "El almacenamiento de mercancías comprende el resguardo del producto en un espacio controlado mientras se programa su siguiente destino. Incluye la recepción, el acomodo, el control de inventario y el despacho hacia el cliente final o la planta.",
       "MM Carga cuenta con 100,000 m² techados y 100,000 m² al aire libre, bodegas y montacargas propios, y control de inventarios mediante sistema WMS. Al integrar transporte y almacenamiento, gestionamos la recolección, el resguardo y la entrega con un solo equipo de trabajo.",
-    ],
-    audience: [
-      "Importadores que requieren espacio para su mercancía a la salida del puerto",
-      "Plantas que necesitan inventario cercano a su producción",
-      "Empresas con carga pesada o voluminosa que requiere patio al aire libre",
-      "Exportadores que deben obtener el pesaje de sus contenedores (VGM)",
     ],
   },
   scope: {
@@ -83,22 +76,14 @@ const data: ServicePageData = {
       },
     ],
   },
-  specs: {
-    title: "Instalaciones de almacenamiento",
-    caption: "Instalaciones de almacenamiento de MM Carga",
-    rows: [
-      ["Almacén techado", "100,000 m²"],
-      ["Patio al aire libre", "100,000 m²"],
-      ["Control de inventarios", "Sistema WMS"],
-      ["Equipo de maniobras", "Montacargas propios"],
-      ["Pesaje", "Báscula certificada para VGM"],
-    ],
-  },
   coverage: {
     title: "Cobertura del servicio de almacenamiento de mercancías",
     text: "Contamos con almacenes propios en Altamira, Manzanillo y Pesquería (Monterrey), integrados con nuestro servicio de transporte para coordinar la recolección, el resguardo y la entrega de cada operación.",
     highlight: ["Altamira", "Manzanillo", "Monterrey"],
     activeLabel: "Base con almacén",
+    mainLabel: "Almacenes propios en",
+    mainNote:
+      "Integrados con el transporte desde y hacia el resto de nuestras bases.",
     linksLabel: "Cómo llegar a nuestros almacenes",
   },
   reasons: {

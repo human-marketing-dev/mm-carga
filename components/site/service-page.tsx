@@ -12,13 +12,9 @@ import {
   TextLink,
 } from "@/components/site/sections";
 import { ArrowIcon } from "@/components/ui/arrow-icon";
-import { services } from "@/lib/site";
+import { bases, services } from "@/lib/site";
 
 type Item = { title: string; text: string; icon: ReactNode };
-
-// Un valor de especificación que el cliente aún no confirma
-export const PENDING = null;
-type Cell = string | typeof PENDING;
 
 export type ServicePageData = {
   slug: string;
@@ -28,22 +24,16 @@ export type ServicePageData = {
   h1: string;
   subtitle: string;
   image: { src: string; alt: string };
-  specsButton: string;
-  about: { title: string; paragraphs: string[]; audience: string[] };
+  about: { title: string; paragraphs: string[] };
   scope: { title: string; items: Item[] };
-  specs: {
-    /** Oculta el bloque mientras el cliente no confirme los datos */
-    hidden?: boolean;
-    title: string;
-    caption: string;
-    note?: string;
-    head?: string[];
-    rows: Cell[][];
-  };
   coverage: {
     title: string;
     text: string;
-    /** Bases que se destacan en el mapa; sin valor, las 6 */
+    /** Título de la tarjeta de bases en "Sobre el servicio" */
+    mainLabel?: string;
+    /** Texto bajo la lista; sin valor, se listan las demás bases */
+    mainNote?: string;
+    /** Bases principales del servicio; sin valor, las 6 */
     highlight?: string[];
     activeLabel?: string;
     linksLabel?: string;
@@ -53,29 +43,34 @@ export type ServicePageData = {
   cta: { title: string; text: string; service: string };
 };
 
+function listCities(cities: string[]) {
+  return cities.length > 1
+    ? `${cities.slice(0, -1).join(", ")} y ${cities.at(-1)}`
+    : cities[0];
+}
+
 // La celda que cierra la rejilla de alcance ocupa el hueco que queden en la última fila
 const mdSpan = ["md:col-span-2", ""];
 const lgSpan = ["lg:col-span-3", "lg:col-span-2", ""];
 
-function SpecValue({ value }: { value: Cell }) {
-  if (value === PENDING) {
-    return (
-      <span className="inline-flex rounded-tag bg-[#f9eeda] px-2.5 py-1 text-xs font-semibold text-[#8a5a00]">
-        Por confirmar
-      </span>
-    );
-  }
-  return <>{value}</>;
-}
-
 export function ServicePage({ data }: { data: ServicePageData }) {
   const others = services.filter((s) => s.slug !== data.slug);
   const n = data.scope.items.length;
-  const { head, rows } = data.specs;
-  const showSpecs = !data.specs.hidden;
-  // Sin especificaciones, los fondos alternos se recorren un bloque para no juntar dos grises
-  const tone = (surface: boolean) =>
-    surface !== !showSpecs ? "bg-surface" : "";
+  const main = data.coverage.highlight;
+  const mainBases = main
+    ? main
+        .map((city) => bases.find((b) => b.city === city))
+        .filter((b) => b !== undefined)
+    : bases;
+  const otherCities = bases
+    .filter((b) => main && !main.includes(b.city))
+    .map((b) => b.city);
+  const mainNote =
+    data.coverage.mainNote ??
+    (otherCities.length > 0
+      ? `También operamos desde y hacia nuestras bases en ${listCities(otherCities)}.`
+      : undefined);
+  const tone = (surface: boolean) => (surface ? "bg-surface" : "");
 
   return (
     <>
@@ -85,11 +80,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
         crumb={data.crumb}
         h1={data.h1}
         subtitle={data.subtitle}
-        secondary={
-          showSpecs
-            ? { href: "#especificaciones", label: data.specsButton }
-            : { href: "#cobertura", label: "Ver cobertura" }
-        }
+        secondary={{ href: "#cobertura", label: "Ver cobertura" }}
         image={data.image}
       />
 
@@ -115,30 +106,42 @@ export function ServicePage({ data }: { data: ServicePageData }) {
             className="self-start rounded-card bg-surface p-8"
           >
             <p className="text-sm font-bold text-navy-800">
-              Este servicio está dirigido a:
+              {data.coverage.mainLabel ??
+                (mainBases.length === 1
+                  ? "Base principal del servicio"
+                  : "Bases principales del servicio")}
             </p>
             <ul className="mt-5 flex flex-col gap-4">
-              {data.about.audience.map((a) => (
-                <li
-                  key={a}
-                  className="flex gap-3 text-[15px] leading-relaxed text-ink"
-                >
+              {mainBases.map((b) => (
+                <li key={b.city} className="flex gap-3">
                   <svg
-                    viewBox="0 0 16 16"
-                    className="mt-1 size-4 shrink-0 text-primary"
+                    viewBox="0 0 24 24"
+                    className="mt-0.5 size-5 shrink-0 text-primary"
                     aria-hidden="true"
                   >
                     <path
-                      d="M3 8.5l3 3 7-7"
+                      d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="2"
+                      strokeLinejoin="round"
                     />
+                    <circle cx="12" cy="9.5" r="2.5" fill="currentColor" />
                   </svg>
-                  {a}
+                  <span className="flex flex-col">
+                    <span className="text-[17px] font-bold text-navy-800">
+                      {b.city === "Monterrey" ? "Monterrey (Pesquería)" : b.city}
+                    </span>
+                    <span className="text-small text-muted">{b.state}</span>
+                  </span>
                 </li>
               ))}
             </ul>
+            {mainNote && (
+              <p className="mt-6 border-t border-navy-800/10 pt-5 text-small text-muted">
+                {mainNote}
+              </p>
+            )}
           </aside>
         </Container>
       </section>
@@ -186,71 +189,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
         </Container>
       </section>
 
-      {/* Bloque 4 · Especificaciones */}
-      {showSpecs && (
-        <section id="especificaciones" className="py-20 md:py-28">
-          <Container className="grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
-            <div className="flex flex-col gap-5">
-              <SectionTitle
-                kicker="Especificaciones técnicas"
-                title={data.specs.title}
-              />
-              {data.specs.note && (
-                <p className="text-small text-muted">{data.specs.note}</p>
-              )}
-            </div>
-            <div
-              data-reveal
-              style={{ "--d": 2 } as CSSProperties}
-              className="overflow-x-auto"
-            >
-              <table className="w-full min-w-[480px] border-collapse text-left">
-                <caption className="sr-only">{data.specs.caption}</caption>
-                {head && (
-                  <thead>
-                    <tr>
-                      {head.map((h) => (
-                        <th
-                          key={h}
-                          scope="col"
-                          className="pr-6 pb-4 text-xs font-bold tracking-[0.12em] text-muted uppercase"
-                        >
-                          {h}
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                )}
-                <tbody>
-                  {rows.map(([k, ...vals]) => (
-                    <tr
-                      key={k}
-                      className="border-b border-navy-800/10 first:border-t"
-                    >
-                      <th
-                        scope="row"
-                        className={`py-5 pr-6 text-[15px] font-semibold ${head ? "text-navy-800" : "w-2/5 text-muted"}`}
-                      >
-                        {k}
-                      </th>
-                      {vals.map((v, i) => (
-                        <td
-                          key={i}
-                          className={`py-5 pr-6 tabular-nums ${head ? "text-[15px] text-muted" : "text-[17px] font-semibold text-navy-800"}`}
-                        >
-                          <SpecValue value={v} />
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </Container>
-        </section>
-      )}
-
-      {/* Bloque 5 · Cobertura */}
+      {/* Bloque 4 · Cobertura */}
       <section
         id="cobertura"
         className={`scroll-mt-24 py-20 md:py-28 ${tone(true)}`}
@@ -280,7 +219,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
         </Container>
       </section>
 
-      {/* Bloque 6 · Por qué */}
+      {/* Bloque 5 · Por qué */}
       <section className={`py-20 md:py-28 ${tone(false)}`}>
         <Container className="grid gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
           <SectionTitle kicker="Por qué MM Carga" title={data.reasons.title} />
@@ -288,12 +227,12 @@ export function ServicePage({ data }: { data: ServicePageData }) {
         </Container>
       </section>
 
-      {/* Bloque 7 · FAQ */}
+      {/* Bloque 6 · FAQ */}
       <div className={tone(true)}>
         <Faq kicker="FAQs" title={data.faq.title} items={data.faq.items} />
       </div>
 
-      {/* Bloque 8 · Otros servicios */}
+      {/* Bloque 7 · Otros servicios */}
       <section className={`py-20 md:py-28 ${tone(false)}`}>
         <Container className="flex flex-col gap-10">
           <SectionTitle
@@ -304,7 +243,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
         </Container>
       </section>
 
-      {/* Bloque 9 · CTA */}
+      {/* Bloque 8 · CTA */}
       <CtaBand
         kicker="Cotización"
         title={data.cta.title}

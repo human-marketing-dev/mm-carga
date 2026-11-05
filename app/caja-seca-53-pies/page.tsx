@@ -24,13 +24,6 @@ export const metadata: Metadata = {
   alternates: { canonical: SLUG },
 };
 
-const audience = [
-  "Empresas manufactureras y maquiladoras con operaciones de exportación",
-  "Fabricantes y distribuidores de producto terminado y refacciones",
-  "Industrias que trasladan insumos empacados o en tarimas",
-  "Empresas que requieren cajas disponibles en sus instalaciones (Drop & Hook)",
-];
-
 const scope = [
   {
     title: "Rutas nacionales",
@@ -57,17 +50,6 @@ const scope = [
     icon: <IconClock />,
     text: "Rastreo GPS, cámaras y supervisión permanente durante todo el trayecto.",
   },
-];
-
-const specs: ServicePageData["specs"]["rows"] = [
-  ["Largo exterior", "53 pies (16.15 m)"],
-  [
-    "Medidas interiores aprox.",
-    "15.9 m de largo × 2.5 m de ancho × 2.7 m de alto",
-  ],
-  ["Volumen aprox.", "100 a 110 m³"],
-  ["Tarimas estándar", "26 a 30"],
-  ["Flota MM Carga", "Más de 100 cajas de 53 pies"],
 ];
 
 const reasons = [
@@ -123,28 +105,23 @@ const data: ServicePageData = {
     src: "/images/servicios/transporte-caja-seca-53-pies-mm-carga.webp",
     alt: "Tractocamión de MM Carga con caja seca de 53 pies en carretera",
   },
-  specsButton: "Ver medidas y capacidad",
   about: {
     title: "Caja seca de 53 pies para carga nacional y de exportación",
     paragraphs: [
       "El transporte en caja seca protege la mercancía de la intemperie, el polvo y el riesgo de robo durante el trayecto. Es la opción más utilizada para carga seca paletizada o empacada, ya que combina gran capacidad volumétrica con altos niveles de seguridad.",
       "MM Carga cuenta con más de 100 cajas de 53 pies propias, que operan en rutas nacionales y en servicio de exportación a Estados Unidos vía Laredo. Todas las unidades cuentan con rastreo GPS y cámaras, supervisadas por nuestro centro de monitoreo las 24 horas.",
     ],
-    audience,
   },
   scope: {
     title: "Alcance del servicio de transporte en caja seca",
     items: scope,
   },
-  specs: {
-    title: "Caja seca de 53 pies: medidas y capacidad",
-    caption: "Medidas y capacidad de la caja seca de 53 pies",
-    note: "Valores de referencia. La capacidad final se confirma según el tipo de carga.",
-    rows: specs,
-  },
   coverage: {
     title: "Cobertura del servicio de caja seca",
-    text: "Ofrecemos el transporte en caja seca con cobertura nacional, desde y hacia nuestras bases en Monterrey, Nuevo Laredo, Altamira, Silao, Manzanillo y Coatzacoalcos.",
+    text: "El transporte en caja seca opera principalmente desde nuestras bases en Nuevo Laredo y Silao, con cobertura nacional desde y hacia el resto de nuestras bases en Monterrey, Altamira, Manzanillo y Coatzacoalcos.",
+    highlight: ["Nuevo Laredo", "Silao"],
+    activeLabel: "Base principal del servicio",
+    linksLabel: "Cómo llegar a las bases principales",
   },
   reasons: {
     title: "¿Por qué elegir a MM Carga para el transporte en caja seca?",

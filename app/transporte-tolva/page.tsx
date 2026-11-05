@@ -9,7 +9,6 @@ import {
   IconWeight,
 } from "@/components/site/icons";
 import {
-  PENDING,
   ServicePage,
   type ServicePageData,
 } from "@/components/site/service-page";
@@ -34,18 +33,11 @@ const data: ServicePageData = {
     src: "/images/servicios/transporte-tolva-granel-mm-carga.webp",
     alt: "Tráiler con tolva de MM Carga para transporte a granel",
   },
-  specsButton: "Ver capacidad de la tolva",
   about: {
     title: "Tolva de carga para materiales a granel",
     paragraphs: [
       "La tolva es un remolque abierto en su parte superior, diseñado para la carga y descarga eficiente de materiales sueltos. Es el equipo indicado para trasladar grandes volúmenes de producto a granel que no se transporta en tarimas ni empaques.",
       "MM Carga opera tolvas con capacidad de 140 m³ para el traslado de materiales como arena, grava, minerales y mercancía ferrosa, con equipo especializado según el tipo de carga.",
-    ],
-    audience: [
-      "Industria siderúrgica y de reciclaje de metales",
-      "Industria de la construcción y producción de agregados",
-      "Minería y procesamiento de minerales",
-      "Proyectos con esquema cargado/cargado de producto terminado",
     ],
   },
   scope: {
@@ -73,22 +65,12 @@ const data: ServicePageData = {
       },
     ],
   },
-  specs: {
-    // Oculto: el cliente aún no tiene estas especificaciones (3 nov)
-    hidden: true,
-    title: "Capacidad del tráiler con tolva",
-    caption: "Capacidad y equipo del tráiler con tolva",
-    rows: [
-      ["Capacidad volumétrica", "140 m³"],
-      ["Tipo de carga", "Granel y mercancía ferrosa"],
-      ["Configuración", PENDING],
-      ["Carga máxima", PENDING],
-      ["Tipo de descarga", PENDING],
-    ],
-  },
   coverage: {
     title: "Cobertura del servicio de transporte en tolva",
-    text: "Ofrecemos el transporte en tolva con cobertura nacional, desde y hacia nuestras bases en Monterrey, Nuevo Laredo, Altamira, Silao, Manzanillo y Coatzacoalcos.",
+    text: "El transporte en tolva opera principalmente desde nuestra base en Coatzacoalcos, con cobertura nacional desde y hacia el resto de nuestras bases en Monterrey, Nuevo Laredo, Altamira, Silao y Manzanillo.",
+    highlight: ["Coatzacoalcos"],
+    activeLabel: "Base principal del servicio",
+    linksLabel: "Cómo llegar a las bases principales",
   },
   reasons: {
     title: "¿Por qué elegir a MM Carga para el transporte en tolva?",
