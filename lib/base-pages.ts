@@ -111,6 +111,10 @@ export const basePages = {
     intro:
       "Nuestra base de Altamira se ubica en el puerto de Altamira, en el Golfo de México, y forma parte de la red de seis bases propias de MM Carga. Cuenta con almacén propio y ofrece cobertura nacional desde y hacia el resto de nuestras bases.",
     warehouse: true,
+    image: {
+      src: "/images/bases/transporte-de-carga-en-altamira-mm-carga.webp",
+      alt: "Patio de MM Carga en Altamira con contenedores marítimos, rollos de acero y plataforma en maniobra de carga",
+    },
     routes: ["Monterrey", "Nuevo Laredo", "Bajío (Silao)"],
     extraFaq: {
       q: "¿La base de Altamira cuenta con almacén?",
