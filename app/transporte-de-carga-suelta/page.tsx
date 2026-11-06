@@ -40,6 +40,10 @@ const data: ServicePageData = {
       "MM Carga cuenta con más de 200 unidades full para carga suelta y equipo propio de amarre y sujeción. Asimismo, realizamos maniobras de carga y descarga en puerto para mercancía de importación y exportación.",
       "Las plataformas en full son el equipo principal de MM Carga: con ellas transportamos acero, carga suelta, maquinaria y también contenedores marítimos.",
     ],
+    image: {
+      src: "/images/servicios/transporte-de-carga-suelta-en-plataforma-mm-carga.webp",
+      alt: "Transporte de carga suelta en plataforma de MM Carga con rollos de acero en carretera",
+    },
   },
   scope: {
     title: "Alcance del servicio de transporte de carga suelta",
