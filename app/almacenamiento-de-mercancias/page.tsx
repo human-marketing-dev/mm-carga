@@ -40,6 +40,10 @@ const data: ServicePageData = {
       "El almacenamiento de mercancías comprende el resguardo del producto en un espacio controlado mientras se programa su siguiente destino. Incluye la recepción, el acomodo, el control de inventario y el despacho hacia el cliente final o la planta.",
       "MM Carga cuenta con 100,000 m² techados y 100,000 m² al aire libre, bodegas y montacargas propios, y control de inventarios mediante sistema WMS. Al integrar transporte y almacenamiento, gestionamos la recolección, el resguardo y la entrega con un solo equipo de trabajo.",
     ],
+    image: {
+      src: "/images/servicios/almacenamiento-de-mercancias-almacen-y-patio-mm-carga.webp",
+      alt: "Almacenamiento de mercancías de MM Carga: vista aérea del almacén techado y patio con acero, contenedores y tractocamiones",
+    },
   },
   scope: {
     title: "Alcance del servicio de almacenamiento",
