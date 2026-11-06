@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import type { CSSProperties } from "react";
 import { MexicoMap } from "@/components/site/mexico-map";
-import { PageHero } from "@/components/site/page-hero";
+import { AboutHero } from "@/components/site/about-hero";
 import {
   Container,
   CtaBand,
@@ -69,8 +69,7 @@ export default function Nosotros() {
   return (
     <>
       {/* Bloque 1 · Hero */}
-      <PageHero
-        crumb="Nosotros"
+      <AboutHero
         h1="MM Carga: 20 años en transporte de carga y almacenaje en México"
         subtitle="Somos una empresa mexicana de transporte y almacenamiento con flota, almacenes y bases de operación propias."
         secondary={{
@@ -81,6 +80,7 @@ export default function Nosotros() {
           src: "/images/nosotros/transporte-de-carga-en-carretera-mm-carga.webp",
           alt: "Transporte de carga de MM Carga: tractocamiones con contenedores marítimos en carretera, vista aérea",
         }}
+        seals={["C-TPAT", "OEA", "ISO 9001:2015", "Transporte Limpio"]}
       />
 
       {/* Bloque 2 · Quiénes somos, con el collage de 20 años */}

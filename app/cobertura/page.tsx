@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import { IconWarehouse } from "@/components/site/icons";
 import { MexicoMap } from "@/components/site/mexico-map";
-import { PageHero } from "@/components/site/page-hero";
+import { CoverageHero } from "@/components/site/coverage-hero";
 import {
   Container,
   CtaBand,
@@ -25,6 +25,10 @@ const ordered = [
   ...bases.filter((b) => b.city === "Monterrey"),
   ...bases.filter((b) => b.city !== "Monterrey"),
 ];
+
+// Ancla de la ficha de cada base (p. ej. "Nuevo Laredo" → "nuevo-laredo")
+const slugify = (city: string) =>
+  city.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "-");
 
 // Bases con almacén propio (confirmado por el cliente el 3 nov; Monterrey = Pesquería)
 const withWarehouse = new Set(["Altamira", "Manzanillo", "Monterrey"]);
@@ -81,15 +85,20 @@ export default function Cobertura() {
   return (
     <>
       {/* Bloque 1 · Hero */}
-      <PageHero
-        crumb="Cobertura"
+      <CoverageHero
         h1="Bases de operación de MM Carga en México"
         subtitle="Seis bases propias en puertos, la frontera norte y el Bajío para atender con oportunidad cada operación."
-        secondary={{ href: "#bases", label: "Ver bases de operación" }}
         image={{
           src: "/images/cobertura/patio-bases-de-operacion-transporte-de-carga-mm-carga.webp",
           alt: "Patio de MM Carga con tractocamiones y plataformas propias en una base de operación",
         }}
+        bases={ordered.map((b) => ({
+          city: b.city,
+          state: b.state,
+          region: b.region,
+          anchor: `#base-${slugify(b.city)}`,
+          warehouse: withWarehouse.has(b.city),
+        }))}
       />
 
       {/* Bloque 2 · Mapa */}
@@ -135,9 +144,10 @@ export default function Cobertura() {
             {ordered.map((b, i) => (
               <li
                 key={b.city}
+                id={`base-${slugify(b.city)}`}
                 data-reveal
                 style={{ "--d": i } as CSSProperties}
-                className="flex flex-col gap-4 rounded-card border border-navy-800/8 bg-white p-7"
+                className="flex scroll-mt-28 flex-col gap-4 rounded-card border border-navy-800/8 bg-white p-7"
               >
                 <p className="text-xs font-bold tracking-[0.14em] text-primary uppercase">
                   {b.region}

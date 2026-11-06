@@ -78,30 +78,7 @@ export function PageHero({
           className={`grid items-center gap-12 pt-10 lg:pt-14 ${facts ? "pb-24 lg:grid-rows-[500px] lg:pb-28" : "pb-16 lg:pb-20"} ${image ? "lg:grid-cols-[1fr_1.05fr] lg:gap-16" : ""}`}
         >
           <div className="hero-in flex flex-col items-start gap-6">
-            <nav
-              aria-label="Ruta de navegación"
-              className="text-sm text-white/65"
-            >
-              <ol className="flex flex-wrap items-center gap-2">
-                <li>
-                  <Link href="/" className="hover:text-white">
-                    Inicio
-                  </Link>
-                </li>
-                {parents.map((p) => (
-                  <li key={p.href} className="flex items-center gap-2">
-                    <span aria-hidden="true">/</span>
-                    <Link href={p.href} className="hover:text-white">
-                      {p.label}
-                    </Link>
-                  </li>
-                ))}
-                <li aria-hidden="true">/</li>
-                <li aria-current="page" className="font-semibold text-white">
-                  {crumb}
-                </li>
-              </ol>
-            </nav>
+            <HeroCrumbs parents={parents} crumb={crumb} />
             {badge && (
               <span className="inline-flex items-center gap-2.5 rounded-full border border-white/18 bg-white/8 py-1.5 pr-4 pl-2 text-[13px] font-semibold text-white/90 backdrop-blur">
                 <span className="grid size-6 place-items-center rounded-full bg-primary">
@@ -207,5 +184,43 @@ export function PageHero({
         </Container>
       )}
     </>
+  );
+}
+
+// Miga de pan de los heros azules (también la usan los heros de Nosotros y Cobertura)
+export function HeroCrumbs({
+  parents = [],
+  crumb,
+  className = "",
+}: {
+  parents?: Crumb[];
+  crumb: string;
+  className?: string;
+}) {
+  return (
+    <nav
+      aria-label="Ruta de navegación"
+      className={`text-sm text-white/65 ${className}`}
+    >
+      <ol className="flex flex-wrap items-center gap-2">
+        <li>
+          <Link href="/" className="hover:text-white">
+            Inicio
+          </Link>
+        </li>
+        {parents.map((p) => (
+          <li key={p.href} className="flex items-center gap-2">
+            <span aria-hidden="true">/</span>
+            <Link href={p.href} className="hover:text-white">
+              {p.label}
+            </Link>
+          </li>
+        ))}
+        <li aria-hidden="true">/</li>
+        <li aria-current="page" className="font-semibold text-white">
+          {crumb}
+        </li>
+      </ol>
+    </nav>
   );
 }
