@@ -6,6 +6,8 @@ const nextConfig: NextConfig = {
     agentFeedback: true,
   },
   cacheComponents: true,
+  // Fotos del cliente: next/image las sirve en calidad 90 (por defecto es 75)
+  images: { qualities: [90] },
   trailingSlash: true,
   partialPrefetching: true,
   turbopack: {

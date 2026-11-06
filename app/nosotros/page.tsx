@@ -138,7 +138,7 @@ export default function Nosotros() {
               src="/images/nosotros/20-anos-de-transporte-de-carga-mm-carga.webp"
               alt="20 años de MM Carga: collage de su flota de tractocamiones, contenedores y operadores"
               width={1524}
-              height={1021}
+              height={1020}
               sizes="(max-width: 1024px) 100vw, 55vw"
               className="h-auto w-full drop-shadow-[0_30px_40px_rgba(6,40,100,0.18)]"
             />

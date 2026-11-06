@@ -41,6 +41,10 @@ const data: ServicePageData = {
       "El transporte de contenedores marítimos enlaza la operación portuaria con las plantas y almacenes de nuestros clientes. En importación, trasladamos el contenedor desde el puerto hasta su destino final; en exportación, lo llevamos desde la planta hasta la terminal portuaria.",
       "MM Carga traslada los contenedores en plataformas en full, nuestro equipo principal, y ofrece movimientos One Way (solo ida) y Round Trip (ida y retorno del contenedor vacío). Para operaciones de exportación contamos con báscula certificada para la obtención del VGM (peso bruto verificado) que requieren las navieras.",
     ],
+    image: {
+      src: "/images/servicios/transporte-de-contenedores-maritimos-en-full-mm-carga.webp",
+      alt: "Transporte de contenedores marítimos de MM Carga: plataforma en full cargada con grúa reach stacker en patio de contenedores",
+    },
   },
   scope: {
     title: "Alcance del servicio de transporte de contenedores",
