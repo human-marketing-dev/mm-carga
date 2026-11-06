@@ -83,31 +83,65 @@ export default function Nosotros() {
         }}
       />
 
-      {/* Bloque 2 · Quiénes somos */}
-      <section className="py-20 md:py-28">
-        <Container className="grid gap-10 lg:grid-cols-2 lg:gap-20">
-          <SectionTitle
-            kicker="Quiénes somos"
-            title="Empresa de transporte de carga pesada con infraestructura propia"
-          />
-          <div
-            data-reveal
-            style={{ "--d": 2 } as CSSProperties}
-            className="flex flex-col gap-6 text-body text-muted lg:pt-9"
-          >
-            <p>
+      {/* Bloque 2 · Quiénes somos, con el collage de 20 años */}
+      <section className="overflow-hidden py-20 md:py-28">
+        <Container className="grid items-center gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
+          <div className="flex flex-col gap-6">
+            <SectionTitle
+              kicker="Quiénes somos"
+              title="Empresa de transporte de carga pesada con infraestructura propia"
+            />
+            <p
+              data-reveal
+              style={{ "--d": 1 } as CSSProperties}
+              className="text-body text-muted"
+            >
               MM Carga S.A. de C.V. es una empresa mexicana especializada en el
               transporte terrestre y el almacenamiento de carga para la
               industria pesada y el comercio exterior. Fundada en 2006, en 2026
               cumple 20 años de operación.
             </p>
-            <p>
+            <p
+              data-reveal
+              style={{ "--d": 2 } as CSSProperties}
+              className="text-body text-muted"
+            >
               Operamos desde nuestra oficina en Pesquería, Nuevo León, y seis
               bases ubicadas en puertos, la frontera norte y el Bajío. Contamos
               con más de 200 unidades, más de 100 cajas secas de 53 pies y
               200,000 m² de almacenamiento, lo que nos permite responder a
               operaciones de gran volumen sin depender de terceros.
             </p>
+            <dl
+              data-reveal
+              style={{ "--d": 3 } as CSSProperties}
+              className="mt-2 grid grid-cols-2 border-t border-navy-800/10 pt-6"
+            >
+              <div className="flex flex-col gap-1 pr-6">
+                <dt className="order-2 text-sm text-muted">Año de fundación</dt>
+                <dd className="order-1 text-[32px] leading-none font-heavy text-navy-800 tabular-nums">
+                  2006
+                </dd>
+              </div>
+              <div className="flex flex-col gap-1 border-l border-navy-800/10 pl-6">
+                <dt className="order-2 text-sm text-muted">
+                  de operación en 2026
+                </dt>
+                <dd className="order-1 text-[32px] leading-none font-heavy text-primary tabular-nums">
+                  20 años
+                </dd>
+              </div>
+            </dl>
+          </div>
+          <div data-reveal="scale" style={{ "--d": 1 } as CSSProperties}>
+            <Image
+              src="/images/nosotros/20-anos-de-transporte-de-carga-mm-carga.webp"
+              alt="20 años de MM Carga: collage de su flota de tractocamiones, contenedores y operadores"
+              width={1524}
+              height={1021}
+              sizes="(max-width: 1024px) 100vw, 55vw"
+              className="h-auto w-full drop-shadow-[0_30px_40px_rgba(6,40,100,0.18)]"
+            />
           </div>
         </Container>
       </section>
