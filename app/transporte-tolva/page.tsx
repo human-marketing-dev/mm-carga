@@ -39,6 +39,10 @@ const data: ServicePageData = {
       "La tolva es un remolque abierto en su parte superior, diseñado para la carga y descarga eficiente de materiales sueltos. Es el equipo indicado para trasladar grandes volúmenes de producto a granel que no se transporta en tarimas ni empaques.",
       "MM Carga opera tolvas con capacidad de 140 m³ para el traslado de materiales como arena, grava, minerales y mercancía ferrosa, con equipo especializado según el tipo de carga.",
     ],
+    image: {
+      src: "/images/servicios/transporte-en-tolva-a-granel-chatarra-mm-carga.webp",
+      alt: "Transporte en tolva de MM Carga: carga de mercancía ferrosa a granel con grúa en patio de chatarra",
+    },
   },
   scope: {
     title: "Alcance del servicio de transporte en tolva",
