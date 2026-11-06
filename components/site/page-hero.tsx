@@ -76,7 +76,7 @@ export function PageHero({
         )}
         {facts && image && (
           /* Servicios: foto a sangre en la mitad derecha con corte diagonal */
-          <div className="hero-photo absolute inset-y-0 right-0 -z-10 hidden w-[50%] [clip-path:polygon(16%_0,100%_0,100%_100%,0_100%)] lg:block">
+          <div className="hero-photo absolute inset-y-0 right-0 -z-10 hidden w-[56%] [mask-image:linear-gradient(to_right,transparent,black_38%)] lg:block">
             <Photo
               src={image.src}
               alt={image.alt}
@@ -87,7 +87,7 @@ export function PageHero({
               priority
             />
             <div
-              className="absolute inset-0 bg-linear-to-r from-navy-900/55 via-navy-900/10 to-transparent"
+              className="absolute inset-0 bg-linear-to-r from-navy-900/40 to-transparent"
               aria-hidden="true"
             />
             <div
@@ -99,13 +99,6 @@ export function PageHero({
               className="absolute inset-x-0 top-0 h-36 bg-linear-to-b from-navy-950/70 to-transparent"
               aria-hidden="true"
             />
-            <span className="absolute top-32 left-[22%] flex items-center gap-2.5 rounded-full bg-white/92 py-2 pr-4 pl-3 text-sm font-semibold text-navy-800 shadow-tag backdrop-blur">
-              <span className="relative grid size-2.5 place-items-center">
-                <span className="absolute size-2.5 animate-pulse-ring rounded-full bg-success" />
-                <span className="size-2 rounded-full bg-success" />
-              </span>
-              Monitoreo 24/7
-            </span>
           </div>
         )}
         <Container
@@ -171,7 +164,7 @@ export function PageHero({
           </div>
           {image && (
             <div
-              className={`hero-photo relative ${facts ? "-mx-5 [clip-path:polygon(0_12%,100%_0,100%_100%,0_100%)] lg:hidden" : ""}`}
+              className={`hero-photo relative ${facts ? "-mx-5 [mask-image:linear-gradient(to_bottom,transparent,black_22%,black_78%,transparent)] lg:hidden" : ""}`}
             >
               {/* Marco desfasado detrás de la foto */}
               <span
@@ -187,15 +180,6 @@ export function PageHero({
                 className={`aspect-[4/3] ${facts ? "" : "rounded-dialog shadow-dialog"}`}
                 priority
               />
-              {facts && (
-                <span className="absolute top-12 left-5 flex items-center gap-2.5 rounded-full bg-white/92 py-2 pr-4 pl-3 text-sm font-semibold text-navy-800 shadow-tag backdrop-blur">
-                  <span className="relative grid size-2.5 place-items-center">
-                    <span className="absolute size-2.5 animate-pulse-ring rounded-full bg-success" />
-                    <span className="size-2 rounded-full bg-success" />
-                  </span>
-                  Monitoreo 24/7
-                </span>
-              )}
             </div>
           )}
         </Container>
