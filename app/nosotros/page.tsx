@@ -78,8 +78,8 @@ export default function Nosotros() {
           label: "Conoce nuestros servicios",
         }}
         image={{
-          src: "/images/nosotros/flota-de-tractocamiones-mm-carga-mexico.webp",
-          alt: "Flota propia de tractocamiones de MM Carga, empresa de transporte de carga en México",
+          src: "/images/nosotros/transporte-de-carga-en-carretera-mm-carga.webp",
+          alt: "Transporte de carga de MM Carga: tractocamiones con contenedores marítimos en carretera, vista aérea",
         }}
       />
 
@@ -146,25 +146,39 @@ export default function Nosotros() {
         </Container>
       </section>
 
-      {/* Bloque 3 · Misión, visión y valores */}
+      {/* Bloque 3 · Misión, visión y valores (con foto de la flota) */}
       <section className="bg-surface py-20 md:py-28">
         <Container className="flex flex-col gap-12">
           <SectionTitle kicker="Identidad" title="Misión, visión y valores" />
-          <ul className="grid gap-5.5 md:grid-cols-3">
-            {identity.map((it, i) => (
-              <li
-                key={it.title}
-                data-reveal
-                style={{ "--d": i } as CSSProperties}
-                className="flex flex-col gap-3 rounded-card border border-navy-800/8 bg-white p-8"
-              >
-                <h3 className="text-[22px] font-bold text-navy-800">
-                  {it.title}
-                </h3>
-                <p className="text-body text-muted">{it.text}</p>
-              </li>
-            ))}
-          </ul>
+          <div className="grid gap-5.5 lg:grid-cols-[1.15fr_1fr] lg:items-stretch">
+            <div
+              data-reveal="scale"
+              className="relative min-h-[280px] overflow-hidden rounded-card shadow-card-hover sm:min-h-[380px]"
+            >
+              <Image
+                src="/images/nosotros/flota-de-tractocamiones-mm-carga-mexico.webp"
+                alt="Flota propia de tractocamiones de MM Carga, empresa de transporte de carga en México"
+                fill
+                sizes="(max-width: 1024px) 100vw, 55vw"
+                className="object-cover"
+              />
+            </div>
+            <ul className="flex flex-col gap-5.5">
+              {identity.map((it, i) => (
+                <li
+                  key={it.title}
+                  data-reveal
+                  style={{ "--d": i } as CSSProperties}
+                  className="flex flex-1 flex-col gap-3 rounded-card border border-navy-800/8 bg-white p-8"
+                >
+                  <h3 className="text-[22px] font-bold text-navy-800">
+                    {it.title}
+                  </h3>
+                  <p className="text-body text-muted">{it.text}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
         </Container>
       </section>
 
