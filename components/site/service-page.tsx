@@ -1,6 +1,14 @@
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
-import { PageHero } from "@/components/site/page-hero";
+import {
+  IconFleet,
+  IconInventory,
+  IconMonitoring,
+  IconRoute,
+  IconScale,
+  IconWarehouse,
+} from "@/components/site/icons";
+import { PageHero, type HeroFact } from "@/components/site/page-hero";
 import { ServiceBases } from "@/components/site/service-bases";
 import {
   Container,
@@ -73,6 +81,46 @@ export function ServicePage({ data }: { data: ServicePageData }) {
       : undefined);
   const tone = (surface: boolean) => (surface ? "bg-surface" : "");
 
+  // Hero: etiqueta con las bases del servicio y barra de datos clave
+  const cities = listCities(mainBases.map((b) => b.city));
+  const warehouse = data.coverage.exclusive;
+  const badge = warehouse
+    ? `Almacenes en ${cities}`
+    : !main
+      ? "Opera desde nuestras seis bases"
+      : `${mainBases.length === 1 ? "Base principal" : "Bases principales"}: ${cities}`;
+  const facts: HeroFact[] = warehouse
+    ? [
+        {
+          icon: <IconWarehouse />,
+          label: "Superficie",
+          value: "200,000 m² de almacenamiento",
+        },
+        {
+          icon: <IconInventory />,
+          label: "Inventarios",
+          value: "Control con sistema WMS",
+        },
+        {
+          icon: <IconScale />,
+          label: "Báscula",
+          value: "Certificada para VGM",
+        },
+      ]
+    : [
+        {
+          icon: <IconRoute />,
+          label: "Cobertura",
+          value: "Nacional, desde y hacia nuestras bases",
+        },
+        {
+          icon: <IconMonitoring />,
+          label: "Monitoreo",
+          value: "24/7 con GPS y cámaras",
+        },
+        { icon: <IconFleet />, label: "Flota", value: "Unidades propias" },
+      ];
+
   return (
     <>
       {/* Bloque 1 · Hero */}
@@ -83,6 +131,8 @@ export function ServicePage({ data }: { data: ServicePageData }) {
         subtitle={data.subtitle}
         secondary={{ href: "#cobertura", label: "Ver cobertura" }}
         image={data.image}
+        badge={badge}
+        facts={facts}
       />
 
       {/* Bloque 2 · Sobre el servicio */}
