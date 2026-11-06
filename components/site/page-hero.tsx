@@ -74,35 +74,8 @@ export function PageHero({
             </circle>
           </svg>
         )}
-        {facts && image && (
-          /* Servicios: foto a sangre en la mitad derecha con corte diagonal */
-          <div className="hero-photo absolute inset-y-0 right-0 -z-10 hidden w-[56%] [mask-image:linear-gradient(to_right,transparent,black_38%)] lg:block">
-            <Photo
-              src={image.src}
-              alt={image.alt}
-              label={image.label}
-              tone="dark"
-              sizes="50vw"
-              className="size-full"
-              priority
-            />
-            <div
-              className="absolute inset-0 bg-linear-to-r from-navy-900/40 to-transparent"
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-navy-950/50 to-transparent"
-              aria-hidden="true"
-            />
-            {/* Sombra superior para que el menú se lea sobre la foto */}
-            <div
-              className="absolute inset-x-0 top-0 h-36 bg-linear-to-b from-navy-950/70 to-transparent"
-              aria-hidden="true"
-            />
-          </div>
-        )}
         <Container
-          className={`grid items-center gap-12 pt-10 lg:pt-14 ${facts ? "pb-24 lg:pb-32" : "pb-16 lg:pb-20"} ${image ? "lg:grid-cols-[1fr_1.05fr] lg:gap-16" : ""}`}
+          className={`grid items-center gap-12 pt-10 lg:pt-14 ${facts ? "pb-24 lg:grid-rows-[500px] lg:pb-28" : "pb-16 lg:pb-20"} ${image ? "lg:grid-cols-[1fr_1.05fr] lg:gap-16" : ""}`}
         >
           <div className="hero-in flex flex-col items-start gap-6">
             <nav
@@ -162,26 +135,38 @@ export function PageHero({
               )}
             </div>
           </div>
-          {image && (
-            <div
-              className={`hero-photo relative ${facts ? "-mx-5 [mask-image:linear-gradient(to_bottom,transparent,black_22%,black_78%,transparent)] lg:hidden" : ""}`}
-            >
-              {/* Marco desfasado detrás de la foto */}
-              <span
-                className="absolute inset-0 translate-x-4 translate-y-4 rounded-dialog border border-white/18 max-lg:hidden"
-                aria-hidden="true"
-              />
-              <Photo
-                src={image.src}
-                alt={image.alt}
-                label={image.label}
-                tone="dark"
-                sizes="(max-width: 1024px) 100vw, 45vw"
-                className={`aspect-[4/3] ${facts ? "" : "rounded-dialog shadow-dialog"}`}
-                priority
-              />
-            </div>
-          )}
+          {image &&
+            (facts ? (
+              /* Servicios: foto con marco tipo paspartú y altura fija, igual en todas las páginas */
+              <div className="hero-photo rounded-dialog bg-white/8 p-2 shadow-dialog ring-1 ring-white/15 backdrop-blur-sm">
+                <Photo
+                  src={image.src}
+                  alt={image.alt}
+                  label={image.label}
+                  tone="dark"
+                  sizes="(max-width: 1024px) 100vw, 45vw"
+                  className="h-[260px] rounded-[18px] sm:h-[360px] lg:h-[420px]"
+                  priority
+                />
+              </div>
+            ) : (
+              <div className="hero-photo relative">
+                {/* Marco desfasado detrás de la foto */}
+                <span
+                  className="absolute inset-0 translate-x-4 translate-y-4 rounded-dialog border border-white/18 max-lg:hidden"
+                  aria-hidden="true"
+                />
+                <Photo
+                  src={image.src}
+                  alt={image.alt}
+                  label={image.label}
+                  tone="dark"
+                  sizes="(max-width: 1024px) 100vw, 45vw"
+                  className="aspect-[4/3] rounded-dialog shadow-dialog"
+                  priority
+                />
+              </div>
+            ))}
         </Container>
       </section>
       {facts && (
