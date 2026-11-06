@@ -293,3 +293,19 @@ html {
     transform: scaleX(1);
   }
 }
+
+/* Hero de servicios: la foto flota suavemente */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-float {
+    animation: hero-float 7s ease-in-out infinite;
+  }
+}
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}

@@ -137,17 +137,23 @@ export function PageHero({
           </div>
           {image &&
             (facts ? (
-              /* Servicios: foto con marco tipo paspartú y altura fija, igual en todas las páginas */
-              <div className="hero-photo rounded-dialog bg-white/8 p-2 shadow-dialog ring-1 ring-white/15 backdrop-blur-sm">
-                <Photo
-                  src={image.src}
-                  alt={image.alt}
-                  label={image.label}
-                  tone="dark"
-                  sizes="(max-width: 1024px) 100vw, 45vw"
-                  className="h-[260px] rounded-[18px] sm:h-[360px] lg:h-[420px]"
-                  priority
+              /* Servicios: foto flotante con sombra profunda y altura fija, igual en todas las páginas */
+              <div className="hero-photo relative">
+                <span
+                  className="absolute inset-x-10 -bottom-10 h-16 rounded-[50%] bg-navy-950/70 blur-2xl max-lg:hidden"
+                  aria-hidden="true"
                 />
+                <div className="hero-float relative">
+                  <Photo
+                    src={image.src}
+                    alt={image.alt}
+                    label={image.label}
+                    tone="dark"
+                    sizes="(max-width: 1024px) 100vw, 45vw"
+                    className="h-[260px] rounded-card shadow-[0_45px_90px_-25px_rgba(0,4,30,0.85),0_18px_36px_-18px_rgba(0,4,30,0.6)] ring-1 ring-white/10 sm:h-[360px] lg:h-[420px]"
+                    priority
+                  />
+                </div>
               </div>
             ) : (
               <div className="hero-photo relative">
