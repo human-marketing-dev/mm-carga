@@ -9,6 +9,7 @@ import {
   IconWarehouse,
 } from "@/components/site/icons";
 import { PageHero, type HeroFact } from "@/components/site/page-hero";
+import { Photo } from "@/components/site/photo";
 import { ServiceBases } from "@/components/site/service-bases";
 import {
   Container,
@@ -31,7 +32,12 @@ export type ServicePageData = {
   h1: string;
   subtitle: string;
   image: { src: string; alt: string };
-  about: { title: string; paragraphs: string[] };
+  about: {
+    title: string;
+    paragraphs: string[];
+    /** Foto opcional a todo lo ancho al final de "Sobre el servicio" */
+    image?: { src: string; alt: string };
+  };
   scope: { title: string; items: Item[] };
   coverage: {
     title: string;
@@ -196,6 +202,16 @@ export function ServicePage({ data }: { data: ServicePageData }) {
               </p>
             )}
           </aside>
+          {data.about.image && (
+            <div data-reveal="scale" className="lg:col-span-2">
+              <Photo
+                src={data.about.image.src}
+                alt={data.about.image.alt}
+                sizes="(max-width: 1280px) 100vw, 1216px"
+                className="aspect-[4/3] rounded-card shadow-card-hover sm:aspect-[2/1]"
+              />
+            </div>
+          )}
         </Container>
       </section>
 

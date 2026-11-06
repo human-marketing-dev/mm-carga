@@ -111,6 +111,10 @@ const data: ServicePageData = {
       "El transporte en caja seca protege la mercancía de la intemperie, el polvo y el riesgo de robo durante el trayecto. Es la opción más utilizada para carga seca paletizada o empacada, ya que combina gran capacidad volumétrica con altos niveles de seguridad.",
       "MM Carga cuenta con más de 100 cajas de 53 pies propias, que operan en rutas nacionales y en servicio de exportación a Estados Unidos vía Laredo. Todas las unidades cuentan con rastreo GPS y cámaras, supervisadas por nuestro centro de monitoreo las 24 horas.",
     ],
+    image: {
+      src: "/images/servicios/transporte-en-caja-seca-de-53-pies-mm-carga.webp",
+      alt: "Transporte en caja seca de 53 pies de MM Carga con tractocamión azul en patio de operación",
+    },
   },
   scope: {
     title: "Alcance del servicio de transporte en caja seca",
