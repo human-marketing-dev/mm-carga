@@ -1,5 +1,18 @@
 import type { CSSProperties, ReactNode } from "react";
-import { IconWarehouse } from "@/components/site/icons";
+import {
+  IconBorder,
+  IconContainer,
+  IconForklift,
+  IconHopper,
+  IconIntegral,
+  IconLayers,
+  IconPort,
+  IconRoute,
+  IconScale,
+  IconSwap,
+  IconTrailer,
+  IconWarehouse,
+} from "@/components/site/icons";
 import { MexicoMap } from "@/components/site/mexico-map";
 import { PageHero } from "@/components/site/page-hero";
 import {
@@ -12,8 +25,20 @@ import {
 import { Button } from "@/components/ui/button";
 import { bases, contact, services } from "@/lib/site";
 
-// Marca de texto provisional: el cliente aún no envía los datos de la base
-export const PENDIENTE = "[PENDIENTE CLIENTE]";
+const facilityIcons = {
+  border: IconBorder,
+  container: IconContainer,
+  forklift: IconForklift,
+  hopper: IconHopper,
+  integral: IconIntegral,
+  layers: IconLayers,
+  port: IconPort,
+  route: IconRoute,
+  scale: IconScale,
+  swap: IconSwap,
+  trailer: IconTrailer,
+  warehouse: IconWarehouse,
+};
 
 export type BasePageData = {
   slug: string;
@@ -28,29 +53,53 @@ export type BasePageData = {
   /** Foto del hero; sin valor muestra el relleno "Foto pendiente" */
   image?: { src: string; alt: string };
   intro: { title: string; paragraphs: string[] };
-  facilities: { title: string; text: string }[];
-  services: { title: string; summaries: Record<string, string> };
-  routes: { to: string; km: string; time: string }[];
+  /** Lo que hay en la base, solo con datos que dio el cliente (6 nov) */
+  facilities: {
+    icon: keyof typeof facilityIcons;
+    title: string;
+    text: string;
+  }[];
+  services: {
+    title: string;
+    intro: string;
+    /** Servicios principales de la base: van primero en las tarjetas */
+    focus: string[];
+    summaries: Record<string, string>;
+  };
+  coverageNote: string;
   faq: { q: string; a: string }[];
   cta: { title: string; text: string };
 };
 
-// Cada marca se muestra como etiqueta; el texto que la sigue es borrador por confirmar
-function Draft({ text }: { text: string }) {
-  const parts = text.split(PENDIENTE);
+/** Tarjetas de instalaciones; también las usa la página de Monterrey */
+export function Facilities({ items }: { items: BasePageData["facilities"] }) {
+  const cols =
+    items.length % 3 === 0 || items.length > 4
+      ? "lg:grid-cols-3"
+      : "lg:grid-cols-2";
   return (
-    <>
-      {parts.map((part, i) => (
-        <span key={i}>
-          {i > 0 && (
-            <span className="mr-2 inline-flex rounded-tag bg-[#f9eeda] px-2 py-0.5 align-[2px] text-[11px] font-bold tracking-wide text-[#8a5a00]">
-              {PENDIENTE}
+    <ul className={`grid gap-5.5 sm:grid-cols-2 ${cols}`}>
+      {items.map((f, i) => {
+        const Icon = facilityIcons[f.icon];
+        return (
+          <li
+            key={f.title}
+            data-reveal
+            style={{ "--d": i } as CSSProperties}
+            className="flex flex-col gap-4 rounded-card border border-navy-800/8 bg-white p-7"
+          >
+            <span
+              className="grid size-12 place-items-center rounded-card bg-primary text-white [&_svg]:size-6"
+              aria-hidden="true"
+            >
+              <Icon />
             </span>
-          )}
-          {i > 0 ? part.trimStart() : part}
-        </span>
-      ))}
-    </>
+            <h3 className="text-[19px] font-bold text-navy-800">{f.title}</h3>
+            <p className="text-small text-muted">{f.text}</p>
+          </li>
+        );
+      })}
+    </ul>
   );
 }
 
@@ -67,9 +116,24 @@ function Row({ label, children }: { label: string; children: ReactNode }) {
 
 export function BasePage({ data }: { data: BasePageData }) {
   const base = bases.find((b) => b.city === data.city)!;
-  const items = services.filter(
+  // Servicios principales de la base primero; almacenamiento solo donde hay almacén
+  const available = services.filter(
     (s) => data.warehouse || s.slug !== "/almacenamiento-de-mercancias/",
   );
+  const items = [
+    ...data.services.focus
+      .map((slug) => available.find((s) => s.slug === slug))
+      .filter((s) => s !== undefined),
+    ...available.filter((s) => !data.services.focus.includes(s.slug)),
+  ];
+  const others = bases.filter((b) => b.city !== data.city);
+  const faq = [
+    {
+      q: `¿Dónde se ubica la base de MM Carga en ${data.label}?`,
+      a: `Nuestra base de operación se encuentra en ${base.address}`,
+    },
+    ...data.faq,
+  ];
   const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(`MM Carga, ${base.address}`)}&output=embed`;
   const [, postalCode] = base.address.match(/\b(\d{5})\b/) ?? [];
 
@@ -120,9 +184,7 @@ export function BasePage({ data }: { data: BasePageData }) {
             className="flex flex-col gap-6 text-body text-muted lg:pt-9"
           >
             {data.intro.paragraphs.map((p) => (
-              <p key={p}>
-                <Draft text={p} />
-              </p>
+              <p key={p}>{p}</p>
             ))}
           </div>
         </Container>
@@ -135,23 +197,7 @@ export function BasePage({ data }: { data: BasePageData }) {
             kicker="Instalaciones"
             title={`Qué hay en nuestra base de ${data.label}`}
           />
-          <ul className="grid gap-5.5 sm:grid-cols-2 lg:grid-cols-3">
-            {data.facilities.map((f, i) => (
-              <li
-                key={f.title}
-                data-reveal
-                style={{ "--d": i } as CSSProperties}
-                className="flex flex-col gap-3 rounded-card border border-navy-800/8 bg-white p-7"
-              >
-                <h3 className="text-[19px] font-bold text-navy-800">
-                  {f.title}
-                </h3>
-                <p className="text-small text-muted">
-                  <Draft text={f.text} />
-                </p>
-              </li>
-            ))}
-          </ul>
+          <Facilities items={data.facilities} />
           {data.warehouse && (
             <p className="inline-flex items-center gap-2 self-start rounded-tag bg-brand-50 px-3 py-1.5 text-sm font-semibold text-primary">
               <span className="[&_svg]:size-4" aria-hidden="true">
@@ -168,41 +214,39 @@ export function BasePage({ data }: { data: BasePageData }) {
         <Container className="flex flex-col gap-10">
           <div className="flex flex-col gap-5">
             <SectionTitle kicker="Servicios" title={data.services.title} />
-            <p className="text-small text-muted">
-              <Draft
-                text={`${PENDIENTE} Confirmar qué servicios se operan desde esta base.`}
-              />
+            <p
+              data-reveal
+              style={{ "--d": 1 } as CSSProperties}
+              className="max-w-3xl text-body text-muted"
+            >
+              {data.services.intro}
             </p>
           </div>
           <ServiceCards items={items} summaries={data.services.summaries} />
         </Container>
       </section>
 
-      {/* Bloque 5 · Rutas frecuentes */}
+      {/* Bloque 5 · Cobertura desde la base */}
       <section className="bg-surface py-20 md:py-28">
         <Container className="grid items-center gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
           <div className="flex flex-col gap-8">
             <SectionTitle
-              kicker="Rutas"
+              kicker="Cobertura"
               title={`Rutas de transporte desde ${data.label}`}
             />
             <div data-reveal style={{ "--d": 1 } as CSSProperties}>
-              <p className="pb-4 text-small text-muted">
-                <Draft
-                  text={`${PENDIENTE} Rutas, distancias y tiempos de referencia por validar con el cliente.`}
-                />
-              </p>
+              <p className="pb-5 text-body text-muted">{data.coverageNote}</p>
               <ul className="flex flex-col">
-                {data.routes.map((r) => (
+                {others.map((b) => (
                   <li
-                    key={r.to}
+                    key={b.city}
                     className="flex items-baseline justify-between gap-4 border-b border-navy-800/10 py-4 first:border-t"
                   >
                     <span className="text-[17px] font-semibold text-navy-800">
-                      {data.label} – {r.to}
+                      {data.label} – {b.city}
                     </span>
-                    <span className="text-small whitespace-nowrap text-muted tabular-nums">
-                      {r.km} · {r.time}
+                    <span className="text-small text-right text-muted">
+                      {b.region}
                     </span>
                   </li>
                 ))}
@@ -220,7 +264,7 @@ export function BasePage({ data }: { data: BasePageData }) {
       {/* Bloque 6 · FAQ */}
       <Faq
         title={`Preguntas frecuentes sobre transporte de carga en ${data.label}`}
-        items={data.faq}
+        items={faq}
       />
 
       {/* Bloque 7 · Ubicación */}

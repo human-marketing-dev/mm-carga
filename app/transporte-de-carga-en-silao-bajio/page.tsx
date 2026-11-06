@@ -4,7 +4,7 @@ import { basePages } from "@/lib/base-pages";
 
 const data = basePages.silao;
 
-// Sin indexar ni enlazar hasta que el cliente envíe los datos de la base
+// Sin indexar ni enlazar hasta que el usuario confirme publicar las páginas por base
 export const metadata: Metadata = {
   title: data.title,
   description: data.subtitle,

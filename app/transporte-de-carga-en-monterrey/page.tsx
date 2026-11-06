@@ -7,6 +7,7 @@ import {
   IconMonitoring,
   IconRoute,
 } from "@/components/site/icons";
+import { Facilities } from "@/components/site/base-page";
 import { MexicoMap } from "@/components/site/mexico-map";
 import { PageHero } from "@/components/site/page-hero";
 import {
@@ -41,6 +42,30 @@ const summaries: Record<string, string> = {
     "Almacenes y maniobras para la gestión de inventario.",
 };
 
+// Base central (información del cliente, 6 nov)
+const facilities = [
+  {
+    icon: "integral" as const,
+    title: "Oficinas",
+    text: "Desde aquí coordinamos la operación de todas nuestras bases.",
+  },
+  {
+    icon: "forklift" as const,
+    title: "Taller",
+    text: "Mantenimiento de nuestras unidades dentro de la misma base.",
+  },
+  {
+    icon: "trailer" as const,
+    title: "Punto de llegada de la flota",
+    text: "Todas nuestras unidades llegan a la base de Monterrey.",
+  },
+  {
+    icon: "route" as const,
+    title: "Salida y llegada de viajes",
+    text: "Viajes que salen y llegan a Monterrey, conectados con el resto de nuestras bases.",
+  },
+];
+
 const routes = [
   { to: "Nuevo Laredo", note: "Cruce fronterizo" },
   { to: "Puerto de Altamira", note: "Golfo de México" },
@@ -52,7 +77,7 @@ const reasons = [
   {
     title: "Presencia local",
     icon: <IconMonitoring />,
-    text: "Oficina corporativa y patio propios en el área metropolitana de Monterrey.",
+    text: "Base central con oficinas y taller propios en el área metropolitana de Monterrey.",
   },
   {
     title: "Flota propia",
@@ -74,7 +99,7 @@ const reasons = [
 const faq = [
   {
     q: "¿Dónde se ubican en Monterrey?",
-    a: "Nuestra oficina corporativa y base se encuentran en Carretera a Huinala km 6.5, Pesquería, N.L., en el área metropolitana de Monterrey.",
+    a: "Nuestra base central, con oficinas y taller, se encuentra en Carretera a Huinala km 6.5, Pesquería, N.L., en el área metropolitana de Monterrey.",
   },
   {
     q: "¿Realizan envíos de Monterrey a Estados Unidos?",
@@ -122,7 +147,7 @@ export default function TransporteMonterrey() {
         parents={[{ href: "/cobertura/", label: "Cobertura" }]}
         crumb="Monterrey"
         h1="Transporte de carga en Monterrey"
-        subtitle="Soluciones de transporte y almacenamiento para la industria de Nuevo León, con flota propia y monitoreo las 24 horas."
+        subtitle="Nuestra base central, con oficinas y taller propios, atiende a la industria de Nuevo León con flota propia y monitoreo las 24 horas."
         secondary={{ href: "#servicios", label: "Ver servicios en Monterrey" }}
         image={{
           src: "/images/monterrey/empresa-de-transporte-de-carga-en-monterrey-mm-carga.webp",
@@ -143,16 +168,15 @@ export default function TransporteMonterrey() {
             className="flex flex-col gap-6 text-body text-muted lg:pt-9"
           >
             <p>
-              Nuestra oficina corporativa se ubica en Pesquería, en el área
-              metropolitana de Monterrey. Desde esta base atendemos a la
-              industria de Nuevo León con unidades propias para carga seca,
-              materiales a granel, contenedores y carga suelta, y coordinamos
-              traslados hacia los puertos, la frontera y el centro del país.
+              Monterrey es la base central de MM Carga. En Pesquería, dentro del
+              área metropolitana, se encuentran nuestras oficinas y nuestro
+              taller, y aquí llegan todas nuestras unidades.
             </p>
             <p>
-              Nuestro equipo conoce las rutas y los parques industriales de la
-              región, lo que nos permite planear cada traslado de acero,
-              maquinaria, granel o mercancía de importación con precisión.
+              Es también punto de salida y llegada de nuestros viajes. Su
+              ubicación es estratégica por la concentración industrial de Nuevo
+              León, y nos permite coordinar traslados hacia los puertos, la
+              frontera y el centro del país.
             </p>
             <p>
               La base de Pesquería cuenta con almacén propio para el{" "}
@@ -169,11 +193,19 @@ export default function TransporteMonterrey() {
         </Container>
       </section>
 
+      {/* Bloque 2b · Base central (cliente, 6 nov) */}
+      <section className="bg-surface py-20 md:py-28">
+        <Container className="flex flex-col gap-12">
+          <SectionTitle
+            kicker="Instalaciones"
+            title="Nuestra base central en Monterrey"
+          />
+          <Facilities items={facilities} />
+        </Container>
+      </section>
+
       {/* Bloque 3 · Servicios en Monterrey */}
-      <section
-        id="servicios"
-        className="scroll-mt-24 bg-surface py-20 md:py-28"
-      >
+      <section id="servicios" className="scroll-mt-24 py-20 md:py-28">
         <Container className="flex flex-col gap-10">
           <SectionTitle
             kicker="Servicios"
@@ -184,7 +216,7 @@ export default function TransporteMonterrey() {
       </section>
 
       {/* Bloque 4 · Rutas frecuentes */}
-      <section className="py-20 md:py-28">
+      <section className="bg-surface py-20 md:py-28">
         <Container className="grid items-center gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
           <div className="flex flex-col gap-8">
             <SectionTitle
@@ -225,13 +257,12 @@ export default function TransporteMonterrey() {
 
       {/* Bloque 5 · Por qué */}
       <ReasonsSection
-        className="bg-surface"
         title="¿Por qué elegir a MM Carga en Nuevo León?"
         items={reasons}
       />
 
       {/* Bloque 6 · Ubicación */}
-      <section className="py-20 md:py-28">
+      <section className="bg-surface py-20 md:py-28">
         <Container className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="flex flex-col gap-8">
             <SectionTitle
@@ -288,7 +319,7 @@ export default function TransporteMonterrey() {
           <div
             data-reveal
             style={{ "--d": 2 } as CSSProperties}
-            className="min-h-[360px] overflow-hidden rounded-dialog border border-navy-800/8 bg-surface"
+            className="min-h-[360px] overflow-hidden rounded-dialog border border-navy-800/8 bg-white"
           >
             <iframe
               src={mapSrc}
@@ -302,7 +333,7 @@ export default function TransporteMonterrey() {
       </section>
 
       {/* Bloque 7 · FAQ */}
-      <div className="bg-surface">
+      <div>
         <Faq
           kicker="FAQs"
           title="Preguntas frecuentes sobre transporte de carga en Monterrey"
