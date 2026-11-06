@@ -74,6 +74,40 @@ export function PageHero({
             </circle>
           </svg>
         )}
+        {facts && image && (
+          /* Servicios: foto a sangre en la mitad derecha con corte diagonal */
+          <div className="hero-photo absolute inset-y-0 right-0 -z-10 hidden w-[50%] [clip-path:polygon(16%_0,100%_0,100%_100%,0_100%)] lg:block">
+            <Photo
+              src={image.src}
+              alt={image.alt}
+              label={image.label}
+              tone="dark"
+              sizes="50vw"
+              className="size-full"
+              priority
+            />
+            <div
+              className="absolute inset-0 bg-linear-to-r from-navy-900/55 via-navy-900/10 to-transparent"
+              aria-hidden="true"
+            />
+            <div
+              className="absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-navy-950/50 to-transparent"
+              aria-hidden="true"
+            />
+            {/* Sombra superior para que el menú se lea sobre la foto */}
+            <div
+              className="absolute inset-x-0 top-0 h-36 bg-linear-to-b from-navy-950/70 to-transparent"
+              aria-hidden="true"
+            />
+            <span className="absolute top-32 left-[22%] flex items-center gap-2.5 rounded-full bg-white/92 py-2 pr-4 pl-3 text-sm font-semibold text-navy-800 shadow-tag backdrop-blur">
+              <span className="relative grid size-2.5 place-items-center">
+                <span className="absolute size-2.5 animate-pulse-ring rounded-full bg-success" />
+                <span className="size-2 rounded-full bg-success" />
+              </span>
+              Monitoreo 24/7
+            </span>
+          </div>
+        )}
         <Container
           className={`grid items-center gap-12 pt-10 lg:pt-14 ${facts ? "pb-24 lg:pb-32" : "pb-16 lg:pb-20"} ${image ? "lg:grid-cols-[1fr_1.05fr] lg:gap-16" : ""}`}
         >
@@ -136,7 +170,9 @@ export function PageHero({
             </div>
           </div>
           {image && (
-            <div className="hero-photo relative">
+            <div
+              className={`hero-photo relative ${facts ? "-mx-5 [clip-path:polygon(0_12%,100%_0,100%_100%,0_100%)] lg:hidden" : ""}`}
+            >
               {/* Marco desfasado detrás de la foto */}
               <span
                 className="absolute inset-0 translate-x-4 translate-y-4 rounded-dialog border border-white/18 max-lg:hidden"
@@ -148,11 +184,11 @@ export function PageHero({
                 label={image.label}
                 tone="dark"
                 sizes="(max-width: 1024px) 100vw, 45vw"
-                className="aspect-[4/3] rounded-dialog shadow-dialog"
+                className={`aspect-[4/3] ${facts ? "" : "rounded-dialog shadow-dialog"}`}
                 priority
               />
               {facts && (
-                <span className="absolute top-5 left-5 flex items-center gap-2.5 rounded-full bg-white/92 py-2 pr-4 pl-3 text-sm font-semibold text-navy-800 shadow-tag backdrop-blur">
+                <span className="absolute top-12 left-5 flex items-center gap-2.5 rounded-full bg-white/92 py-2 pr-4 pl-3 text-sm font-semibold text-navy-800 shadow-tag backdrop-blur">
                   <span className="relative grid size-2.5 place-items-center">
                     <span className="absolute size-2.5 animate-pulse-ring rounded-full bg-success" />
                     <span className="size-2 rounded-full bg-success" />
