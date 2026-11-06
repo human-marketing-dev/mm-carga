@@ -41,8 +41,8 @@ const data: ServicePageData = {
       "Las plataformas en full son el equipo principal de MM Carga: con ellas transportamos acero, carga suelta, maquinaria y también contenedores marítimos.",
     ],
     image: {
-      src: "/images/servicios/transporte-de-carga-suelta-en-plataforma-mm-carga.webp",
-      alt: "Transporte de carga suelta en plataforma de MM Carga con rollos de acero en carretera",
+      src: "/images/servicios/transporte-de-carga-suelta-rollos-de-acero-mm-carga.webp",
+      alt: "Transporte de carga suelta en plataforma full de MM Carga con rollos de acero en puente vehicular",
     },
   },
   scope: {
