@@ -54,10 +54,10 @@ const heroSlides: HeroSlide[] = [
     position: "65% 50%",
   },
   {
-    src: "/images/servicios/transporte-carga-suelta-plataforma-mm-carga.webp",
-    alt: "Plataforma de MM Carga transportando rollos de acero",
+    src: "/images/servicios/transporte-de-carga-suelta-rollos-de-acero-mm-carga.webp",
+    alt: "Transporte de carga suelta en plataforma full de MM Carga con rollos de acero",
     label: "Carga suelta en plataforma",
-    position: "75% 50%",
+    position: "50% 60%",
   },
 ];
 
