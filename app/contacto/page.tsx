@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import type { CSSProperties, ReactNode } from "react";
 import { SocialIcon } from "@/components/site/icons";
-import { MexicoMap } from "@/components/site/mexico-map";
 import { PageHero } from "@/components/site/page-hero";
 import { QuoteForm } from "@/components/site/quote-form";
-import { Container, SectionTitle, TextLink } from "@/components/site/sections";
+import { Container, SectionTitle } from "@/components/site/sections";
 import { contact, social } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -129,26 +128,6 @@ export default function Contacto() {
         </Container>
       </section>
 
-      {/* Bloque 4 · Bases */}
-      <section className="bg-surface py-20 md:py-28">
-        <Container className="grid items-center gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
-          <div className="flex flex-col gap-6">
-            <SectionTitle kicker="Cobertura" title="Bases de operación" />
-            <p
-              data-reveal
-              style={{ "--d": 1 } as CSSProperties}
-              className="text-body text-muted"
-            >
-              Operamos desde seis bases propias en Monterrey, Nuevo Laredo,
-              Altamira, Silao, Manzanillo y Coatzacoalcos.
-            </p>
-            <div className="pt-2">
-              <TextLink href="/cobertura/">Conoce nuestra cobertura</TextLink>
-            </div>
-          </div>
-          <MexicoMap />
-        </Container>
-      </section>
     </>
   );
 }

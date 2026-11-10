@@ -78,7 +78,7 @@ export function TextLink({
   );
 }
 
-// Tarjetas de "Por qué MM Carga": icono en bloque azul, número de fondo y línea de acento al pasar el cursor
+// Tarjetas de "Por qué MM Carga": icono en bloque azul y línea de acento al pasar el cursor
 export function Points({
   items,
 }: {
@@ -93,12 +93,6 @@ export function Points({
           style={{ "--d": i } as CSSProperties}
           className="group relative flex flex-col gap-4 overflow-hidden rounded-card border border-brand-800/8 bg-white p-7 shadow-card transition duration-300 hover:-translate-y-1 hover:border-brand-800/18 hover:shadow-card-hover"
         >
-          <span
-            className="pointer-events-none absolute top-7 right-7 text-[56px] leading-[56px] tracking-tight font-heavy text-navy-800/[0.07] tabular-nums transition group-hover:text-primary/10"
-            aria-hidden="true"
-          >
-            {String(i + 1).padStart(2, "0")}
-          </span>
           {it.icon && (
             <span
               className="grid size-14 place-items-center rounded-btn bg-linear-135 from-brand-500 to-brand-550 text-white shadow-btn-solid transition group-hover:shadow-btn-primary [&_svg]:size-6"
@@ -107,7 +101,7 @@ export function Points({
               {it.icon}
             </span>
           )}
-          <h3 className="pr-10 text-[19px] leading-snug font-bold text-navy-800">
+          <h3 className="text-[19px] leading-snug font-bold text-navy-800">
             {it.title}
           </h3>
           <p className="text-small text-muted">{it.text}</p>
