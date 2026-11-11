@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { ArrowIcon } from "@/components/ui/arrow-icon";
+import { WHATSAPP_NUMBER } from "@/lib/site";
 
 export const serviceOptions = [
   "Caja seca de 53 pies",
@@ -16,7 +17,7 @@ const field =
   "w-full rounded-btn-sm border border-navy-800/15 bg-white px-3.5 py-3 text-[15px] text-ink placeholder:text-muted/70 transition focus:border-primary focus:ring-3 focus:ring-primary/15 focus:outline-none";
 const label = "flex flex-col gap-1.5 text-[13px] font-semibold text-navy-800";
 
-// Pendiente: definir a dónde se envía (correo, CRM o WhatsApp). Por ahora no envía nada.
+// Envía a /api/solicitud/ (Brevo: correo al equipo y, si se configura, contacto en lista)
 // withReason (página de Contacto): agrega "Motivo"; para proveedores se ocultan servicio, origen y destino
 export function QuoteForm({
   service,
@@ -25,20 +26,46 @@ export function QuoteForm({
   service?: string;
   withReason?: boolean;
 }) {
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<
+    "idle" | "sending" | "sent" | "error"
+  >("idle");
   const [reason, setReason] = useState("Cotización");
   const isQuote = reason === "Cotización";
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSent(true);
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form));
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/solicitud/", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ ...data, pagina: window.location.pathname }),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      form.reset();
+      setReason("Cotización");
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
   }
 
   return (
     <form
       onSubmit={onSubmit}
-      className="rounded-dialog bg-white p-6 text-ink shadow-floating sm:p-8"
+      className="relative rounded-dialog bg-white p-6 text-ink shadow-floating sm:p-8"
     >
+      {/* Campo trampa para bots: oculto para personas */}
+      <input
+        type="text"
+        name="sitio_web"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute -left-[9999px] size-px opacity-0"
+      />
       <div className="grid gap-4 sm:grid-cols-2">
         <label className={label}>
           Nombre
@@ -159,9 +186,10 @@ export function QuoteForm({
         </p>
         <button
           type="submit"
-          className="inline-flex min-h-14 items-center justify-between gap-5 rounded-btn bg-linear-135 from-brand-500 to-[#1474ff] py-1.75 pr-1.75 pl-6 text-sm font-heavy text-white shadow-btn-primary transition hover:from-[#0964e9] hover:to-[#197dff]"
+          disabled={status === "sending"}
+          className="inline-flex disabled:cursor-wait disabled:opacity-70 min-h-14 items-center justify-between gap-5 rounded-btn bg-linear-135 from-brand-500 to-[#1474ff] py-1.75 pr-1.75 pl-6 text-sm font-heavy text-white shadow-btn-primary transition hover:from-[#0964e9] hover:to-[#197dff]"
         >
-          Enviar solicitud
+          {status === "sending" ? "Enviando…" : "Enviar solicitud"}
           <span
             className="grid size-10.5 place-items-center rounded-btn-sm bg-white/16"
             aria-hidden="true"
@@ -170,13 +198,29 @@ export function QuoteForm({
           </span>
         </button>
       </div>
-      {sent && (
+      {status === "sent" && (
         <p
           role="status"
           className="mt-4 rounded-btn-sm bg-brand-50 px-4 py-3 text-sm text-brand-700"
         >
-          El envío del formulario todavía no está conectado. Mientras tanto,
-          escríbenos por WhatsApp.
+          Recibimos tu solicitud. Nuestro equipo te contactará a la brevedad.
+        </p>
+      )}
+      {status === "error" && (
+        <p
+          role="alert"
+          className="mt-4 rounded-btn-sm bg-red-50 px-4 py-3 text-sm text-red-700"
+        >
+          No pudimos enviar tu solicitud. Intenta de nuevo o escríbenos por{" "}
+          <a
+            href={`https://wa.me/${WHATSAPP_NUMBER}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold underline underline-offset-2"
+          >
+            WhatsApp
+          </a>
+          .
         </p>
       )}
     </form>
