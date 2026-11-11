@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Logo } from "@/components/ui/logo";
 import { HeaderShell } from "./header-shell";
-import { contact, services } from "@/lib/site";
+import { getServices, getSettings } from "@/lib/content";
 
 const nav = [
   { href: "/almacenamiento-de-mercancias/", label: "Almacenamiento" },
@@ -12,11 +12,14 @@ const nav = [
 
 const QUOTE_HREF = "/contacto/";
 
-const transport = services.filter(
-  (s) => s.slug !== "/almacenamiento-de-mercancias/",
-);
-
-export function SiteHeader() {
+export async function SiteHeader() {
+  const [{ contact }, services] = await Promise.all([
+    getSettings(),
+    getServices(),
+  ]);
+  const transport = services.filter(
+    (s) => s.slug !== "/almacenamiento-de-mercancias/",
+  );
   return (
     <HeaderShell>
       <div className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-6 px-5 lg:px-8">
@@ -55,7 +58,7 @@ export function SiteHeader() {
                       href={s.slug}
                       className="block rounded-tag px-3 py-2.5 font-medium text-ink hover:bg-surface hover:text-primary"
                     >
-                      {s.name}
+                      {s.card.name}
                     </Link>
                   </li>
                 ))}
@@ -121,7 +124,7 @@ export function SiteHeader() {
                   {transport.map((s) => (
                     <li key={s.slug}>
                       <Link href={s.slug} className="block py-2">
-                        {s.name}
+                        {s.card.name}
                       </Link>
                     </li>
                   ))}

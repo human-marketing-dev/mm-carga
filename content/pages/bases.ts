@@ -1,24 +1,23 @@
-import type { BasePageData } from "@/components/site/base-page";
+// Páginas por base bajo /cobertura/ (documentos "basePage" en Sanity). Copy con la
+// información que el cliente envió el 6 nov. Siguen con noindex y sin enlaces en
+// menú/footer hasta que el usuario confirme publicarlas.
 
-// Páginas por base bajo /cobertura/. Copy con la información que el cliente envió el
-// 6 nov (qué hay en cada base y a qué se dedica). Siguen con noindex y sin enlaces
-// en menú/footer hasta que el usuario confirme publicarlas.
-
-const coverage =
-  "Ofrecemos cobertura nacional desde y hacia nuestras bases, con unidades propias y monitoreo las 24 horas.";
-
-type Data = BasePageData & { title: string };
+import type { BasePageData } from "./base-types";
 
 export const basePages: Record<
   "altamira" | "manzanillo" | "nuevoLaredo" | "silao" | "coatzacoalcos",
-  Data
+  BasePageData
 > = {
   altamira: {
     slug: "/transporte-de-carga-en-altamira/",
     city: "Altamira",
     label: "Altamira",
     h1: "Transporte de carga en Altamira, Tamaulipas",
-    title: "Transporte de carga en Altamira | MM Carga",
+    seo: {
+      title: "Transporte de carga en Altamira | MM Carga",
+      description:
+        "Base de operación propia muy cerca del puerto industrial de Altamira, con bodega, patio de maniobras y báscula certificada.",
+    },
     subtitle:
       "Base de operación propia muy cerca del puerto industrial de Altamira, con bodega, patio de maniobras y báscula certificada.",
     warehouse: true,
@@ -31,7 +30,7 @@ export const basePages: Record<
       paragraphs: [
         "Altamira es una de las bases más importantes de MM Carga por su cercanía con el puerto industrial de Altamira, en el Golfo de México. Desde aquí transportamos principalmente acero y contenedores de importación y exportación que entran o salen del puerto.",
         "La base cuenta con bodega, patio de maniobras y báscula certificada. En ella consolidamos y desconsolidamos mercancía, lo que nos permite integrar en un mismo lugar el transporte, el resguardo y la preparación de cada embarque.",
-        coverage,
+        "Ofrecemos cobertura nacional desde y hacia nuestras bases, con unidades propias y monitoreo las 24 horas.",
       ],
     },
     facilities: [
@@ -70,18 +69,31 @@ export const basePages: Record<
         "/transporte-de-carga-suelta/",
         "/almacenamiento-de-mercancias/",
       ],
-      summaries: {
-        "/transporte-de-contenedores-maritimos/":
-          "Contenedores de importación y exportación que entran o salen del puerto de Altamira.",
-        "/transporte-de-carga-suelta/":
-          "Acero y carga suelta en plataformas en full desde y hacia el puerto.",
-        "/almacenamiento-de-mercancias/":
-          "Resguardo, consolidación y desconsolidación de mercancía en nuestra bodega.",
-        "/caja-seca-53-pies/": "Carga seca desde y hacia Altamira.",
-        "/transporte-tolva/": "Materiales a granel desde y hacia Altamira.",
-      },
+      summaries: [
+        {
+          slug: "/transporte-de-contenedores-maritimos/",
+          text: "Contenedores de importación y exportación que entran o salen del puerto de Altamira.",
+        },
+        {
+          slug: "/transporte-de-carga-suelta/",
+          text: "Acero y carga suelta en plataformas en full desde y hacia el puerto.",
+        },
+        {
+          slug: "/almacenamiento-de-mercancias/",
+          text: "Resguardo, consolidación y desconsolidación de mercancía en nuestra bodega.",
+        },
+        {
+          slug: "/caja-seca-53-pies/",
+          text: "Carga seca desde y hacia Altamira.",
+        },
+        {
+          slug: "/transporte-tolva/",
+          text: "Materiales a granel desde y hacia Altamira.",
+        },
+      ],
     },
-    coverageNote: coverage,
+    coverageNote:
+      "Ofrecemos cobertura nacional desde y hacia nuestras bases, con unidades propias y monitoreo las 24 horas.",
     faq: [
       {
         q: "¿Qué tipo de carga transportan desde Altamira?",
@@ -107,7 +119,11 @@ export const basePages: Record<
     city: "Manzanillo",
     label: "Manzanillo",
     h1: "Transporte de contenedores desde Manzanillo, Colima",
-    title: "Transporte de contenedores en Manzanillo | MM Carga",
+    seo: {
+      title: "Transporte de contenedores en Manzanillo | MM Carga",
+      description:
+        "Base de operación propia cerca del puerto más importante del país, con almacén, patio y montacargas para el manejo de contenedores.",
+    },
     subtitle:
       "Base de operación propia cerca del puerto más importante del país, con almacén, patio y montacargas para el manejo de contenedores.",
     warehouse: true,
@@ -120,7 +136,7 @@ export const basePages: Record<
       paragraphs: [
         "Nuestra base de Manzanillo se ubica cerca del puerto más importante del país, lo que nos permite atender con oportunidad los movimientos de contenedores de importación y exportación en el Pacífico mexicano.",
         "Contamos con almacén, patio y montacargas para mover contenedores. En la base consolidamos y desconsolidamos mercancía antes de su traslado a destino.",
-        coverage,
+        "Ofrecemos cobertura nacional desde y hacia nuestras bases, con unidades propias y monitoreo las 24 horas.",
       ],
     },
     facilities: [
@@ -158,18 +174,31 @@ export const basePages: Record<
         "/transporte-de-contenedores-maritimos/",
         "/almacenamiento-de-mercancias/",
       ],
-      summaries: {
-        "/transporte-de-contenedores-maritimos/":
-          "Contenedores de importación y exportación desde y hacia el puerto de Manzanillo.",
-        "/almacenamiento-de-mercancias/":
-          "Resguardo, consolidación y desconsolidación de mercancía en nuestro almacén.",
-        "/transporte-de-carga-suelta/":
-          "Acero, maquinaria y carga suelta en plataformas en full.",
-        "/caja-seca-53-pies/": "Carga seca desde y hacia Manzanillo.",
-        "/transporte-tolva/": "Materiales a granel desde y hacia Manzanillo.",
-      },
+      summaries: [
+        {
+          slug: "/transporte-de-contenedores-maritimos/",
+          text: "Contenedores de importación y exportación desde y hacia el puerto de Manzanillo.",
+        },
+        {
+          slug: "/almacenamiento-de-mercancias/",
+          text: "Resguardo, consolidación y desconsolidación de mercancía en nuestro almacén.",
+        },
+        {
+          slug: "/transporte-de-carga-suelta/",
+          text: "Acero, maquinaria y carga suelta en plataformas en full.",
+        },
+        {
+          slug: "/caja-seca-53-pies/",
+          text: "Carga seca desde y hacia Manzanillo.",
+        },
+        {
+          slug: "/transporte-tolva/",
+          text: "Materiales a granel desde y hacia Manzanillo.",
+        },
+      ],
     },
-    coverageNote: coverage,
+    coverageNote:
+      "Ofrecemos cobertura nacional desde y hacia nuestras bases, con unidades propias y monitoreo las 24 horas.",
     faq: [
       {
         q: "¿Qué servicios ofrecen en el puerto de Manzanillo?",
@@ -196,7 +225,11 @@ export const basePages: Record<
     city: "Nuevo Laredo",
     label: "Nuevo Laredo",
     h1: "Transporte de carga en Nuevo Laredo, Tamaulipas",
-    title: "Transporte de carga en Nuevo Laredo | MM Carga",
+    seo: {
+      title: "Transporte de carga en Nuevo Laredo | MM Carga",
+      description:
+        "Base de operación de nuestras cajas secas de 53 pies, enfocada en el transporte de carga cross border entre México y Estados Unidos.",
+    },
     subtitle:
       "Base de operación de nuestras cajas secas de 53 pies, enfocada en el transporte de carga cross border entre México y Estados Unidos.",
     warehouse: false,
@@ -205,7 +238,7 @@ export const basePages: Record<
       paragraphs: [
         "Nuevo Laredo es la base de nuestras cajas secas de 53 pies y está enfocada en el transporte de carga cross border, en la frontera con Estados Unidos.",
         "Desde aquí coordinamos el intercambio de remolques y los traslados de mercancía que cruzan por esta frontera, con unidades propias y procesos certificados en C-TPAT y OEA.",
-        coverage,
+        "Ofrecemos cobertura nacional desde y hacia nuestras bases, con unidades propias y monitoreo las 24 horas.",
       ],
     },
     facilities: [
@@ -230,17 +263,27 @@ export const basePages: Record<
       intro:
         "Desde Nuevo Laredo operamos principalmente el transporte en caja seca de 53 pies, con enfoque en el cruce fronterizo.",
       focus: ["/caja-seca-53-pies/"],
-      summaries: {
-        "/caja-seca-53-pies/":
-          "Carga seca cross border entre México y Estados Unidos vía Nuevo Laredo.",
-        "/transporte-de-contenedores-maritimos/":
-          "Contenedores de importación y exportación desde y hacia Nuevo Laredo.",
-        "/transporte-de-carga-suelta/":
-          "Acero, maquinaria y carga suelta en plataformas en full.",
-        "/transporte-tolva/": "Materiales a granel desde y hacia Nuevo Laredo.",
-      },
+      summaries: [
+        {
+          slug: "/caja-seca-53-pies/",
+          text: "Carga seca cross border entre México y Estados Unidos vía Nuevo Laredo.",
+        },
+        {
+          slug: "/transporte-de-contenedores-maritimos/",
+          text: "Contenedores de importación y exportación desde y hacia Nuevo Laredo.",
+        },
+        {
+          slug: "/transporte-de-carga-suelta/",
+          text: "Acero, maquinaria y carga suelta en plataformas en full.",
+        },
+        {
+          slug: "/transporte-tolva/",
+          text: "Materiales a granel desde y hacia Nuevo Laredo.",
+        },
+      ],
     },
-    coverageNote: coverage,
+    coverageNote:
+      "Ofrecemos cobertura nacional desde y hacia nuestras bases, con unidades propias y monitoreo las 24 horas.",
     faq: [
       {
         q: "¿Realizan transporte de carga cross border en Nuevo Laredo?",
@@ -262,7 +305,11 @@ export const basePages: Record<
     city: "Silao",
     label: "Silao",
     h1: "Transporte de carga en Silao, Guanajuato",
-    title: "Transporte de carga en Silao y el Bajío | MM Carga",
+    seo: {
+      title: "Transporte de carga en Silao y el Bajío | MM Carga",
+      description:
+        "Base de operación de nuestras cajas secas de 53 pies en el corredor industrial del Bajío, enfocada en la industria automotriz.",
+    },
     subtitle:
       "Base de operación de nuestras cajas secas de 53 pies en el corredor industrial del Bajío, enfocada en la industria automotriz.",
     warehouse: false,
@@ -271,7 +318,7 @@ export const basePages: Record<
       paragraphs: [
         "Nuestra base de Silao, en el corredor industrial del Bajío, está enfocada en el servicio de transporte en caja seca de 53 pies para la industria automotriz.",
         "Su ubicación nos permite atender a la industria de la región y conectar sus embarques con el resto de nuestras bases, incluida la frontera con Estados Unidos a través de Nuevo Laredo.",
-        coverage,
+        "Ofrecemos cobertura nacional desde y hacia nuestras bases, con unidades propias y monitoreo las 24 horas.",
       ],
     },
     facilities: [
@@ -296,17 +343,27 @@ export const basePages: Record<
       intro:
         "Desde Silao operamos principalmente el transporte en caja seca de 53 pies para la industria automotriz.",
       focus: ["/caja-seca-53-pies/"],
-      summaries: {
-        "/caja-seca-53-pies/":
-          "Carga seca para la industria automotriz del Bajío.",
-        "/transporte-de-contenedores-maritimos/":
-          "Contenedores de importación y exportación desde y hacia el Bajío.",
-        "/transporte-de-carga-suelta/":
-          "Acero, maquinaria y carga suelta en plataformas en full.",
-        "/transporte-tolva/": "Materiales a granel desde y hacia el Bajío.",
-      },
+      summaries: [
+        {
+          slug: "/caja-seca-53-pies/",
+          text: "Carga seca para la industria automotriz del Bajío.",
+        },
+        {
+          slug: "/transporte-de-contenedores-maritimos/",
+          text: "Contenedores de importación y exportación desde y hacia el Bajío.",
+        },
+        {
+          slug: "/transporte-de-carga-suelta/",
+          text: "Acero, maquinaria y carga suelta en plataformas en full.",
+        },
+        {
+          slug: "/transporte-tolva/",
+          text: "Materiales a granel desde y hacia el Bajío.",
+        },
+      ],
     },
-    coverageNote: coverage,
+    coverageNote:
+      "Ofrecemos cobertura nacional desde y hacia nuestras bases, con unidades propias y monitoreo las 24 horas.",
     faq: [
       {
         q: "¿Atienden a la industria automotriz desde Silao?",
@@ -328,7 +385,11 @@ export const basePages: Record<
     city: "Coatzacoalcos",
     label: "Coatzacoalcos",
     h1: "Transporte de carga en Coatzacoalcos, Veracruz",
-    title: "Transporte de carga en Coatzacoalcos | MM Carga",
+    seo: {
+      title: "Transporte de carga en Coatzacoalcos | MM Carga",
+      description:
+        "Base de operación de nuestras unidades de tolva y de las rutas del sureste del país.",
+    },
     subtitle:
       "Base de operación de nuestras unidades de tolva y de las rutas del sureste del país.",
     warehouse: false,
@@ -341,7 +402,7 @@ export const basePages: Record<
       paragraphs: [
         "Nuestra base de Coatzacoalcos da servicio principalmente a nuestras unidades de tolva y a las unidades con ruta en el sureste del país.",
         "Desde aquí atendemos el transporte de materiales a granel en el sur del Golfo de México y conectamos la región con el resto de nuestras bases.",
-        coverage,
+        "Ofrecemos cobertura nacional desde y hacia nuestras bases, con unidades propias y monitoreo las 24 horas.",
       ],
     },
     facilities: [
@@ -361,17 +422,27 @@ export const basePages: Record<
       intro:
         "Desde Coatzacoalcos operamos principalmente el transporte en tolva y las rutas del sureste del país.",
       focus: ["/transporte-tolva/"],
-      summaries: {
-        "/transporte-tolva/":
-          "Materiales a granel en unidades de tolva desde y hacia el sureste.",
-        "/caja-seca-53-pies/": "Carga seca desde y hacia Coatzacoalcos.",
-        "/transporte-de-contenedores-maritimos/":
-          "Contenedores de importación y exportación desde y hacia Coatzacoalcos.",
-        "/transporte-de-carga-suelta/":
-          "Acero, maquinaria y carga suelta en plataformas en full.",
-      },
+      summaries: [
+        {
+          slug: "/transporte-tolva/",
+          text: "Materiales a granel en unidades de tolva desde y hacia el sureste.",
+        },
+        {
+          slug: "/caja-seca-53-pies/",
+          text: "Carga seca desde y hacia Coatzacoalcos.",
+        },
+        {
+          slug: "/transporte-de-contenedores-maritimos/",
+          text: "Contenedores de importación y exportación desde y hacia Coatzacoalcos.",
+        },
+        {
+          slug: "/transporte-de-carga-suelta/",
+          text: "Acero, maquinaria y carga suelta en plataformas en full.",
+        },
+      ],
     },
-    coverageNote: coverage,
+    coverageNote:
+      "Ofrecemos cobertura nacional desde y hacia nuestras bases, con unidades propias y monitoreo las 24 horas.",
     faq: [
       {
         q: "¿Qué servicio se opera principalmente desde Coatzacoalcos?",

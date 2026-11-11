@@ -11,24 +11,36 @@ import {
   ServiceCards,
 } from "@/components/site/sections";
 import { ArrowIcon } from "@/components/ui/arrow-icon";
-import { bases, contact, services } from "@/lib/site";
+import { Rich } from "@/components/site/rich";
+import { cobertura } from "@/content/pages/cobertura";
+import type { Base } from "@/content/site";
+import { getDoc } from "@/lib/cms";
+import { getServices, getSettings } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Cobertura y bases de operación | MM Carga",
-  description:
-    "Bases de operación de MM Carga en Altamira, Manzanillo, Coatzacoalcos, Nuevo Laredo, Silao y Monterrey. Transporte de carga en puertos, frontera y Bajío.",
-  alternates: { canonical: "/cobertura/" },
-};
+const getContent = () => getDoc("page-cobertura", cobertura);
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { seo } = await getContent();
+  return {
+    title: seo.title,
+    description: seo.description,
+    alternates: { canonical: "/cobertura/" },
+  };
+}
 
 // Monterrey primero: es la oficina corporativa
-const ordered = [
+const monterreyFirst = (bases: Base[]) => [
   ...bases.filter((b) => b.city === "Monterrey"),
   ...bases.filter((b) => b.city !== "Monterrey"),
 ];
 
 // Ancla de la ficha de cada base (p. ej. "Nuevo Laredo" → "nuevo-laredo")
 const slugify = (city: string) =>
-  city.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "-");
+  city
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, "-");
 
 // Bases con almacén propio (confirmado por el cliente el 3 nov; Monterrey = Pesquería)
 const withWarehouse = new Set(["Altamira", "Manzanillo", "Monterrey"]);
@@ -61,37 +73,40 @@ const localPages: Record<string, { href: string; label: string }> = {
   },
 };
 
-// Schema LocalBusiness por base, con la misma dirección que se muestra en la ficha
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@graph": ordered.map((b) => ({
-    "@type": "LocalBusiness",
-    name: `MM Carga ${b.city}`,
-    description: b.role,
-    telephone: contact.phone,
-    email: contact.email,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: b.address,
-      addressRegion: b.state,
-      addressCountry: "MX",
-    },
-    hasMap: b.maps,
-    parentOrganization: { "@type": "Organization", name: "MM Carga" },
-  })),
-};
+export default async function Cobertura() {
+  const [c, services, { bases, contact }] = await Promise.all([
+    getContent(),
+    getServices(),
+    getSettings(),
+  ]);
+  const ordered = monterreyFirst(bases);
+  // Schema LocalBusiness por base, con la misma dirección que se muestra en la ficha
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": ordered.map((b) => ({
+      "@type": "LocalBusiness",
+      name: `MM Carga ${b.city}`,
+      description: b.role,
+      telephone: contact.phone,
+      email: contact.email,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: b.address,
+        addressRegion: b.state,
+        addressCountry: "MX",
+      },
+      hasMap: b.maps,
+      parentOrganization: { "@type": "Organization", name: "MM Carga" },
+    })),
+  };
 
-export default function Cobertura() {
   return (
     <>
       {/* Bloque 1 · Hero */}
       <CoverageHero
-        h1="Bases de operación de MM Carga en México"
-        subtitle="Seis bases propias en puertos, la frontera norte y el Bajío para atender con oportunidad cada operación."
-        image={{
-          src: "/images/cobertura/patio-bases-de-operacion-transporte-de-carga-mm-carga.webp",
-          alt: "Patio de MM Carga con tractocamiones y plataformas propias en una base de operación",
-        }}
+        h1={c.hero.h1}
+        subtitle={c.hero.subtitle}
+        image={c.hero.image}
         bases={ordered.map((b) => ({
           city: b.city,
           state: b.state,
@@ -105,29 +120,17 @@ export default function Cobertura() {
       <section className="py-20 md:py-28">
         <Container className="grid items-center gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
           <div className="flex flex-col gap-6">
-            <SectionTitle
-              kicker="Cobertura"
-              title="Transporte de carga en puertos, frontera y Bajío"
-            />
-            <p
-              data-reveal
-              style={{ "--d": 1 } as CSSProperties}
-              className="text-body text-muted"
-            >
-              Nuestra red de bases se ubica en los puntos de mayor actividad
-              comercial del país: los puertos del Golfo y del Pacífico, el
-              principal cruce fronterizo con Estados Unidos y el corredor
-              industrial del Bajío. Esta presencia nos permite coordinar cada
-              movimiento con equipo propio y tiempos de respuesta oportunos.
-            </p>
-            <p
-              data-reveal
-              style={{ "--d": 2 } as CSSProperties}
-              className="text-body text-muted"
-            >
-              Ofrecemos cobertura nacional desde y hacia cada una de nuestras
-              bases. Contamos con almacenes en Altamira, Manzanillo y Pesquería.
-            </p>
+            <SectionTitle kicker="Cobertura" title={c.map.title} />
+            {c.map.paragraphs.map((p, i) => (
+              <p
+                key={i}
+                data-reveal
+                style={{ "--d": i + 1 } as CSSProperties}
+                className="text-body text-muted"
+              >
+                <Rich text={p} />
+              </p>
+            ))}
           </div>
           <MexicoMap />
         </Container>
@@ -136,10 +139,7 @@ export default function Cobertura() {
       {/* Bloque 3 · Fichas de cada base */}
       <section id="bases" className="scroll-mt-24 bg-surface py-20 md:py-28">
         <Container className="flex flex-col gap-12">
-          <SectionTitle
-            kicker="Ubicaciones"
-            title="Nuestras bases de operación"
-          />
+          <SectionTitle kicker="Ubicaciones" title={c.bases.title} />
           <ul className="grid gap-5.5 md:grid-cols-2 lg:grid-cols-3">
             {ordered.map((b, i) => (
               <li
@@ -209,20 +209,13 @@ export default function Cobertura() {
       {/* Bloque 4 · Servicios disponibles */}
       <section className="py-20 md:py-28">
         <Container className="flex flex-col gap-10">
-          <SectionTitle
-            kicker="Servicios"
-            title="Servicios coordinados desde nuestras bases"
-          />
+          <SectionTitle kicker="Servicios" title={c.services.title} />
           <ServiceCards items={services} />
         </Container>
       </section>
 
       {/* Bloque 5 · CTA */}
-      <CtaBand
-        kicker="Cotización"
-        title="Coordinamos tu operación desde la base más cercana"
-        text="Compártenos el origen, el destino y el tipo de carga, y nuestro equipo te presentará una propuesta."
-      />
+      <CtaBand kicker="Cotización" title={c.cta.title} text={c.cta.text} />
 
       <script
         type="application/ld+json"

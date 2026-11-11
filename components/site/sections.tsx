@@ -2,17 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
 import { ArrowIcon } from "@/components/ui/arrow-icon";
-import {
-  bases,
-  certifications,
-  contact,
-  otherServiceSummary,
-  social,
-  type Service,
-} from "@/lib/site";
+import type { ServiceContent } from "@/content/service-types";
+import type { IconName } from "@/content/types";
+import { contactLinks, getSettings } from "@/lib/content";
 import { CountUp } from "./count-up";
 import { QuoteForm } from "./quote-form";
-import { SocialIcon } from "./icons";
+import { NamedIcon, SocialIcon } from "./icons";
 
 export function Container({
   children,
@@ -82,7 +77,7 @@ export function TextLink({
 export function Points({
   items,
 }: {
-  items: { title: string; text: string; icon?: ReactNode }[];
+  items: { title: string; text: string; icon?: IconName }[];
 }) {
   return (
     <ul className="grid gap-5 sm:grid-cols-2">
@@ -98,7 +93,7 @@ export function Points({
               className="grid size-14 place-items-center rounded-btn bg-linear-135 from-brand-500 to-brand-550 text-white shadow-btn-solid transition group-hover:shadow-btn-primary [&_svg]:size-6"
               aria-hidden="true"
             >
-              {it.icon}
+              <NamedIcon name={it.icon} />
             </span>
           )}
           <h3 className="text-[19px] leading-snug font-bold text-navy-800">
@@ -154,7 +149,7 @@ export function ReasonsSection({
 }: {
   title: string;
   intro?: string;
-  items: { title: string; text: string; icon?: ReactNode }[];
+  items: { title: string; text: string; icon?: IconName }[];
   className?: string;
   /** Contenido extra bajo el título (p. ej. un enlace) */
   aside?: ReactNode;
@@ -242,13 +237,18 @@ export function Faq({
   );
 }
 
-export function Certifications({
+/** Logos alargados (p. ej. Dun & Bradstreet) ocupan más ancho */
+export const isWide = (img: { width?: number; height?: number }) =>
+  (img.width ?? 1) / (img.height ?? 1) > 3;
+
+export async function Certifications({
   title,
   intro,
 }: {
   title: string;
   intro?: string;
 }) {
+  const { certifications } = await getSettings();
   return (
     <section className="border-y border-navy-800/8 py-16">
       <Container className="flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between">
@@ -259,17 +259,17 @@ export function Certifications({
         <ul className="grid grid-cols-3 items-center gap-x-8 gap-y-6 sm:grid-cols-7 lg:max-w-4xl">
           {certifications.map((c, i) => (
             <li
-              key={c.file}
+              key={c.image.src}
               data-reveal="fade"
               style={{ "--d": i } as CSSProperties}
-              className={c.width > 200 ? "col-span-3 sm:col-span-2" : ""}
+              className={isWide(c.image) ? "col-span-3 sm:col-span-2" : ""}
             >
               <Image
-                src={`/images/certificaciones/${c.file}`}
-                alt={c.alt}
-                width={c.width}
-                height={c.height}
-                className={`mx-auto h-auto w-full opacity-80 ${c.width > 200 ? "max-w-[220px]" : "max-w-[104px]"}`}
+                src={c.image.src}
+                alt={c.image.alt}
+                width={c.image.width}
+                height={c.image.height}
+                className={`mx-auto h-auto w-full opacity-80 ${isWide(c.image) ? "max-w-[220px]" : "max-w-[104px]"}`}
               />
             </li>
           ))}
@@ -279,37 +279,7 @@ export function Certifications({
   );
 }
 
-export function BaseList({ highlight }: { highlight?: string[] }) {
-  return (
-    <ul className="grid gap-px overflow-hidden rounded-card border border-navy-800/10 bg-navy-800/10 sm:grid-cols-2 lg:grid-cols-3">
-      {bases.map((b, i) => {
-        const on = highlight?.includes(b.city);
-        return (
-          <li
-            key={b.city}
-            data-reveal="fade"
-            style={{ "--d": i } as CSSProperties}
-            className={`flex flex-col gap-1 p-6 ${on ? "bg-brand-50" : "bg-white"}`}
-          >
-            <span className="text-xs font-bold tracking-[0.14em] text-muted uppercase">
-              {b.region}
-            </span>
-            <span className="flex items-center gap-2.5 text-lg font-bold text-navy-800">
-              <span
-                className={`size-2.5 rounded-full ${on || !highlight ? "bg-primary" : "bg-slate-300"}`}
-                aria-hidden="true"
-              />
-              {b.city}
-            </span>
-            <span className="text-sm text-muted">{b.state}</span>
-          </li>
-        );
-      })}
-    </ul>
-  );
-}
-
-export function CtaBand({
+export async function CtaBand({
   title,
   text,
   kicker = "Cotización",
@@ -320,6 +290,8 @@ export function CtaBand({
   kicker?: string;
   service?: string;
 }) {
+  const { contact, social } = await getSettings();
+  const { whatsappHref } = contactLinks(contact);
   return (
     <section
       id="cotizar"
@@ -344,7 +316,7 @@ export function CtaBand({
                 WhatsApp y teléfono
               </span>
               <a
-                href={contact.whatsapp}
+                href={whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-semibold tabular-nums hover:text-brand-400"
@@ -385,7 +357,7 @@ export function CtaBand({
           </ul>
         </div>
         <div data-reveal style={{ "--d": 2 } as CSSProperties}>
-          <QuoteForm service={service} />
+          <QuoteForm service={service} whatsapp={contact.whatsapp} />
         </div>
       </Container>
     </section>
@@ -441,9 +413,10 @@ export function Figures({ items, label }: { items: Figure[]; label: string }) {
 // Tarjetas de servicios con resumen corto (Otros servicios, Cobertura)
 export function ServiceCards({
   items,
-  summaries = otherServiceSummary,
+  summaries = {},
 }: {
-  items: Service[];
+  items: ServiceContent[];
+  /** Resumen por URL; sin valor, el resumen corto del servicio */
   summaries?: Record<string, string>;
 }) {
   const cols = items.length > 4 ? "lg:grid-cols-5" : "lg:grid-cols-4";
@@ -457,8 +430,8 @@ export function ServiceCards({
           >
             <div className="relative aspect-[16/10] overflow-hidden bg-[#dfe6f0]">
               <Image
-                src={s.image}
-                alt={s.imageAlt}
+                src={s.card.image.src}
+                alt={s.card.image.alt}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 className="object-cover transition duration-700 group-hover:scale-105"
@@ -466,10 +439,10 @@ export function ServiceCards({
             </div>
             <div className="flex flex-1 flex-col gap-3 p-6">
               <h3 className="text-[19px] leading-snug font-extrabold text-brand-800">
-                {s.name}
+                {s.card.name}
               </h3>
               <p className="flex-1 text-small text-muted">
-                {summaries[s.slug]}
+                {summaries[s.slug] ?? s.card.otherSummary}
               </p>
               <span className="inline-flex items-center gap-2 pt-2 text-sm font-bold text-primary">
                 Ver servicio{" "}

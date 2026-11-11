@@ -1,20 +1,8 @@
 import type { CSSProperties, ReactNode } from "react";
-import {
-  IconBorder,
-  IconContainer,
-  IconForklift,
-  IconHopper,
-  IconIntegral,
-  IconLayers,
-  IconPort,
-  IconRoute,
-  IconScale,
-  IconSwap,
-  IconTrailer,
-  IconWarehouse,
-} from "@/components/site/icons";
+import { IconWarehouse, NamedIcon } from "@/components/site/icons";
 import { MexicoMap } from "@/components/site/mexico-map";
 import { PageHero } from "@/components/site/page-hero";
+import { Rich } from "@/components/site/rich";
 import {
   Container,
   CtaBand,
@@ -23,56 +11,28 @@ import {
   ServiceCards,
 } from "@/components/site/sections";
 import { Button } from "@/components/ui/button";
-import { bases, contact, services } from "@/lib/site";
+import { basePages } from "@/content/pages/bases";
+import type { Facility } from "@/content/pages/base-types";
+import { getDoc } from "@/lib/cms";
+import { contactLinks, getServices, getSettings } from "@/lib/content";
 
-const facilityIcons = {
-  border: IconBorder,
-  container: IconContainer,
-  forklift: IconForklift,
-  hopper: IconHopper,
-  integral: IconIntegral,
-  layers: IconLayers,
-  port: IconPort,
-  route: IconRoute,
-  scale: IconScale,
-  swap: IconSwap,
-  trailer: IconTrailer,
-  warehouse: IconWarehouse,
-};
+export type BaseKey = keyof typeof basePages;
 
-export type BasePageData = {
-  slug: string;
-  /** Debe coincidir con bases[].city en lib/site.ts */
-  city: string;
-  h1: string;
-  subtitle: string;
-  /** Nombre corto de la ciudad en títulos y miga */
-  label: string;
-  /** Solo Altamira, Manzanillo y Pesquería tienen almacén (cliente, 3 nov) */
-  warehouse: boolean;
-  /** Foto del hero; sin valor muestra el relleno "Foto pendiente" */
-  image?: { src: string; alt: string };
-  intro: { title: string; paragraphs: string[] };
-  /** Lo que hay en la base, solo con datos que dio el cliente (6 nov) */
-  facilities: {
-    icon: keyof typeof facilityIcons;
-    title: string;
-    text: string;
-  }[];
-  services: {
-    title: string;
-    intro: string;
-    /** Servicios principales de la base: van primero en las tarjetas */
-    focus: string[];
-    summaries: Record<string, string>;
+const getBase = (key: BaseKey) => getDoc(`base-${key}`, basePages[key]);
+
+/** Metadatos de una página por base (sin indexar hasta que se confirme publicarlas) */
+export async function baseMetadata(key: BaseKey) {
+  const data = await getBase(key);
+  return {
+    title: data.seo.title,
+    description: data.seo.description,
+    alternates: { canonical: data.slug },
+    robots: { index: false, follow: false },
   };
-  coverageNote: string;
-  faq: { q: string; a: string }[];
-  cta: { title: string; text: string };
-};
+}
 
 /** Tarjetas de instalaciones; también las usa la página de Monterrey */
-export function Facilities({ items }: { items: BasePageData["facilities"] }) {
+export function Facilities({ items }: { items: Facility[] }) {
   const cols =
     items.length % 3 === 0 || items.length > 4
       ? "lg:grid-cols-3"
@@ -80,7 +40,6 @@ export function Facilities({ items }: { items: BasePageData["facilities"] }) {
   return (
     <ul className={`grid gap-5.5 sm:grid-cols-2 ${cols}`}>
       {items.map((f, i) => {
-        const Icon = facilityIcons[f.icon];
         return (
           <li
             key={f.title}
@@ -92,7 +51,7 @@ export function Facilities({ items }: { items: BasePageData["facilities"] }) {
               className="grid size-12 place-items-center rounded-card bg-primary text-white [&_svg]:size-6"
               aria-hidden="true"
             >
-              <Icon />
+              <NamedIcon name={f.icon} />
             </span>
             <h3 className="text-[19px] font-bold text-navy-800">{f.title}</h3>
             <p className="text-small text-muted">{f.text}</p>
@@ -114,7 +73,16 @@ function Row({ label, children }: { label: string; children: ReactNode }) {
   );
 }
 
-export function BasePage({ data }: { data: BasePageData }) {
+export async function BasePage({ base: key }: { base: BaseKey }) {
+  const [data, services, { bases, contact }] = await Promise.all([
+    getBase(key),
+    getServices(),
+    getSettings(),
+  ]);
+  const { whatsappHref } = contactLinks(contact);
+  const summaries = Object.fromEntries(
+    data.services.summaries.map((s) => [s.slug, s.text]),
+  );
   const base = bases.find((b) => b.city === data.city)!;
   // Servicios principales de la base primero; almacenamiento solo donde hay almacén
   const available = services.filter(
@@ -184,7 +152,9 @@ export function BasePage({ data }: { data: BasePageData }) {
             className="flex flex-col gap-6 text-body text-muted lg:pt-9"
           >
             {data.intro.paragraphs.map((p) => (
-              <p key={p}>{p}</p>
+              <p key={p}>
+                <Rich text={p} />
+              </p>
             ))}
           </div>
         </Container>
@@ -222,7 +192,7 @@ export function BasePage({ data }: { data: BasePageData }) {
               {data.services.intro}
             </p>
           </div>
-          <ServiceCards items={items} summaries={data.services.summaries} />
+          <ServiceCards items={items} summaries={summaries} />
         </Container>
       </section>
 
@@ -282,7 +252,7 @@ export function BasePage({ data }: { data: BasePageData }) {
               <Row label="Dirección">{base.address}</Row>
               <Row label="Teléfono y WhatsApp">
                 <a
-                  href={contact.whatsapp}
+                  href={whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="tabular-nums hover:text-primary"

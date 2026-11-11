@@ -1,8 +1,13 @@
 import Link from "next/link";
 import { Logo } from "@/components/ui/logo";
-import { bases, contact, services } from "@/lib/site";
+import { contactLinks, getServices, getSettings } from "@/lib/content";
 
-export function SiteFooter() {
+export async function SiteFooter() {
+  const [{ contact, bases, footerText }, services] = await Promise.all([
+    getSettings(),
+    getServices(),
+  ]);
+  const { phoneHref } = contactLinks(contact);
   return (
     <footer className="bg-navy-900 text-slate-300">
       {/* Divisor con el CTA, a todo lo ancho */}
@@ -10,10 +15,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 lg:grid-cols-[1.3fr_1fr_1fr_1.2fr] lg:px-8">
         <div className="flex flex-col gap-5">
           <Logo variant="white" className="h-9 self-start" />
-          <p className="max-w-xs text-[15px] leading-relaxed">
-            MM Carga ofrece transporte de carga y almacenaje de mercancías con
-            flota, almacenes y bases propias. 20 años de experiencia en México.
-          </p>
+          <p className="max-w-xs text-[15px] leading-relaxed">{footerText}</p>
         </div>
 
         <div>
@@ -24,7 +26,7 @@ export function SiteFooter() {
             {services.map((s) => (
               <li key={s.slug}>
                 <Link href={s.slug} className="hover:text-white">
-                  {s.short}
+                  {s.card.short}
                 </Link>
               </li>
             ))}
@@ -68,10 +70,7 @@ export function SiteFooter() {
           </h2>
           <ul className="mt-5 flex flex-col gap-3 text-[15px]">
             <li>
-              <a
-                href={contact.phoneHref}
-                className="tabular-nums hover:text-white"
-              >
+              <a href={phoneHref} className="tabular-nums hover:text-white">
                 {contact.phone}
               </a>
             </li>

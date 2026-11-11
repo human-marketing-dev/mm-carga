@@ -1,6 +1,6 @@
 import { BASE_POINTS, MX_PATH, MX_VIEWBOX } from "@/lib/mexico-map";
 import { LocationTag } from "@/components/ui/location-tag";
-import { bases } from "@/lib/site";
+import { getSettings } from "@/lib/content";
 
 const [, , VW, VH] = MX_VIEWBOX.split(" ").map(Number);
 const HQ = "Monterrey";
@@ -8,7 +8,7 @@ const HQ = "Monterrey";
 const labelLeft = new Set(["Manzanillo", "Silao", "Monterrey"]);
 
 // highlight: bases que operan el servicio; las demás se muestran en gris
-export function MexicoMap({
+export async function MexicoMap({
   highlight,
   activeLabel = "Base que opera este servicio",
   linksLabel = "Cómo llegar a las bases de este servicio",
@@ -18,6 +18,7 @@ export function MexicoMap({
   activeLabel?: string;
   linksLabel?: string;
 }) {
+  const { bases } = await getSettings();
   const hq = BASE_POINTS[HQ];
   const active = (city: string) => !highlight || highlight.includes(city);
   const linked = bases.filter((b) => active(b.city));

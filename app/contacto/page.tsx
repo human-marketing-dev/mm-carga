@@ -4,16 +4,20 @@ import { SocialIcon } from "@/components/site/icons";
 import { PageHero } from "@/components/site/page-hero";
 import { QuoteForm } from "@/components/site/quote-form";
 import { Container, SectionTitle } from "@/components/site/sections";
-import { contact, social } from "@/lib/site";
+import { contacto } from "@/content/pages/contacto";
+import { getDoc } from "@/lib/cms";
+import { contactLinks, getSettings } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Contacto y cotizaciones | MM Carga",
-  description:
-    "Solicita una cotización de transporte de carga o almacenamiento con MM Carga. Contáctanos por WhatsApp, teléfono o formulario.",
-  alternates: { canonical: "/contacto/" },
-};
+const getContent = () => getDoc("page-contacto", contacto);
 
-const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(`MM Carga, ${contact.address}`)}&output=embed`;
+export async function generateMetadata(): Promise<Metadata> {
+  const { seo } = await getContent();
+  return {
+    title: seo.title,
+    description: seo.description,
+    alternates: { canonical: "/contacto/" },
+  };
+}
 
 function Row({ label, children }: { label: string; children: ReactNode }) {
   return (
@@ -28,15 +32,21 @@ function Row({ label, children }: { label: string; children: ReactNode }) {
 
 const link = "hover:text-primary";
 
-export default function Contacto() {
+export default async function Contacto() {
+  const [c, { contact, social }] = await Promise.all([
+    getContent(),
+    getSettings(),
+  ]);
+  const { whatsappHref, phoneAltHref } = contactLinks(contact);
+  const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(`MM Carga, ${contact.address}`)}&output=embed`;
   return (
     <>
       {/* Bloque 1 · Hero */}
       <PageHero
         crumb="Contacto"
-        h1="Solicita una cotización de transporte de carga"
-        subtitle="Compártenos los detalles de tu operación y nuestro equipo te presentará una propuesta."
-        primary={{ href: contact.whatsapp, label: "Escríbenos por WhatsApp" }}
+        h1={c.hero.h1}
+        subtitle={c.hero.subtitle}
+        primary={{ href: whatsappHref, label: c.hero.whatsappLabel }}
       />
 
       {/* Bloque 2 · Formulario */}
@@ -45,12 +55,12 @@ export default function Contacto() {
           <div className="flex flex-col gap-6">
             <SectionTitle
               kicker="Cotización"
-              title="Formulario de cotización"
-              intro="Indica el servicio, el origen y el destino de tu carga. Si eres proveedor, elige ese motivo y te pondremos en contacto con el área de compras."
+              title={c.form.title}
+              intro={c.form.intro}
             />
           </div>
           <div data-reveal style={{ "--d": 2 } as CSSProperties}>
-            <QuoteForm withReason />
+            <QuoteForm withReason whatsapp={contact.whatsapp} />
           </div>
         </Container>
       </section>
@@ -59,11 +69,11 @@ export default function Contacto() {
       <section className="py-20 md:py-28">
         <Container className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="flex flex-col gap-10">
-            <SectionTitle kicker="Contacto" title="Información de contacto" />
+            <SectionTitle kicker="Contacto" title={c.info.title} />
             <dl data-reveal style={{ "--d": 1 } as CSSProperties}>
               <Row label="WhatsApp y teléfono">
                 <a
-                  href={contact.whatsapp}
+                  href={whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`${link} tabular-nums`}
@@ -72,10 +82,7 @@ export default function Contacto() {
                 </a>
               </Row>
               <Row label="Teléfono adicional">
-                <a
-                  href={contact.phoneAltHref}
-                  className={`${link} tabular-nums`}
-                >
+                <a href={phoneAltHref} className={`${link} tabular-nums`}>
                   {contact.phoneAlt}
                 </a>
               </Row>
@@ -90,7 +97,7 @@ export default function Contacto() {
                 </a>
               </Row>
               <Row label="Oficina corporativa">{contact.address}</Row>
-              <Row label="Monitoreo">Monitoreo de unidades 24/7</Row>
+              <Row label="Monitoreo">{c.info.monitoring}</Row>
               <div className="flex flex-col gap-3 pt-5">
                 <dt className="text-xs font-semibold tracking-[0.12em] text-muted uppercase">
                   Síguenos
@@ -127,7 +134,6 @@ export default function Contacto() {
           </div>
         </Container>
       </section>
-
     </>
   );
 }

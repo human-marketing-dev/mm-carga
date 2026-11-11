@@ -4,6 +4,7 @@ import { SiteFooter } from "@/components/site/footer";
 import { SiteHeader } from "@/components/site/header";
 import { RevealObserver } from "@/components/site/reveal";
 import { WhatsAppButton } from "@/components/site/whatsapp-button";
+import { getSettings } from "@/lib/content";
 import "./globals.css";
 
 const inter = Inter({
@@ -18,7 +19,8 @@ export const metadata: Metadata = {
   description: "Transporte de carga y almacenaje de mercancías en México.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const { contact, whatsappMessage } = await getSettings();
   return (
     <html
       lang="es-MX"
@@ -36,7 +38,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />
-        <WhatsAppButton />
+        <WhatsAppButton number={contact.whatsapp} message={whatsappMessage} />
         <RevealObserver />
       </body>
     </html>

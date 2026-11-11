@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import { Container, TextLink } from "@/components/site/sections";
-import { bases } from "@/lib/site";
+import { getSettings } from "@/lib/content";
 
 type Props = {
   title: string;
@@ -40,7 +40,13 @@ function OutIcon() {
 
 // Cobertura de las páginas de servicio: en lugar del mapa (que ya está en el Home),
 // tarjetas con las bases principales del servicio y, debajo, el resto de la red.
-export function ServiceBases({ title, text, highlight, exclusive }: Props) {
+export async function ServiceBases({
+  title,
+  text,
+  highlight,
+  exclusive,
+}: Props) {
+  const { bases } = await getSettings();
   // Respeta el orden en que la página lista sus bases principales
   const main = highlight
     ? highlight.flatMap((c) => bases.filter((b) => b.city === c))

@@ -1,13 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { WHATSAPP_MESSAGE, WHATSAPP_NUMBER } from "@/lib/site";
 
 const TEASER_KEY = "mm-wa-teaser";
 
-// Respuestas rápidas: llenan el mensaje que se envía a WhatsApp
-const quickReplies = [
-  WHATSAPP_MESSAGE,
+// Respuestas rápidas: llenan el mensaje que se envía a WhatsApp (la primera es el mensaje base)
+const moreReplies = [
   "Hola, quiero información sobre sus servicios de transporte.",
   "Hola, quiero información sobre el servicio de almacenamiento.",
 ];
@@ -26,7 +24,15 @@ function WhatsAppIcon({ className = "size-7" }: { className?: string }) {
 }
 
 // Botón flotante de WhatsApp con mini chat: saluda, deja escribir o elegir un mensaje y abre WhatsApp
-export function WhatsAppButton() {
+export function WhatsAppButton({
+  number: WHATSAPP_NUMBER,
+  message: WHATSAPP_MESSAGE,
+}: {
+  /** Formato internacional sin "+" ni espacios (ajustes generales) */
+  number: string;
+  message: string;
+}) {
+  const quickReplies = [WHATSAPP_MESSAGE, ...moreReplies];
   const [open, setOpen] = useState(false);
   const [typing, setTyping] = useState(true);
   const [teaser, setTeaser] = useState(false);

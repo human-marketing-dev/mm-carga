@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import type { IconName } from "@/content/types";
 
 function Icon({ children }: { children: ReactNode }) {
   return (
@@ -227,4 +228,37 @@ export function SocialIcon({
       <path d={paths[name]} />
     </svg>
   );
+}
+
+// Íconos por nombre: el contenido editable (Sanity) elige el ícono de una lista cerrada
+const iconMap = {
+  integral: IconIntegral,
+  fleet: IconFleet,
+  monitoring: IconMonitoring,
+  certified: IconCertified,
+  route: IconRoute,
+  border: IconBorder,
+  trailer: IconTrailer,
+  swap: IconSwap,
+  clock: IconClock,
+  eye: IconEye,
+  hopper: IconHopper,
+  layers: IconLayers,
+  weight: IconWeight,
+  cost: IconCost,
+  container: IconContainer,
+  import: IconImport,
+  export: IconExport,
+  scale: IconScale,
+  warehouse: IconWarehouse,
+  port: IconPort,
+  flatbed: IconFlatbed,
+  strap: IconStrap,
+  inventory: IconInventory,
+  forklift: IconForklift,
+} satisfies Record<IconName, () => ReactNode>;
+
+export function NamedIcon({ name }: { name: IconName }) {
+  const Cmp = iconMap[name] ?? IconIntegral;
+  return <Cmp />;
 }

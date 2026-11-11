@@ -7,138 +7,91 @@ import {
   Container,
   CtaBand,
   Figures,
+  isWide,
   SectionTitle,
   TextLink,
 } from "@/components/site/sections";
-import { certifications } from "@/lib/site";
+import { Rich } from "@/components/site/rich";
+import { nosotros } from "@/content/pages/nosotros";
+import { getDoc } from "@/lib/cms";
+import { getSettings } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Nosotros | MM Carga, 20 años en transporte de carga",
-  description:
-    "Conoce a MM Carga, empresa mexicana con 20 años en transporte de carga y almacenamiento, certificada C-TPAT, OEA e ISO 9001.",
-  alternates: { canonical: "/nosotros/" },
-};
+const getContent = () => getDoc("page-nosotros", nosotros);
 
-const figures = [
-  { value: "20", label: "años de experiencia" },
-  { value: "+200", label: "unidades full" },
-  { value: "+100", label: "cajas secas de 53 pies" },
-  { value: "200,000", unit: "m²", label: "de almacenamiento" },
-  { value: "6", label: "bases de operación" },
-  { value: "24/7", label: "monitoreo de unidades" },
-];
+export async function generateMetadata(): Promise<Metadata> {
+  const { seo } = await getContent();
+  return {
+    title: seo.title,
+    description: seo.description,
+    alternates: { canonical: "/nosotros/" },
+  };
+}
 
-const identity = [
-  {
-    title: "Misión",
-    text: "Brindar servicios de transporte con personal calificado, equipo moderno y tecnología de vanguardia, generando seguridad y confianza en nuestros clientes.",
-  },
-  {
-    title: "Visión",
-    text: "Ser la empresa de transporte y almacenaje de mercancías de referencia en México, reconocida por un servicio seguro, rentable y de alta calidad.",
-  },
-  {
-    title: "Valores",
-    text: "Honestidad, responsabilidad y puntualidad.",
-  },
-];
-
-// Mismo orden que lib/site.ts: los 4 primeros son certificaciones; CANACAR y D&B son afiliación y registro
-const certTexts = [
-  {
-    title: "C-TPAT",
-    text: "Programa de seguridad en la cadena de suministro para el comercio con Estados Unidos.",
-  },
-  {
-    title: "OEA (Operador Económico Autorizado)",
-    text: "Certificación del SAT que facilita y agiliza las operaciones de comercio exterior.",
-  },
-  {
-    title: "ISO 9001:2015",
-    text: "Sistema de gestión de la calidad certificado.",
-  },
-  {
-    title: "Transporte Limpio",
-    text: "Programa de SEMARNAT para la reducción de emisiones en el autotransporte.",
-  },
-];
-
-export default function Nosotros() {
-  const certs = certifications.slice(0, 4);
-  const affiliations = certifications.slice(4);
+export default async function Nosotros() {
+  const [c, { certifications }] = await Promise.all([
+    getContent(),
+    getSettings(),
+  ]);
+  const certs = certifications.filter((c) => !c.affiliation);
+  const affiliations = certifications.filter((c) => c.affiliation);
   return (
     <>
       {/* Bloque 1 · Hero */}
       <AboutHero
-        h1="MM Carga: 20 años en transporte de carga y almacenaje en México"
-        subtitle="Somos una empresa mexicana de transporte y almacenamiento con flota, almacenes y bases de operación propias."
+        h1={c.hero.h1}
+        subtitle={c.hero.subtitle}
         secondary={{
           href: "/transporte-de-carga/",
           label: "Conoce nuestros servicios",
         }}
-        image={{
-          src: "/images/nosotros/transporte-de-carga-en-carretera-mm-carga.webp",
-          alt: "Transporte de carga de MM Carga: tractocamiones con contenedores marítimos en carretera, vista aérea",
-        }}
-        seals={["C-TPAT", "OEA", "ISO 9001:2015", "Transporte Limpio"]}
+        image={c.hero.image}
+        seals={c.hero.seals}
       />
 
       {/* Bloque 2 · Quiénes somos, con el collage de 20 años */}
       <section className="overflow-hidden py-20 md:py-28">
         <Container className="grid items-center gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
           <div className="flex flex-col gap-6">
-            <SectionTitle
-              kicker="Quiénes somos"
-              title="Empresa de transporte de carga pesada con infraestructura propia"
-            />
-            <p
-              data-reveal
-              style={{ "--d": 1 } as CSSProperties}
-              className="text-body text-muted"
-            >
-              MM Carga S.A. de C.V. es una empresa mexicana especializada en el
-              transporte terrestre y el almacenamiento de carga para la
-              industria pesada y el comercio exterior. Fundada en 2006, en 2026
-              cumple 20 años de operación.
-            </p>
-            <p
-              data-reveal
-              style={{ "--d": 2 } as CSSProperties}
-              className="text-body text-muted"
-            >
-              Operamos desde nuestra oficina en Pesquería, Nuevo León, y seis
-              bases ubicadas en puertos, la frontera norte y el Bajío. Contamos
-              con más de 200 unidades, más de 100 cajas secas de 53 pies y
-              200,000 m² de almacenamiento, lo que nos permite responder a
-              operaciones de gran volumen sin depender de terceros.
-            </p>
+            <SectionTitle kicker="Quiénes somos" title={c.about.title} />
+            {c.about.paragraphs.map((p, i) => (
+              <p
+                key={i}
+                data-reveal
+                style={{ "--d": i + 1 } as CSSProperties}
+                className="text-body text-muted"
+              >
+                <Rich text={p} />
+              </p>
+            ))}
             <dl
               data-reveal
               style={{ "--d": 3 } as CSSProperties}
               className="mt-2 grid grid-cols-2 border-t border-navy-800/10 pt-6"
             >
               <div className="flex flex-col gap-1 pr-6">
-                <dt className="order-2 text-sm text-muted">Año de fundación</dt>
+                <dt className="order-2 text-sm text-muted">
+                  {c.about.foundedLabel}
+                </dt>
                 <dd className="order-1 text-[32px] leading-none font-heavy text-navy-800 tabular-nums">
-                  2006
+                  {c.about.foundedYear}
                 </dd>
               </div>
               <div className="flex flex-col gap-1 border-l border-navy-800/10 pl-6">
                 <dt className="order-2 text-sm text-muted">
-                  de operación en 2026
+                  {c.about.yearsLabel}
                 </dt>
                 <dd className="order-1 text-[32px] leading-none font-heavy text-primary tabular-nums">
-                  20 años
+                  {c.about.yearsValue}
                 </dd>
               </div>
             </dl>
           </div>
           <div data-reveal="scale" style={{ "--d": 1 } as CSSProperties}>
             <Image
-              src="/images/nosotros/20-anos-de-transporte-de-carga-mm-carga.webp"
-              alt="20 años de MM Carga: collage de su flota de tractocamiones, contenedores y operadores"
-              width={1524}
-              height={1020}
+              src={c.about.image.src}
+              alt={c.about.image.alt}
+              width={c.about.image.width ?? 1524}
+              height={c.about.image.height ?? 1020}
               sizes="(max-width: 1024px) 100vw, 55vw"
               className="h-auto w-full drop-shadow-[0_30px_40px_rgba(6,40,100,0.18)]"
             />
@@ -149,22 +102,22 @@ export default function Nosotros() {
       {/* Bloque 3 · Misión, visión y valores (con foto de la flota) */}
       <section className="bg-surface py-20 md:py-28">
         <Container className="flex flex-col gap-12">
-          <SectionTitle kicker="Identidad" title="Misión, visión y valores" />
+          <SectionTitle kicker="Identidad" title={c.identity.title} />
           <div className="grid gap-5.5 lg:grid-cols-[1.15fr_1fr] lg:items-stretch">
             <div
               data-reveal="scale"
               className="relative min-h-[280px] overflow-hidden rounded-card shadow-card-hover sm:min-h-[380px]"
             >
               <Image
-                src="/images/nosotros/flota-de-tractocamiones-mm-carga-mexico.webp"
-                alt="Flota propia de tractocamiones de MM Carga, empresa de transporte de carga en México"
+                src={c.identity.image.src}
+                alt={c.identity.image.alt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 55vw"
                 className="object-cover"
               />
             </div>
             <ul className="flex flex-col gap-5.5">
-              {identity.map((it, i) => (
+              {c.identity.items.map((it, i) => (
                 <li
                   key={it.title}
                   data-reveal
@@ -185,41 +138,38 @@ export default function Nosotros() {
       {/* Bloque 4 · Cifras */}
       <section className="pt-20 md:pt-28">
         <Container>
-          <SectionTitle
-            kicker="Capacidad operativa"
-            title="MM Carga en cifras"
-          />
+          <SectionTitle kicker="Capacidad operativa" title={c.figures.title} />
         </Container>
       </section>
-      <Figures items={figures} label="MM Carga en cifras" />
+      <Figures items={c.figures.items} label={c.figures.title} />
 
       {/* Bloque 5 · Certificaciones */}
       <section className="py-20 md:py-28">
         <Container className="flex flex-col gap-12">
           <SectionTitle
             kicker="Calidad y seguridad"
-            title="Certificaciones y estándares de operación"
-            intro="Nuestras certificaciones avalan procesos auditados de seguridad, calidad y cuidado ambiental en cada operación."
+            title={c.certifications.title}
+            intro={c.certifications.intro}
           />
           <ul className="grid gap-5.5 sm:grid-cols-2 lg:grid-cols-4">
-            {certs.map((c, i) => (
+            {certs.map((cert, i) => (
               <li
-                key={c.file}
+                key={cert.image.src}
                 data-reveal
                 style={{ "--d": i } as CSSProperties}
                 className="flex flex-col gap-4 rounded-card border border-navy-800/8 bg-white p-7"
               >
                 <Image
-                  src={`/images/certificaciones/${c.file}`}
-                  alt={c.alt}
-                  width={c.width}
-                  height={c.height}
+                  src={cert.image.src}
+                  alt={cert.image.alt}
+                  width={cert.image.width}
+                  height={cert.image.height}
                   className="h-16 w-auto self-start"
                 />
                 <h3 className="text-[19px] font-bold text-navy-800">
-                  {certTexts[i].title}
+                  {cert.name}
                 </h3>
-                <p className="text-small text-muted">{certTexts[i].text}</p>
+                <p className="text-small text-muted">{cert.text}</p>
               </li>
             ))}
           </ul>
@@ -228,17 +178,17 @@ export default function Nosotros() {
             className="flex flex-col gap-5 border-t border-navy-800/10 pt-8 sm:flex-row sm:items-center sm:gap-10"
           >
             <h3 className="text-[15px] font-bold text-navy-800">
-              Afiliaciones y registros
+              {c.certifications.affiliationsTitle}
             </h3>
             <ul className="flex flex-wrap items-center gap-8">
-              {affiliations.map((c) => (
-                <li key={c.file}>
+              {affiliations.map((a) => (
+                <li key={a.image.src}>
                   <Image
-                    src={`/images/certificaciones/${c.file}`}
-                    alt={c.alt}
-                    width={c.width}
-                    height={c.height}
-                    className={`w-auto opacity-80 ${c.width > 200 ? "h-7" : "h-14"}`}
+                    src={a.image.src}
+                    alt={a.image.alt}
+                    width={a.image.width}
+                    height={a.image.height}
+                    className={`w-auto opacity-80 ${isWide(a.image) ? "h-7" : "h-14"}`}
                   />
                 </li>
               ))}
@@ -251,16 +201,17 @@ export default function Nosotros() {
       <section className="bg-surface py-20 md:py-28">
         <Container className="grid items-center gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
           <div className="flex flex-col gap-6">
-            <SectionTitle kicker="Cobertura" title="Bases de operación" />
-            <p
-              data-reveal
-              style={{ "--d": 1 } as CSSProperties}
-              className="text-body text-muted"
-            >
-              Operamos desde seis bases propias en Monterrey, Nuevo Laredo,
-              Altamira, Silao, Manzanillo y Coatzacoalcos, ubicadas en los
-              principales puertos, la frontera norte y el Bajío.
-            </p>
+            <SectionTitle kicker="Cobertura" title={c.bases.title} />
+            {c.bases.paragraphs.map((p, i) => (
+              <p
+                key={i}
+                data-reveal
+                style={{ "--d": i + 1 } as CSSProperties}
+                className="text-body text-muted"
+              >
+                <Rich text={p} />
+              </p>
+            ))}
             <div className="pt-2">
               <TextLink href="/cobertura/">Conoce nuestra cobertura</TextLink>
             </div>
@@ -270,11 +221,7 @@ export default function Nosotros() {
       </section>
 
       {/* Bloque 7 · CTA */}
-      <CtaBand
-        kicker="Cotización"
-        title="Un aliado con 20 años de experiencia en transporte y almacenaje"
-        text="Nuestro equipo está listo para analizar tus necesidades de transporte y almacenamiento y presentarte una propuesta."
-      />
+      <CtaBand kicker="Cotización" title={c.cta.title} text={c.cta.text} />
     </>
   );
 }

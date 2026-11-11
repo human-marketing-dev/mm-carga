@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { CSSProperties, ReactNode } from "react";
+import type { CSSProperties } from "react";
 import {
   IconFleet,
   IconInventory,
@@ -20,43 +20,9 @@ import {
   ServiceCards,
 } from "@/components/site/sections";
 import { ArrowIcon } from "@/components/ui/arrow-icon";
-import { bases, services } from "@/lib/site";
-
-type Item = { title: string; text: string; icon: ReactNode };
-
-export type ServicePageData = {
-  slug: string;
-  /** Miga intermedia; las páginas de transporte cuelgan de /transporte-de-carga/ */
-  parent?: { href: string; label: string };
-  crumb: string;
-  h1: string;
-  subtitle: string;
-  image: { src: string; alt: string };
-  about: {
-    title: string;
-    paragraphs: string[];
-    /** Foto opcional a todo lo ancho al final de "Sobre el servicio" */
-    image?: { src: string; alt: string };
-  };
-  scope: { title: string; items: Item[] };
-  coverage: {
-    title: string;
-    text: string;
-    /** Título de la tarjeta de bases en "Sobre el servicio" */
-    mainLabel?: string;
-    /** Texto bajo la lista; sin valor, se listan las demás bases */
-    mainNote?: string;
-    /** Bases principales del servicio; sin valor, las 6 */
-    highlight?: string[];
-    /** true: el servicio solo opera en esas bases (no se listan las demás en Cobertura) */
-    exclusive?: boolean;
-    activeLabel?: string;
-    linksLabel?: string;
-  };
-  reasons: { title: string; items: Item[] };
-  faq: { title: string; items: { q: string; a: string }[] };
-  cta: { title: string; text: string; service: string };
-};
+import { NamedIcon } from "@/components/site/icons";
+import { Rich } from "@/components/site/rich";
+import { getService, getServices, getSettings } from "@/lib/content";
 
 function listCities(cities: string[]) {
   return cities.length > 1
@@ -68,7 +34,22 @@ function listCities(cities: string[]) {
 const mdSpan = ["md:col-span-2", ""];
 const lgSpan = ["lg:col-span-3", "lg:col-span-2", ""];
 
-export function ServicePage({ data }: { data: ServicePageData }) {
+/** Metadatos de la página de un servicio (título y descripción editables, URL fija) */
+export async function serviceMetadata(slug: string) {
+  const { seo } = await getService(slug);
+  return {
+    title: seo.title,
+    description: seo.description,
+    alternates: { canonical: slug },
+  };
+}
+
+export async function ServicePage({ slug }: { slug: string }) {
+  const [data, services, { bases }] = await Promise.all([
+    getService(slug),
+    getServices(),
+    getSettings(),
+  ]);
   const others = services.filter((s) => s.slug !== data.slug);
   const n = data.scope.items.length;
   const main = data.coverage.highlight;
@@ -153,7 +134,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
                 style={{ "--d": i + 1 } as CSSProperties}
                 className="text-body text-muted"
               >
-                {p}
+                <Rich text={p} />
               </p>
             ))}
           </div>
@@ -231,7 +212,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
                   className="mb-1 grid size-12 place-items-center rounded-btn bg-brand-50 text-primary"
                   aria-hidden="true"
                 >
-                  {s.icon}
+                  <NamedIcon name={s.icon} />
                 </span>
                 <h3 className="text-[19px] font-bold text-navy-800">
                   {s.title}

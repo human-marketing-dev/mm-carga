@@ -2,7 +2,6 @@
 
 import { useState, type FormEvent } from "react";
 import { ArrowIcon } from "@/components/ui/arrow-icon";
-import { WHATSAPP_NUMBER } from "@/lib/site";
 
 export const serviceOptions = [
   "Caja seca de 53 pies",
@@ -22,13 +21,16 @@ const label = "flex flex-col gap-1.5 text-[13px] font-semibold text-navy-800";
 export function QuoteForm({
   service,
   withReason = false,
+  whatsapp,
 }: {
   service?: string;
   withReason?: boolean;
+  /** Número de WhatsApp (ajustes generales), formato internacional sin "+" */
+  whatsapp: string;
 }) {
-  const [status, setStatus] = useState<
-    "idle" | "sending" | "sent" | "error"
-  >("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle",
+  );
   const [reason, setReason] = useState("Cotización");
   const isQuote = reason === "Cotización";
 
@@ -213,7 +215,7 @@ export function QuoteForm({
         >
           No pudimos enviar tu solicitud. Intenta de nuevo o escríbenos por{" "}
           <a
-            href={`https://wa.me/${WHATSAPP_NUMBER}`}
+            href={`https://wa.me/${whatsapp}`}
             target="_blank"
             rel="noopener noreferrer"
             className="font-semibold underline underline-offset-2"

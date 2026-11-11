@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import {
-  IconFleet,
-  IconIntegral,
-  IconLayers,
-  IconMonitoring,
-} from "@/components/site/icons";
-import { HeroSlider, type HeroSlide } from "@/components/site/hero-slider";
+import { IconFleet } from "@/components/site/icons";
+import { HeroSlider } from "@/components/site/hero-slider";
+import { Rich } from "@/components/site/rich";
 import { MexicoMap } from "@/components/site/mexico-map";
 import { Photo } from "@/components/site/photo";
 import {
@@ -23,98 +19,23 @@ import {
 import { ArrowIcon } from "@/components/ui/arrow-icon";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { services } from "@/lib/site";
+import { home } from "@/content/pages/home";
+import { getDoc } from "@/lib/cms";
+import { getServices } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Transporte de carga y almacenaje de mercancías en México | MM Carga",
-  description:
-    "20 años en el transporte de carga y almacenaje de mercancías, con flota, almacenes y bases propias en México. Solicita tu cotización.",
-  alternates: { canonical: "/" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { seo } = await getHome();
+  return {
+    title: seo.title,
+    description: seo.description,
+    alternates: { canonical: "/" },
+  };
+}
 
-// Hero: fotos de los distintos servicios para que no se lea solo como flota de camiones.
-// ⚠️ Carga suelta es una foto de 630 px: reemplazar por una versión de 2000 px o más.
-const heroSlides: HeroSlide[] = [
-  {
-    src: "/images/hero/hero-transporte-de-carga-mexico.webp",
-    alt: "Flota de tractocamiones de MM Carga, empresa de transporte de carga y almacenaje de mercancías en México",
-    label: "Transporte de carga",
-    position: "60% 50%",
-  },
-  {
-    src: "/images/servicios/almacenamiento-de-mercancias-mm-carga.webp",
-    alt: "Almacén de MM Carga con mercancía paletizada",
-    label: "Almacenaje de mercancías",
-    position: "50% 60%",
-  },
-  {
-    src: "/images/hero/transporte-de-contenedores-y-acero-mm-carga.webp",
-    alt: "Patio de MM Carga en Altamira con contenedores marítimos, rollos de acero y plataforma en maniobra de carga",
-    label: "Contenedores marítimos",
-    position: "65% 50%",
-  },
-  {
-    src: "/images/servicios/transporte-de-carga-suelta-rollos-de-acero-mm-carga.webp",
-    alt: "Transporte de carga suelta en plataforma full de MM Carga con rollos de acero",
-    label: "Carga suelta en plataforma",
-    position: "50% 60%",
-  },
-];
+const getHome = () => getDoc("page-home", home);
 
-const figures = [
-  { value: "20", label: "años de experiencia" },
-  { value: "+200", label: "unidades full" },
-  { value: "+100", label: "cajas secas de 53 pies" },
-  { value: "200,000", unit: "m²", label: "de almacenamiento" },
-];
-
-const reasons = [
-  {
-    title: "Solución logística integral",
-    icon: <IconIntegral />,
-    text: "Centralizamos los servicios que tu mercancía necesita y coordinamos cada etapa de la operación, desde el origen hasta el destino, con distintas modalidades y equipos dentro de una misma empresa.",
-  },
-  {
-    title: "Capacidad para grandes operaciones",
-    icon: <IconFleet />,
-    text: "Más de 200 unidades para operación full, más de 100 cajas secas de 53 pies, 100,000 m² de almacén techado y 100,000 m² de almacenamiento al aire libre.",
-  },
-  {
-    title: "Control, tecnología y servicio 24/7",
-    icon: <IconMonitoring />,
-    text: "Unidades propias de modelos recientes con GPS y cámaras, un centro de monitoreo que opera las 24 horas, operadores certificados e integraciones vía API.",
-  },
-  {
-    title: "Todo lo que tu operación necesita, en un solo lugar",
-    icon: <IconLayers />,
-    text: "Integramos transporte, almacenamiento y servicios especializados con un solo proveedor, desde el origen hasta el destino.",
-  },
-];
-
-const faq = [
-  {
-    q: "¿Qué tipos de carga transportan?",
-    a: "Nuestro equipo principal son las plataformas en full, con las que transportamos contenedores marítimos, carga suelta, acero y maquinaria. Además, contamos con tolvas para materiales a granel y con cajas secas de 53 pies para carga seca.",
-  },
-  {
-    q: "¿Cuentan con cobertura nacional?",
-    a: "Sí. Ofrecemos cobertura nacional desde y hacia nuestras bases en Monterrey, Altamira, Manzanillo, Nuevo Laredo, Silao y Coatzacoalcos.",
-  },
-  {
-    q: "¿Cómo se da seguimiento a la carga?",
-    a: "Todas nuestras unidades cuentan con GPS y cámaras, y son supervisadas por nuestro centro de monitoreo las 24 horas.",
-  },
-  {
-    q: "¿Ofrecen servicio de almacenamiento?",
-    a: "Sí. Contamos con almacenes en Altamira, Manzanillo y Pesquería, con 100,000 m² techados y 100,000 m² al aire libre, y control de inventarios mediante sistema WMS.",
-  },
-  {
-    q: "¿Cómo puedo solicitar una cotización?",
-    a: "Comunícate por WhatsApp o completa el formulario de contacto con el origen, el destino y el tipo de carga. Nuestro equipo te enviará una propuesta.",
-  },
-];
-
-export default function Home() {
+export default async function Home() {
+  const [c, services] = await Promise.all([getHome(), getServices()]);
   return (
     <>
       {/* Bloque 1 · Hero */}
@@ -123,7 +44,7 @@ export default function Home() {
         className="relative isolate -mt-18 overflow-hidden bg-navy-950 pt-18 text-white"
       >
         {/* Fotos de fondo que rotan (transporte, almacén, contenedores, carga suelta) con overlay para legibilidad */}
-        <HeroSlider slides={heroSlides} />
+        <HeroSlider slides={c.hero.slides} />
         <div
           className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-r from-navy-950/90 via-navy-950/72 to-navy-950/45 lg:from-navy-950/95 lg:via-navy-950/75 lg:to-navy-950/25"
           aria-hidden="true"
@@ -134,14 +55,12 @@ export default function Home() {
         />
         <Container className="flex min-h-[clamp(600px,84vh,800px)] items-center pt-16 pb-36 lg:pt-24 lg:pb-40">
           <div className="hero-in flex max-w-2xl flex-col items-start gap-7">
-            <Badge dot={false}>20 AÑOS DE EXPERIENCIA</Badge>
+            <Badge dot={false}>{c.hero.badge}</Badge>
             <h1 className="text-[clamp(36px,4.4vw,60px)] leading-[1.08] font-heavy">
-              Transporte de carga y almacenaje de mercancías en México
+              {c.hero.h1}
             </h1>
             <p className="max-w-xl text-lead tracking-[.05px] text-white/80">
-              Servicio integral para el manejo, almacenaje y transporte de tu
-              mercancía, con flota, almacenes y bases propias y 20 años de
-              experiencia.
+              {c.hero.subtitle}
             </p>
             <div className="flex flex-wrap gap-4 pt-1">
               <Button href="/contacto/">Solicita una cotización</Button>
@@ -154,40 +73,23 @@ export default function Home() {
       </section>
 
       {/* Bloque 2 · Cifras */}
-      <Figures items={figures} label="MM Carga en cifras" />
+      <Figures items={c.figures} label="MM Carga en cifras" />
 
       {/* Bloque 3 · Presentación */}
       <section className="overflow-hidden py-20 md:py-28">
         <Container className="grid items-center gap-14 lg:grid-cols-[1fr_1.05fr] lg:gap-20">
           <div className="flex flex-col gap-6">
-            <SectionTitle
-              kicker="Quiénes somos"
-              title="Empresa de transporte y almacenaje con infraestructura propia en México"
-            />
-            <p
-              data-reveal
-              style={{ "--d": 1 } as CSSProperties}
-              className="text-body text-muted"
-            >
-              MM Carga es una empresa mexicana dedicada al transporte terrestre
-              de carga y al almacenaje de mercancías. Desde hace 20 años
-              facilitamos las operaciones de nuestros clientes con un servicio
-              integral para el manejo, almacenaje y transporte de su mercancía,
-              respaldado por infraestructura propia: flota, cajas secas,
-              almacenes y bases de operación.
-            </p>
-            <p
-              data-reveal
-              style={{ "--d": 2 } as CSSProperties}
-              className="text-body text-muted"
-            >
-              Nuestra principal fortaleza es el transporte en plataformas en
-              full, con el que movemos acero, carga suelta y contenedores de
-              importación y exportación. Además, operamos cajas secas de 53 pies
-              y tolvas para materiales a granel. Nuestras unidades cuentan con
-              rastreo GPS y cámaras, supervisadas por un centro de monitoreo que
-              opera las 24 horas.
-            </p>
+            <SectionTitle kicker="Quiénes somos" title={c.about.title} />
+            {c.about.paragraphs.map((p, i) => (
+              <p
+                key={i}
+                data-reveal
+                style={{ "--d": i + 1 } as CSSProperties}
+                className="text-body text-muted"
+              >
+                <Rich text={p} />
+              </p>
+            ))}
             <div
               data-reveal
               style={{ "--d": 3 } as CSSProperties}
@@ -208,8 +110,8 @@ export default function Home() {
               aria-hidden="true"
             />
             <Photo
-              src="/images/cobertura/patio-bases-de-operacion-transporte-de-carga-mm-carga.webp"
-              alt="Patio de MM Carga con tractocamiones en una de sus bases de operación"
+              src={c.about.image.src}
+              alt={c.about.image.alt}
               className="aspect-[5/4] rounded-dialog shadow-card-hover"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
@@ -219,10 +121,10 @@ export default function Home() {
               </span>
               <span className="flex flex-col">
                 <span className="text-[28px] leading-none font-heavy tabular-nums">
-                  6
+                  {c.about.statValue}
                 </span>
                 <span className="text-sm text-white/70">
-                  bases de operación propias
+                  {c.about.statLabel}
                 </span>
               </span>
             </div>
@@ -240,9 +142,9 @@ export default function Home() {
       {/* Bloque 4 · Por qué MM Carga */}
       <ReasonsSection
         className="bg-surface"
-        title="¿Por qué elegir a MM Carga para el transporte y almacenaje de tu mercancía?"
-        intro="Nos encargamos de tu mercancía de principio a fin."
-        items={reasons}
+        title={c.reasons.title}
+        intro={c.reasons.intro}
+        items={c.reasons.items}
       />
 
       {/* Bloque 5 · Servicios */}
@@ -251,8 +153,8 @@ export default function Home() {
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <SectionTitle
               kicker="Servicios"
-              title="Soluciones integrales de transporte de carga y almacenamiento"
-              intro="Ofrecemos el equipo adecuado para cada tipo de carga, con monitoreo permanente y coordinación de origen a destino."
+              title={c.services.title}
+              intro={c.services.intro}
             />
           </div>
           <ul className="grid gap-5.5 sm:grid-cols-2 lg:grid-cols-3">
@@ -267,16 +169,18 @@ export default function Home() {
                   className="group flex h-full flex-col overflow-hidden rounded-card border border-brand-800/8 bg-white shadow-card transition hover:-translate-y-1 hover:border-brand-800/22 hover:shadow-card-hover"
                 >
                   <Photo
-                    src={s.image}
-                    alt={s.imageAlt}
+                    src={s.card.image.src}
+                    alt={s.card.image.alt}
                     className="aspect-[16/10]"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                   <div className="flex flex-1 flex-col gap-3 p-6">
                     <h3 className="text-card-title font-extrabold text-brand-800">
-                      {s.name}
+                      {s.card.name}
                     </h3>
-                    <p className="flex-1 text-small text-muted">{s.summary}</p>
+                    <p className="flex-1 text-small text-muted">
+                      {s.card.summary}
+                    </p>
                     <span className="inline-flex items-center gap-2 pt-2 text-sm font-bold text-primary">
                       Ver servicio
                       <ArrowIcon className="size-3.5 transition group-hover:translate-x-0.5" />
@@ -295,11 +199,10 @@ export default function Home() {
                 </span>
                 <span className="flex flex-col gap-3">
                   <span className="text-[26px] leading-tight font-bold">
-                    Ver servicios de transporte de carga
+                    {c.services.allTitle}
                   </span>
                   <span className="text-small text-white/75">
-                    Conoce el equipo, el alcance y la cobertura de cada
-                    servicio.
+                    {c.services.allText}
                   </span>
                 </span>
                 <span className="grid size-12 place-items-center rounded-btn bg-white/14 transition group-hover:bg-white/22">
@@ -315,22 +218,17 @@ export default function Home() {
       <section className="bg-surface py-20 md:py-28">
         <Container className="grid items-center gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
           <div className="flex flex-col gap-6">
-            <SectionTitle
-              kicker="Cobertura"
-              title="Presencia en los principales puertos, la frontera norte y el Bajío"
-            />
-            <p
-              data-reveal
-              style={{ "--d": 1 } as CSSProperties}
-              className="text-body text-muted"
-            >
-              Contamos con bases de operación propias en Altamira, Manzanillo,
-              Coatzacoalcos, Nuevo Laredo, Silao y Monterrey, y ofrecemos
-              cobertura nacional desde y hacia cada una de ellas. Esta red nos
-              permite atender con oportunidad las operaciones portuarias del
-              Golfo y del Pacífico, el comercio con Estados Unidos y el corredor
-              industrial del centro del país.
-            </p>
+            <SectionTitle kicker="Cobertura" title={c.coverage.title} />
+            {c.coverage.paragraphs.map((p, i) => (
+              <p
+                key={i}
+                data-reveal
+                style={{ "--d": i + 1 } as CSSProperties}
+                className="text-body text-muted"
+              >
+                <Rich text={p} />
+              </p>
+            ))}
             <div className="flex flex-col gap-3 pt-2">
               <TextLink href="/cobertura/">Conoce nuestra cobertura</TextLink>
               <TextLink href="/transporte-de-carga-en-monterrey/">
@@ -344,23 +242,17 @@ export default function Home() {
 
       {/* Bloque 7 · Certificaciones */}
       <Certifications
-        title="Certificaciones y afiliaciones"
-        intro="Nuestras operaciones cumplen con estándares nacionales e internacionales de seguridad, calidad y cuidado ambiental."
+        title={c.certifications.title}
+        intro={c.certifications.intro}
       />
 
       {/* Bloque 8 · FAQ */}
       <div className="bg-surface">
-        <Faq
-          title="Preguntas frecuentes sobre transporte de carga y almacenaje"
-          items={faq}
-        />
+        <Faq title={c.faq.title} items={c.faq.items} />
       </div>
 
       {/* Bloque 9 · CTA */}
-      <CtaBand
-        title="Soluciones de transporte y almacenaje a la medida de tu operación"
-        text="Nuestro equipo está listo para analizar tus necesidades de transporte y almacenamiento y presentarte una propuesta."
-      />
+      <CtaBand title={c.cta.title} text={c.cta.text} />
     </>
   );
 }

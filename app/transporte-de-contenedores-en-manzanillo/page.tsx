@@ -1,17 +1,9 @@
-import type { Metadata } from "next";
-import { BasePage } from "@/components/site/base-page";
-import { basePages } from "@/lib/base-pages";
+import { BasePage, baseMetadata } from "@/components/site/base-page";
 
-const data = basePages.manzanillo;
-
-// Sin indexar ni enlazar hasta que el usuario confirme publicar las páginas por base
-export const metadata: Metadata = {
-  title: data.title,
-  description: data.subtitle,
-  alternates: { canonical: data.slug },
-  robots: { index: false, follow: false },
-};
+// Contenido editable en Sanity (Páginas por base); respaldo local en content/pages/bases.ts.
+// Sin indexar ni enlazar hasta que el usuario confirme publicar las páginas por base.
+export const generateMetadata = () => baseMetadata("manzanillo");
 
 export default function Page() {
-  return <BasePage data={data} />;
+  return <BasePage base="manzanillo" />;
 }
