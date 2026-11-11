@@ -39,7 +39,7 @@ const isObj = (v: unknown): v is Obj =>
   typeof v === "object" && v !== null && !Array.isArray(v);
 
 /** Quita los campos internos de Sanity y convierte imágenes a { src, alt } */
-function normalize(value: unknown): unknown {
+export function normalize(value: unknown): unknown {
   if (Array.isArray(value)) return value.map(normalize);
   if (!isObj(value)) return value;
   const asset = value.asset as Obj | undefined;
@@ -69,7 +69,7 @@ function normalize(value: unknown): unknown {
  * en Sanity se usa el local, para que la página nunca quede sin texto. Las listas de
  * Sanity reemplazan completas a las locales.
  */
-function merge<T>(local: T, remote: unknown): T {
+export function merge<T>(local: T, remote: unknown): T {
   if (remote === undefined) return local;
   if (isObj(local) && isObj(remote)) {
     const out: Obj = { ...local };
@@ -85,11 +85,14 @@ function merge<T>(local: T, remote: unknown): T {
 async function fetchDoc(id: string): Promise<unknown> {
   "use cache";
   cacheTag(CMS_TAG);
-  cacheLife("max");
   try {
-    return await query<unknown>(`*[_id == $id][0]`, { id });
+    const doc = await query<unknown>(`*[_id == $id][0]`, { id });
+    cacheLife("max");
+    return doc;
   } catch (err) {
+    // Sin conexión con Sanity: se usa el contenido local y se reintenta pronto
     console.error(`[cms] No se pudo leer "${id}" de Sanity:`, err);
+    cacheLife("minutes");
     return null;
   }
 }

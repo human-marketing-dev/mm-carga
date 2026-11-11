@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Sanity Studio: proyecto aparte con su propio package.json
+    "studio/**",
   ]),
 ]);
 

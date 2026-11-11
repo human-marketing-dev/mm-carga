@@ -1,0 +1,24 @@
+{
+  "name": "mm-carga-studio",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Sanity Studio de MM Carga: edición de textos e imágenes del sitio",
+  "type": "module",
+  "scripts": {
+    "dev": "sanity dev",
+    "build": "sanity build",
+    "deploy": "sanity deploy",
+    "migrar": "sanity exec scripts/migrate.ts --with-user-token"
+  },
+  "dependencies": {
+    "@sanity/locale-es-es": "^1.2.39",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "sanity": "6.23.0",
+    "styled-components": "^6.1.15"
+  },
+  "devDependencies": {
+    "@types/react": "^19",
+    "typescript": "^5"
+  }
+}
