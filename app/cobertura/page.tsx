@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { localPages } from "@/content/base-links";
 import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
+import { MobileSlider } from "@/components/site/mobile-slider";
 import type { CSSProperties } from "react";
 import { IconWarehouse } from "@/components/site/icons";
 import { MexicoMap } from "@/components/site/mexico-map";
@@ -111,14 +112,17 @@ export default async function Cobertura() {
       <section id="bases" className="scroll-mt-24 bg-surface py-20 md:py-28">
         <Container className="flex flex-col gap-12">
           <SectionTitle kicker="Ubicaciones" title={c.bases.title} />
-          <ul className="grid gap-5.5 md:grid-cols-2 lg:grid-cols-3">
+          <MobileSlider
+            label={c.bases.title}
+            className="gap-5.5 md:grid md:grid-cols-2 lg:grid-cols-3"
+          >
             {ordered.map((b, i) => (
               <li
                 key={b.city}
                 id={`base-${slugify(b.city)}`}
                 data-reveal
                 style={{ "--d": i } as CSSProperties}
-                className="flex scroll-mt-28 flex-col gap-4 rounded-card border border-navy-800/8 bg-white p-7"
+                className="flex scroll-mt-28 flex-col gap-4 rounded-card border border-navy-800/8 bg-white p-7 max-md:w-[86%]"
               >
                 <p className="text-xs font-bold tracking-[0.14em] text-primary uppercase">
                   {b.region}
@@ -173,7 +177,7 @@ export default async function Cobertura() {
                 </div>
               </li>
             ))}
-          </ul>
+          </MobileSlider>
         </Container>
       </section>
 

@@ -103,18 +103,37 @@ export async function SiteHeader() {
           </span>
         </Link>
 
-        <details className="group lg:hidden">
+        <details className="mobile-menu group lg:hidden">
           <summary className="flex size-11 cursor-pointer list-none items-center justify-center rounded-btn-sm border border-navy-800/12 text-navy-800 transition-colors group-data-[top=true]/h:border-white/30 group-data-[top=true]/h:text-white [&::-webkit-details-marker]:hidden">
             <span className="sr-only">Abrir menú</span>
             <svg viewBox="0 0 20 20" className="size-5" aria-hidden="true">
               <path
-                d="M3 6h14M3 10h14M3 14h14"
+                className="menu-line menu-line-1"
+                d="M3 6h14"
+                stroke="currentColor"
+                strokeWidth="1.8"
+              />
+              <path
+                className="menu-line menu-line-2"
+                d="M3 10h14"
+                stroke="currentColor"
+                strokeWidth="1.8"
+              />
+              <path
+                className="menu-line menu-line-3"
+                d="M3 14h14"
                 stroke="currentColor"
                 strokeWidth="1.8"
               />
             </svg>
           </summary>
-          <div className="absolute inset-x-0 top-18 border-b border-navy-800/8 bg-white px-5 pt-2 pb-6 shadow-card">
+          {/* Fondo oscuro bajo el menú: al tocarlo se cierra */}
+          <div
+            data-menu-close
+            className="menu-backdrop fixed inset-x-0 top-18 bottom-0 bg-navy-950/35"
+            aria-hidden="true"
+          />
+          <div className="menu-panel absolute inset-x-0 top-18 max-h-[calc(100dvh-4.5rem)] overflow-y-auto border-b border-navy-800/8 bg-white px-5 pt-2 pb-6 shadow-card">
             <ul className="flex flex-col text-base font-semibold text-navy-800">
               <li>
                 <Link href="/transporte-de-carga/" className="block py-3">

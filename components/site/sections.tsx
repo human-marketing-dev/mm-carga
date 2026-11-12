@@ -6,6 +6,8 @@ import type { ServiceContent } from "@/content/service-types";
 import type { IconName } from "@/content/types";
 import { contactLinks, getSettings } from "@/lib/content";
 import { CountUp } from "./count-up";
+import { FaqItem } from "./faq-item";
+import { MobileSlider } from "./mobile-slider";
 import { QuoteForm } from "./quote-form";
 import { NamedIcon, SocialIcon } from "./icons";
 
@@ -80,13 +82,13 @@ export function Points({
   items: { title: string; text: string; icon?: IconName }[];
 }) {
   return (
-    <ul className="grid gap-5 sm:grid-cols-2">
+    <MobileSlider bp="sm" label="Razones" className="grid gap-5 sm:grid-cols-2">
       {items.map((it, i) => (
         <li
           key={it.title}
           data-reveal
           style={{ "--d": i } as CSSProperties}
-          className="group relative flex flex-col gap-4 overflow-hidden rounded-card border border-brand-800/8 bg-white p-7 shadow-card transition duration-300 hover:-translate-y-1 hover:border-brand-800/18 hover:shadow-card-hover"
+          className="group relative flex flex-col max-sm:w-[84%] gap-4 overflow-hidden rounded-card border border-brand-800/8 bg-white p-7 shadow-card transition duration-300 hover:-translate-y-1 hover:border-brand-800/18 hover:shadow-card-hover"
         >
           {it.icon && (
             <span
@@ -106,7 +108,7 @@ export function Points({
           />
         </li>
       ))}
-    </ul>
+    </MobileSlider>
   );
 }
 
@@ -204,28 +206,7 @@ export function Faq({
           className="divide-y divide-navy-800/10 border-y border-navy-800/10"
         >
           {items.map((it) => (
-            <details key={it.q} className="faq-item group">
-              <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden">
-                <h3 className="text-[17px] leading-snug font-semibold text-navy-800">
-                  {it.q}
-                </h3>
-                <span
-                  className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full border border-navy-800/20 text-navy-800 transition group-open:rotate-45"
-                  aria-hidden="true"
-                >
-                  <svg viewBox="0 0 12 12" className="size-2.5">
-                    <path
-                      d="M6 1v10M1 6h10"
-                      stroke="currentColor"
-                      strokeWidth="1.6"
-                    />
-                  </svg>
-                </span>
-              </summary>
-              <p className="faq-answer max-w-2xl pb-6 text-small text-muted">
-                {it.a}
-              </p>
-            </details>
+            <FaqItem key={it.q} q={it.q} a={it.a} />
           ))}
         </div>
       </Container>
@@ -256,13 +237,19 @@ export async function Certifications({
           <h2 className="text-2xl font-semibold text-navy-ink">{title}</h2>
           {intro && <p className="text-small text-muted">{intro}</p>}
         </div>
-        <ul className="grid grid-cols-3 items-center gap-x-8 gap-y-6 sm:grid-cols-7 lg:max-w-4xl">
+        <MobileSlider
+          bp="sm"
+          label="Certificaciones"
+          className="items-center gap-x-8 gap-y-6 sm:grid sm:grid-cols-7 lg:max-w-4xl"
+        >
           {certifications.map((c, i) => (
             <li
               key={c.image.src}
               data-reveal="fade"
               style={{ "--d": i } as CSSProperties}
-              className={isWide(c.image) ? "col-span-3 sm:col-span-2" : ""}
+              className={`max-sm:grid max-sm:h-28 max-sm:place-items-center max-sm:rounded-card max-sm:border max-sm:border-navy-800/8 max-sm:bg-white max-sm:px-5 ${
+                isWide(c.image) ? "max-sm:w-[64%] sm:col-span-2" : "max-sm:w-[40%]"
+              }`}
             >
               <Image
                 src={c.image.src}
@@ -273,7 +260,7 @@ export async function Certifications({
               />
             </li>
           ))}
-        </ul>
+        </MobileSlider>
       </Container>
     </section>
   );

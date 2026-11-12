@@ -14,6 +14,7 @@ export function HeaderShell({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLElement>(null);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const closeMenu = useRef<(animate?: boolean) => void>(() => {});
 
   useEffect(() => {
     const id = requestAnimationFrame(() =>
@@ -27,13 +28,65 @@ export function HeaderShell({ children }: { children: ReactNode }) {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     const menu = ref.current?.querySelector("details");
-    const onToggle = () => setMenuOpen(!!menu?.open);
+    const summary = menu?.querySelector("summary");
+    let timer: ReturnType<typeof setTimeout> | undefined;
+
+    // Cierra el menú móvil con animación de salida (data-closing) y luego quita el open
+    const close = (animate = true) => {
+      if (!menu?.open) return;
+      clearTimeout(timer);
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!animate || reduce) {
+        menu.open = false;
+        delete menu.dataset.closing;
+        return;
+      }
+      menu.dataset.closing = "1";
+      setMenuOpen(false);
+      timer = setTimeout(() => {
+        menu.open = false;
+        delete menu.dataset.closing;
+      }, 220);
+    };
+    const onSummary = (e: Event) => {
+      if (menu?.open) {
+        e.preventDefault();
+        close();
+      }
+    };
+    // Al tocar un enlace o el fondo, se cierra
+    const onPanel = (e: Event) => {
+      const t = e.target as HTMLElement;
+      if (t.closest("a[href], [data-menu-close]")) close();
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && menu?.open) {
+        close();
+        summary?.focus();
+      }
+    };
+    const onToggle = () => {
+      if (!menu?.dataset.closing) setMenuOpen(!!menu?.open);
+    };
+    summary?.addEventListener("click", onSummary);
+    menu?.addEventListener("click", onPanel);
     menu?.addEventListener("toggle", onToggle);
+    document.addEventListener("keydown", onKey);
+    closeMenu.current = close;
     return () => {
+      clearTimeout(timer);
       window.removeEventListener("scroll", onScroll);
+      summary?.removeEventListener("click", onSummary);
+      menu?.removeEventListener("click", onPanel);
       menu?.removeEventListener("toggle", onToggle);
+      document.removeEventListener("keydown", onKey);
     };
   }, []);
+
+  // Al cambiar de página, el menú queda cerrado
+  useEffect(() => {
+    closeMenu.current(false);
+  }, [pathname]);
 
   const top = overHero && !scrolled && !menuOpen;
 

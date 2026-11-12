@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { pageMetadata } from "@/lib/seo";
 import type { CSSProperties } from "react";
+import { MobileSlider } from "./mobile-slider";
 import {
   IconFleet,
   IconInventory,
@@ -197,13 +198,16 @@ export async function ServicePage({ slug }: { slug: string }) {
       <section className="bg-surface py-20 md:py-28">
         <Container className="flex flex-col gap-12">
           <SectionTitle kicker="Qué incluye" title={data.scope.title} />
-          <ul className="grid gap-px overflow-hidden rounded-card border border-navy-800/10 bg-navy-800/10 md:grid-cols-2 lg:grid-cols-3">
+          <MobileSlider
+            label={data.scope.title}
+            className="md:grid md:gap-px md:overflow-hidden md:rounded-card md:border md:border-navy-800/10 md:bg-navy-800/10 md:grid-cols-2 lg:grid-cols-3"
+          >
             {data.scope.items.map((s, i) => (
               <li
                 key={s.title}
                 data-reveal="fade"
                 style={{ "--d": i } as CSSProperties}
-                className="flex flex-col gap-3 bg-white p-7"
+                className="flex flex-col gap-3 bg-white p-7 max-md:w-[84%] max-md:rounded-card max-md:border max-md:border-navy-800/10"
               >
                 <span
                   className="mb-1 grid size-12 place-items-center rounded-btn bg-brand-50 text-primary"
@@ -220,7 +224,7 @@ export async function ServicePage({ slug }: { slug: string }) {
             <li
               data-reveal="fade"
               style={{ "--d": n } as CSSProperties}
-              className={`flex flex-col justify-between gap-6 bg-navy-800 p-7 text-white ${mdSpan[n % 2]} ${lgSpan[n % 3]}`}
+              className={`flex flex-col justify-between gap-6 bg-navy-800 p-7 text-white max-md:w-[84%] max-md:rounded-card ${mdSpan[n % 2]} ${lgSpan[n % 3]}`}
             >
               <p className="text-[19px] font-bold">
                 ¿Tu operación requiere otro esquema?
@@ -232,7 +236,7 @@ export async function ServicePage({ slug }: { slug: string }) {
                 Cuéntanos tu operación <ArrowIcon className="size-3.5" />
               </Link>
             </li>
-          </ul>
+          </MobileSlider>
         </Container>
       </section>
 

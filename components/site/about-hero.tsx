@@ -42,7 +42,7 @@ export function AboutHero({ h1, subtitle, secondary, image, seals }: Props) {
         aria-hidden="true"
       />
 
-      <Container className="flex flex-col items-center gap-12 pt-10 lg:gap-16 lg:pt-14">
+      <Container className="flex flex-col items-center gap-12 pt-10 pb-14 lg:gap-16 lg:pt-14 lg:pb-16">
         <div className="hero-in flex max-w-4xl flex-col items-center gap-6 text-center">
           <HeroCrumbs crumb="Nosotros" />
           <h1 className="text-[clamp(36px,4.6vw,60px)] leading-[1.06] font-heavy text-balance">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
+import { MobileSlider } from "@/components/site/mobile-slider";
 import type { CSSProperties } from "react";
 import { MexicoMap } from "@/components/site/mexico-map";
 import { AboutHero } from "@/components/site/about-hero";
@@ -148,13 +149,17 @@ export default async function Nosotros() {
             title={c.certifications.title}
             intro={c.certifications.intro}
           />
-          <ul className="grid gap-5.5 sm:grid-cols-2 lg:grid-cols-4">
+          <MobileSlider
+            bp="sm"
+            label={c.certifications.title}
+            className="gap-5.5 sm:grid sm:grid-cols-2 lg:grid-cols-4"
+          >
             {certs.map((cert, i) => (
               <li
                 key={cert.image.src}
                 data-reveal
                 style={{ "--d": i } as CSSProperties}
-                className="flex flex-col gap-4 rounded-card border border-navy-800/8 bg-white p-7"
+                className="flex flex-col gap-4 rounded-card border border-navy-800/8 bg-white p-7 max-sm:w-[84%]"
               >
                 <Image
                   src={cert.image.src}
@@ -169,7 +174,7 @@ export default async function Nosotros() {
                 <p className="text-small text-muted">{cert.text}</p>
               </li>
             ))}
-          </ul>
+          </MobileSlider>
           <div
             data-reveal
             className="flex flex-col gap-5 border-t border-navy-800/10 pt-8 sm:flex-row sm:items-center sm:gap-10"

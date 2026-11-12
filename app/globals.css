@@ -198,37 +198,6 @@ html {
 }
 
 
-/* Acordeón de preguntas frecuentes */
-.faq-item::details-content {
-  block-size: 0;
-  overflow-y: clip;
-  transition:
-    block-size 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
-    content-visibility 0.35s allow-discrete;
-}
-.faq-item[open]::details-content {
-  block-size: auto;
-}
-:root {
-  interpolate-size: allow-keywords;
-}
-@media (prefers-reduced-motion: no-preference) {
-  .faq-item[open] .faq-answer {
-    animation: faq-in 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-  }
-}
-@keyframes faq-in {
-  from {
-    opacity: 0;
-    transform: translateY(-6px);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .faq-item::details-content {
-    transition: none;
-  }
-}
-
 @keyframes hero-up {
   from {
     opacity: 0;
@@ -307,5 +276,82 @@ html {
   }
   50% {
     transform: translateY(-8px);
+  }
+}
+
+/* Carruseles móviles: las tarjetas entran deslizando, sin animación de aparición */
+@media (max-width: 47.98rem) {
+  .js .m-slider-md > [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (max-width: 39.98rem) {
+  .js .m-slider-sm > [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Menú móvil: entrada y salida del panel, fondo y ícono hamburguesa → X */
+.mobile-menu[open] .menu-panel {
+  animation: menu-in 0.32s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.mobile-menu[open] .menu-backdrop {
+  animation: menu-fade 0.3s ease both;
+}
+.mobile-menu[data-closing] .menu-panel {
+  animation: menu-out 0.22s cubic-bezier(0.4, 0, 1, 1) both;
+}
+.mobile-menu[data-closing] .menu-backdrop {
+  animation: menu-fade 0.22s ease reverse both;
+}
+.mobile-menu[open] .menu-panel li {
+  animation: menu-item 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.mobile-menu[open] .menu-panel > ul > li:nth-child(2) { animation-delay: 0.04s; }
+.mobile-menu[open] .menu-panel > ul > li:nth-child(3) { animation-delay: 0.08s; }
+.mobile-menu[open] .menu-panel > ul > li:nth-child(4) { animation-delay: 0.12s; }
+.mobile-menu[open] .menu-panel > ul > li:nth-child(5) { animation-delay: 0.16s; }
+.mobile-menu[data-closing] .menu-panel li {
+  animation: none;
+}
+.menu-line {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1),
+    opacity 0.2s ease;
+}
+.mobile-menu[open]:not([data-closing]) .menu-line-1 {
+  transform: translateY(4px) rotate(45deg);
+}
+.mobile-menu[open]:not([data-closing]) .menu-line-2 {
+  opacity: 0;
+}
+.mobile-menu[open]:not([data-closing]) .menu-line-3 {
+  transform: translateY(-4px) rotate(-45deg);
+}
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+@keyframes menu-out {
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+@keyframes menu-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes menu-item {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
   }
 }

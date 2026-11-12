@@ -96,7 +96,7 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
                     onClick={() => setIndex(i)}
                     aria-current={on}
                     aria-label={`Ver imagen ${i + 1} de ${slides.length}: ${s.label}`}
-                    className="group/tab flex w-full cursor-pointer flex-col gap-2.5 pt-4 pb-6 text-left sm:pb-8"
+                    className="group/tab flex w-full cursor-pointer flex-col gap-2.5 pt-4 pb-14 text-left sm:pb-8"
                   >
                     <span className="relative block h-[3px] overflow-hidden rounded-full bg-white/22">
                       <span
@@ -135,7 +135,7 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
               type="button"
               onClick={() => setPaused((p) => !p)}
               aria-label={paused ? "Reanudar imágenes" : "Pausar imágenes"}
-              className="mt-1.5 grid size-8 shrink-0 cursor-pointer place-items-center rounded-full border border-white/25 text-white/80 transition hover:border-white/60 hover:text-white"
+              className="mt-[1.5px] grid size-8 shrink-0 cursor-pointer place-items-center rounded-full border border-white/25 text-white/80 transition hover:border-white/60 hover:text-white"
             >
               <svg viewBox="0 0 12 12" className="size-2.5" aria-hidden="true">
                 {paused ? (
