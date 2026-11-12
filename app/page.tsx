@@ -22,7 +22,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { home } from "@/content/pages/home";
 import { getDoc } from "@/lib/cms";
-import { getServices } from "@/lib/content";
+import { getServices, getSettings } from "@/lib/content";
+import { SITE_URL } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { seo } = await getHome();
@@ -32,7 +33,41 @@ export async function generateMetadata(): Promise<Metadata> {
 const getHome = () => getDoc("page-home", home);
 
 export default async function Home() {
-  const [c, services] = await Promise.all([getHome(), getServices()]);
+  const [c, services, { contact, social }] = await Promise.all([
+    getHome(),
+    getServices(),
+    getSettings(),
+  ]);
+  // Datos de la empresa para Google (panel de marca, logo y redes)
+  const orgLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${SITE_URL}/#organizacion`,
+    name: "MM Carga",
+    url: `${SITE_URL}/`,
+    logo: `${SITE_URL}/brand/logo-mm-carga-azul.webp`,
+    image: `${SITE_URL}/og/inicio.jpg`,
+    description: c.seo.description,
+    email: contact.email,
+    telephone: contact.phone,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Carretera a Huinala km 6.5",
+      postalCode: "66673",
+      addressLocality: "Pesquería",
+      addressRegion: "Nuevo León",
+      addressCountry: "MX",
+    },
+    areaServed: { "@type": "Country", name: "México" },
+    sameAs: social.map((s) => s.href),
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "sales",
+      telephone: contact.phone,
+      email: contact.email,
+      availableLanguage: "es",
+    },
+  };
   return (
     <>
       {/* Bloque 1 · Hero */}
@@ -250,6 +285,10 @@ export default async function Home() {
 
       {/* Bloque 9 · CTA */}
       <CtaBand title={c.cta.title} text={c.cta.text} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgLd) }}
+      />
     </>
   );
 }

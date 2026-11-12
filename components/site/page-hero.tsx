@@ -154,11 +154,11 @@ export function PageHero({
       </section>
       {facts && (
         <Container className="relative z-10 -mt-14 lg:-mt-16">
-          <dl
+          <ul
             className={`grid overflow-hidden rounded-card bg-white shadow-dialog ring-1 ring-navy-800/6 sm:grid-cols-2 ${facts.length > 3 ? "lg:grid-cols-4" : "lg:grid-cols-3"}`}
           >
             {facts.map((f, i) => (
-              <div
+              <li
                 key={f.label}
                 data-reveal="fade"
                 style={{ "--d": i } as CSSProperties}
@@ -170,17 +170,17 @@ export function PageHero({
                 >
                   {f.icon}
                 </span>
-                <span className="flex flex-col gap-0.5">
-                  <dt className="text-xs font-semibold tracking-[0.12em] text-muted uppercase">
+                <div className="flex flex-col gap-0.5">
+                  <p className="text-xs font-semibold tracking-[0.12em] text-muted uppercase">
                     {f.label}
-                  </dt>
-                  <dd className="text-[15px] leading-snug font-bold text-navy-800">
+                  </p>
+                  <p className="text-[15px] leading-snug font-bold text-navy-800">
                     {f.value}
-                  </dd>
-                </span>
-              </div>
+                  </p>
+                </div>
+              </li>
             ))}
-          </dl>
+          </ul>
         </Container>
       )}
     </>

@@ -80,7 +80,7 @@ export async function ServiceBases({
         aria-hidden="true"
       />
 
-      <Container className="grid gap-12 lg:grid-cols-[1fr_1.55fr] lg:items-center lg:gap-16">
+      <Container className="grid gap-12 xl:grid-cols-[1fr_1.55fr] xl:items-center xl:gap-16">
         <div className="flex flex-col gap-6">
           <div data-reveal className="flex flex-col gap-4">
             <p className="flex items-center gap-3 text-xs font-bold tracking-[0.16em] text-brand-400 uppercase">
@@ -129,7 +129,7 @@ export async function ServiceBases({
                     ? ""
                     : main.length === 2
                       ? "sm:grid-cols-2"
-                      : "sm:grid-cols-3"
+                      : "md:grid-cols-3"
                   : "sm:grid-cols-2 xl:grid-cols-3"
               }`}
             >

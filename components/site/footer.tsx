@@ -92,7 +92,7 @@ export async function SiteFooter() {
             <Link href="/aviso-de-privacidad/" className="hover:text-white">
               Aviso de privacidad
             </Link>
-            <span className="text-slate-300/45">
+            <span className="text-slate-300/60">
               SEO by{" "}
               <a
                 href="https://humanmarketing.mx/"

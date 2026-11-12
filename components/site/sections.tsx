@@ -419,7 +419,7 @@ export function ServiceCards({
   /** Resumen por URL; sin valor, el resumen corto del servicio */
   summaries?: Record<string, string>;
 }) {
-  const cols = items.length > 4 ? "lg:grid-cols-5" : "lg:grid-cols-4";
+  const cols = items.length > 4 ? "lg:grid-cols-3 xl:grid-cols-5" : "lg:grid-cols-4";
   return (
     <ul className={`grid gap-5.5 sm:grid-cols-2 ${cols}`}>
       {items.map((s, i) => (

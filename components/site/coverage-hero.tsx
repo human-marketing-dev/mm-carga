@@ -71,7 +71,7 @@ export function CoverageHero({ h1, subtitle, image, bases }: Props) {
         <div className="hero-photo relative aspect-[16/9] overflow-hidden rounded-card ring-1 ring-white/10 lg:hidden">
           <Image
             src={image.src}
-            alt=""
+            alt={image.alt}
             fill
             sizes="100vw"
             className="object-cover"

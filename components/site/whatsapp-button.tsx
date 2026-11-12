@@ -104,7 +104,7 @@ export function WhatsAppButton({
         <div className="flex items-center gap-3 bg-[#075e54] px-5 py-4 text-white">
           <span className="relative grid size-11 shrink-0 place-items-center rounded-full bg-white">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/icon.png" alt="" className="size-8 rounded-full" />
+            <img src="/icon.png" alt="Logo de MM Carga" className="size-8 rounded-full" />
             <span className="absolute right-0 bottom-0 size-3 rounded-full border-2 border-[#075e54] bg-[#25d366]" />
           </span>
           <div className="flex-1">
