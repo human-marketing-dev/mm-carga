@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { IconFleet } from "@/components/site/icons";
@@ -25,11 +26,7 @@ import { getServices } from "@/lib/content";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { seo } = await getHome();
-  return {
-    title: seo.title,
-    description: seo.description,
-    alternates: { canonical: "/" },
-  };
+  return pageMetadata("/", seo);
 }
 
 const getHome = () => getDoc("page-home", home);

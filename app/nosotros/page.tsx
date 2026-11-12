@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import type { CSSProperties } from "react";
 import { MexicoMap } from "@/components/site/mexico-map";
@@ -20,11 +21,7 @@ const getContent = () => getDoc("page-nosotros", nosotros);
 
 export async function generateMetadata(): Promise<Metadata> {
   const { seo } = await getContent();
-  return {
-    title: seo.title,
-    description: seo.description,
-    alternates: { canonical: "/nosotros/" },
-  };
+  return pageMetadata("/nosotros/", seo);
 }
 
 export default async function Nosotros() {

@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/site/header";
 import { RevealObserver } from "@/components/site/reveal";
 import { WhatsAppButton } from "@/components/site/whatsapp-button";
 import { getSettings } from "@/lib/content";
+import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/seo";
 import "./globals.css";
 
 const inter = Inter({
@@ -14,9 +15,16 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://mmcarga.com"),
+  metadataBase: new URL(SITE_URL),
   title: "MM Carga",
   description: "Transporte de carga y almacenaje de mercancías en México.",
+  openGraph: {
+    type: "website",
+    locale: "es_MX",
+    siteName: SITE_NAME,
+    images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630 }],
+  },
+  twitter: { card: "summary_large_image", images: [DEFAULT_OG_IMAGE] },
 };
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {

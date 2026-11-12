@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import type { CSSProperties } from "react";
 import { Facilities } from "@/components/site/base-page";
 import { MexicoMap } from "@/components/site/mexico-map";
@@ -22,11 +23,7 @@ const getContent = () => getDoc("page-monterrey", monterreyPage);
 
 export async function generateMetadata(): Promise<Metadata> {
   const { seo } = await getContent();
-  return {
-    title: seo.title,
-    description: seo.description,
-    alternates: { canonical: SLUG },
-  };
+  return pageMetadata(SLUG, seo);
 }
 
 export default async function TransporteMonterrey() {

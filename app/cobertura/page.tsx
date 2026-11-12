@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { IconWarehouse } from "@/components/site/icons";
@@ -21,11 +22,7 @@ const getContent = () => getDoc("page-cobertura", cobertura);
 
 export async function generateMetadata(): Promise<Metadata> {
   const { seo } = await getContent();
-  return {
-    title: seo.title,
-    description: seo.description,
-    alternates: { canonical: "/cobertura/" },
-  };
+  return pageMetadata("/cobertura/", seo);
 }
 
 // Monterrey primero: es la oficina corporativa

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import type { CSSProperties, ReactNode } from "react";
 import { SocialIcon } from "@/components/site/icons";
 import { PageHero } from "@/components/site/page-hero";
@@ -12,11 +13,7 @@ const getContent = () => getDoc("page-contacto", contacto);
 
 export async function generateMetadata(): Promise<Metadata> {
   const { seo } = await getContent();
-  return {
-    title: seo.title,
-    description: seo.description,
-    alternates: { canonical: "/contacto/" },
-  };
+  return pageMetadata("/contacto/", seo);
 }
 
 function Row({ label, children }: { label: string; children: ReactNode }) {

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import type { ReactNode } from "react";
 import { PageHero } from "@/components/site/page-hero";
 import { PortableText } from "@/components/site/portable-text";
@@ -11,12 +12,7 @@ const getContent = () => getDoc("page-aviso", aviso);
 
 export async function generateMetadata(): Promise<Metadata> {
   const { seo } = await getContent();
-  return {
-    title: seo.title,
-    description: seo.description,
-    alternates: { canonical: "/aviso-de-privacidad/" },
-    robots: { index: false, follow: true },
-  };
+  return pageMetadata("/aviso-de-privacidad/", seo, { robots: { index: false, follow: true } });
 }
 
 function Block({ title, children }: { title: string; children: ReactNode }) {

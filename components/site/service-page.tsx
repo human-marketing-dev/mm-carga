@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { pageMetadata } from "@/lib/seo";
 import type { CSSProperties } from "react";
 import {
   IconFleet,
@@ -37,11 +38,7 @@ const lgSpan = ["lg:col-span-3", "lg:col-span-2", ""];
 /** Metadatos de la página de un servicio (título y descripción editables, URL fija) */
 export async function serviceMetadata(slug: string) {
   const { seo } = await getService(slug);
-  return {
-    title: seo.title,
-    description: seo.description,
-    alternates: { canonical: slug },
-  };
+  return pageMetadata(slug, seo);
 }
 
 export async function ServicePage({ slug }: { slug: string }) {

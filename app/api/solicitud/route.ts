@@ -23,6 +23,38 @@ const FIELDS = [
 
 type Key = (typeof FIELDS)[number][0];
 
+// Dominios desde los que se aceptan envíos (sitio final, sitio de prueba y local)
+const ALLOWED_ORIGIN = /^https?:\/\/((www\.)?mmcarga\.com|([a-z0-9-]+\.)*humanmarketing\.mx|localhost(:\d+)?)$/i;
+
+// Límite de envíos por IP: 5 cada 10 minutos. Vive en memoria del proceso (un solo
+// servidor), así que se reinicia con cada despliegue; suficiente contra bots simples.
+const WINDOW_MS = 10 * 60 * 1000;
+const MAX_PER_IP = 5;
+const hits = new Map<string, number[]>();
+
+function tooMany(ip: string) {
+  const now = Date.now();
+  const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
+  if (recent.length >= MAX_PER_IP) {
+    hits.set(ip, recent);
+    return true;
+  }
+  recent.push(now);
+  hits.set(ip, recent);
+  // Limpieza para que el mapa no crezca sin fin
+  if (hits.size > 5000) {
+    for (const [k, v] of hits) {
+      if (v.every((t) => now - t >= WINDOW_MS)) hits.delete(k);
+    }
+  }
+  return false;
+}
+
+function clientIp(request: Request) {
+  const fwd = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+  return fwd || request.headers.get("x-real-ip") || "desconocida";
+}
+
 const escape = (s: string) =>
   s.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
 
@@ -43,6 +75,19 @@ async function brevo(path: string, apiKey: string, body: unknown) {
 }
 
 export async function POST(request: Request) {
+  // Solo envíos desde el propio sitio (los navegadores siempre mandan Origin en un POST)
+  const origin = request.headers.get("origin");
+  if (!origin || !ALLOWED_ORIGIN.test(origin)) {
+    return Response.json({ ok: false, error: "forbidden" }, { status: 403 });
+  }
+  if (Number(request.headers.get("content-length") ?? 0) > 20_000) {
+    return Response.json({ ok: false, error: "bad_request" }, { status: 413 });
+  }
+  if (tooMany(clientIp(request))) {
+    console.warn("[solicitud] Límite de envíos alcanzado", clientIp(request));
+    return Response.json({ ok: false, error: "rate_limited" }, { status: 429 });
+  }
+
   const apiKey = process.env.BREVO_API_KEY;
   const to = (process.env.FORM_TO_EMAIL ?? "")
     .split(",")

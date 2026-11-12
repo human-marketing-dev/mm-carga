@@ -87,11 +87,22 @@ export async function SiteFooter() {
       <div className="border-t border-white/8">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-5 py-6 text-[13px] sm:flex-row sm:items-center sm:justify-between lg:px-8">
           <p>Bases: {bases.map((b) => b.city).join(" · ")}</p>
-          <p className="flex gap-5">
+          <p className="flex flex-wrap gap-x-5 gap-y-2">
             <span>© 2026 MM Carga</span>
             <Link href="/aviso-de-privacidad/" className="hover:text-white">
               Aviso de privacidad
             </Link>
+            <span className="text-slate-300/45">
+              SEO by{" "}
+              <a
+                href="https://humanmarketing.mx/"
+                target="_blank"
+                rel="noopener"
+                className="hover:text-white"
+              >
+                Human Marketing
+              </a>
+            </span>
           </p>
         </div>
       </div>

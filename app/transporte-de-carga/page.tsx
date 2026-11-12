@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { MexicoMap } from "@/components/site/mexico-map";
@@ -24,11 +25,7 @@ const getContent = () => getDoc("page-transporte-de-carga", transporte);
 
 export async function generateMetadata(): Promise<Metadata> {
   const { seo } = await getContent();
-  return {
-    title: seo.title,
-    description: seo.description,
-    alternates: { canonical: SLUG },
-  };
+  return pageMetadata(SLUG, seo);
 }
 
 export default async function TransporteDeCarga() {

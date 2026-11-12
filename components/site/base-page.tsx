@@ -3,6 +3,7 @@ import { IconWarehouse, NamedIcon } from "@/components/site/icons";
 import { MexicoMap } from "@/components/site/mexico-map";
 import { PageHero } from "@/components/site/page-hero";
 import { Rich } from "@/components/site/rich";
+import { pageMetadata } from "@/lib/seo";
 import {
   Container,
   CtaBand,
@@ -23,12 +24,9 @@ const getBase = (key: BaseKey) => getDoc(`base-${key}`, basePages[key]);
 /** Metadatos de una página por base (sin indexar hasta que se confirme publicarlas) */
 export async function baseMetadata(key: BaseKey) {
   const data = await getBase(key);
-  return {
-    title: data.seo.title,
-    description: data.seo.description,
-    alternates: { canonical: data.slug },
+  return pageMetadata(data.slug, data.seo, {
     robots: { index: false, follow: false },
-  };
+  });
 }
 
 /** Tarjetas de instalaciones; también las usa la página de Monterrey */
