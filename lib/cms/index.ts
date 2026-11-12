@@ -90,6 +90,8 @@ async function fetchDoc(id: string): Promise<unknown> {
     cacheLife("max");
     return doc;
   } catch (err) {
+    // Versión estática: si Sanity no responde, mejor que falle el build a publicar contenido viejo
+    if (process.env.STATIC_EXPORT === "1") throw err;
     // Sin conexión con Sanity: se usa el contenido local y se reintenta pronto
     console.error(`[cms] No se pudo leer "${id}" de Sanity:`, err);
     cacheLife("minutes");

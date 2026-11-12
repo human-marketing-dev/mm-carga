@@ -1,0 +1,124 @@
+{
+  "_comentario": "Reglas compartidas por next.config.ts / app/sitemap.node.ts / app/robots.node.ts (sitio en Node) y deploy/build-static.mjs (versión estática de IONOS). redirects: 301 de las URLs del WordPress anterior; prefix: true redirige todo lo que empiece así. sitemap: solo páginas indexables.",
+  "redirects": [
+    {
+      "from": "/contactos/",
+      "to": "/contacto/"
+    },
+    {
+      "from": "/servicios/",
+      "to": "/transporte-de-carga/"
+    },
+    {
+      "from": "/cart-3/",
+      "to": "/"
+    },
+    {
+      "from": "/pxl-template/cajas-secas-de-53/",
+      "to": "/caja-seca-53-pies/"
+    },
+    {
+      "from": "/pxl-template/tolvas/",
+      "to": "/transporte-tolva/"
+    },
+    {
+      "from": "/pxl-template/transporte-en-tolvas/",
+      "to": "/transporte-tolva/"
+    },
+    {
+      "from": "/pxl-template/traslado-de-contenedores-maritimos/",
+      "to": "/transporte-de-contenedores-maritimos/"
+    },
+    {
+      "from": "/pxl-template/plataformas-para-carga-suelta/",
+      "to": "/transporte-de-carga-suelta/"
+    },
+    {
+      "from": "/pxl-template/almacen-y-maniobras-de-mercancia/",
+      "to": "/almacenamiento-de-mercancias/"
+    },
+    {
+      "from": "/pxl-template/control-de-inventarios/",
+      "to": "/almacenamiento-de-mercancias/"
+    },
+    {
+      "from": "/pxl-template/maniobras/",
+      "to": "/almacenamiento-de-mercancias/"
+    },
+    {
+      "from": "/pxl-template/rastreo/",
+      "to": "/transporte-de-carga/"
+    },
+    {
+      "from": "/pxl-template/coordinacion/",
+      "to": "/transporte-de-carga/"
+    },
+    {
+      "from": "/pxl-template/",
+      "to": "/",
+      "prefix": true
+    },
+    {
+      "from": "/author/",
+      "to": "/",
+      "prefix": true
+    },
+    {
+      "from": "/wp-sitemap",
+      "to": "/sitemap.xml",
+      "prefix": true
+    },
+    {
+      "from": "/sitemap_index.xml",
+      "to": "/sitemap.xml"
+    },
+    {
+      "from": "/feed/",
+      "to": "/"
+    }
+  ],
+  "securityHeaders": [
+    {
+      "key": "Strict-Transport-Security",
+      "value": "max-age=63072000"
+    },
+    {
+      "key": "X-Content-Type-Options",
+      "value": "nosniff"
+    },
+    {
+      "key": "X-Frame-Options",
+      "value": "SAMEORIGIN"
+    },
+    {
+      "key": "Referrer-Policy",
+      "value": "strict-origin-when-cross-origin"
+    },
+    {
+      "key": "Permissions-Policy",
+      "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+    },
+    {
+      "key": "Content-Security-Policy",
+      "value": "frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'"
+    }
+  ],
+  "sitemap": [
+    "/",
+    "/transporte-de-carga/",
+    "/caja-seca-53-pies/",
+    "/transporte-tolva/",
+    "/transporte-de-contenedores-maritimos/",
+    "/transporte-de-carga-suelta/",
+    "/almacenamiento-de-mercancias/",
+    "/cobertura/",
+    "/transporte-de-carga-en-monterrey/",
+    "/transporte-de-carga-en-altamira/",
+    "/transporte-de-contenedores-en-manzanillo/",
+    "/transporte-de-carga-en-nuevo-laredo/",
+    "/transporte-de-carga-en-silao-bajio/",
+    "/transporte-de-carga-en-coatzacoalcos/",
+    "/nosotros/",
+    "/contacto/"
+  ]
+}

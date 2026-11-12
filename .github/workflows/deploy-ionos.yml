@@ -1,0 +1,80 @@
+# Publica la versión estática del sitio en el hosting de IONOS (mmcarga.com).
+# Corre en cada push a main, al publicar en Sanity (webhook → repository_dispatch) o a mano.
+# Secretos del repo (Settings → Secrets and variables → Actions):
+#   SFTP_HOST, SFTP_USER, SFTP_PASSWORD   acceso SFTP de IONOS
+#   SFTP_DIR                              carpeta del sitio nuevo, p. ej. mmcarga-nuevo
+#   BREVO_API_KEY, FORM_TO_EMAIL, FORM_SENDER_EMAIL, FORM_SENDER_NAME (opcional), BREVO_LIST_ID (opcional)
+name: Publicar en IONOS
+
+on:
+  push:
+    branches: [main]
+  repository_dispatch:
+    types: [sanity-publish]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-ionos
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      SFTP_HOST: ${{ secrets.SFTP_HOST }}
+      SFTP_USER: ${{ secrets.SFTP_USER }}
+      SFTP_PASSWORD: ${{ secrets.SFTP_PASSWORD }}
+      SFTP_DIR: ${{ secrets.SFTP_DIR }}
+    steps:
+      - name: Revisar que exista el acceso SFTP
+        id: check
+        run: |
+          if [ -z "$SFTP_HOST" ] || [ -z "$SFTP_USER" ] || [ -z "$SFTP_PASSWORD" ] || [ -z "$SFTP_DIR" ]; then
+            echo "Faltan secretos SFTP: no se publica." >> "$GITHUB_STEP_SUMMARY"
+            echo "listo=no" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # Nunca publicar sobre la raíz ni sobre la carpeta del WordPress anterior
+          case "${SFTP_DIR%/}" in
+            ""|"/"|"."|"mmcarga"|"/mmcarga") echo "SFTP_DIR inválido: $SFTP_DIR"; exit 1 ;;
+          esac
+          echo "listo=si" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v4
+        if: steps.check.outputs.listo == 'si'
+
+      - uses: actions/setup-node@v4
+        if: steps.check.outputs.listo == 'si'
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependencias
+        if: steps.check.outputs.listo == 'si'
+        run: npm ci
+
+      - name: Generar sitio estático
+        if: steps.check.outputs.listo == 'si'
+        env:
+          NEXT_PUBLIC_SANITY_PROJECT_ID: hbnkjqig
+          NEXT_PUBLIC_SANITY_DATASET: production
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          FORM_TO_EMAIL: ${{ secrets.FORM_TO_EMAIL }}
+          FORM_SENDER_EMAIL: ${{ secrets.FORM_SENDER_EMAIL }}
+          FORM_SENDER_NAME: ${{ secrets.FORM_SENDER_NAME }}
+          BREVO_LIST_ID: ${{ secrets.BREVO_LIST_ID }}
+        run: npm run build:static
+
+      - name: Subir a IONOS por SFTP
+        if: steps.check.outputs.listo == 'si'
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+          lftp -u "$SFTP_USER","$SFTP_PASSWORD" "sftp://$SFTP_HOST" -e "
+            set sftp:auto-confirm yes;
+            set net:max-retries 3;
+            set net:timeout 30;
+            mkdir -p -f $SFTP_DIR;
+            mirror --reverse --delete --parallel=4 --verbose=1 out/ $SFTP_DIR/;
+            bye"
+          echo "Publicado en $SFTP_DIR" >> "$GITHUB_STEP_SUMMARY"
