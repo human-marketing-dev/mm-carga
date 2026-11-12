@@ -24,7 +24,7 @@ const FIELDS = [
 type Key = (typeof FIELDS)[number][0];
 
 // Dominios desde los que se aceptan envíos (sitio final, sitio de prueba y local)
-const ALLOWED_ORIGIN = /^https?:\/\/((www\.)?mmcarga\.com|([a-z0-9-]+\.)*humanmarketing\.mx|localhost(:\d+)?)$/i;
+const ALLOWED_ORIGIN = /^https?:\/\/(([a-z0-9-]+\.)*mmcarga\.com|([a-z0-9-]+\.)*humanmarketing\.mx|localhost(:\d+)?)$/i;
 
 // Límite de envíos por IP: 5 cada 10 minutos. Vive en memoria del proceso (un solo
 // servidor), así que se reinicia con cada despliegue; suficiente contra bots simples.

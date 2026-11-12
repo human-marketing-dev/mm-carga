@@ -29,7 +29,7 @@ if ($apiKey === '' || !$to || $sender === '') {
 
 // Solo envíos desde el propio sitio
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
-if (!preg_match('#^https?://((www\.)?mmcarga\.com|([a-z0-9-]+\.)*humanmarketing\.mx|localhost(:\d+)?)$#i', $origin)) {
+if (!preg_match('#^https?://(([a-z0-9-]+\.)*mmcarga\.com|([a-z0-9-]+\.)*humanmarketing\.mx|localhost(:\d+)?)$#i', $origin)) {
   responder(403, ['ok' => false, 'error' => 'forbidden']);
 }
 if ((int)($_SERVER['CONTENT_LENGTH'] ?? 0) > 20000) {
