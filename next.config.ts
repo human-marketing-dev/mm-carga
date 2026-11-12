@@ -68,9 +68,9 @@ const nextConfig: NextConfig = {
     agentFeedback: true,
   },
   cacheComponents: true,
-  // Fotos del cliente: next/image las sirve en calidad 80 (por defecto es 75; 90 pesaba ~40% más sin diferencia visible)
+  // Fotos del cliente: next/image las sirve en calidad 90 (por defecto es 75). Decisión del usuario: no bajarla
   images: {
-    qualities: [80],
+    qualities: [90],
     // Imágenes subidas en Sanity (CMS)
     remotePatterns: [
       { protocol: "https", hostname: "cdn.sanity.io", pathname: "/images/**" },
