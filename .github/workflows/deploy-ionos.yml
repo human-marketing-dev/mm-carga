@@ -2,7 +2,8 @@
 # Corre en cada push a main, al publicar en Sanity (webhook → repository_dispatch) o a mano.
 # Secretos del repo (Settings → Secrets and variables → Actions):
 #   SFTP_HOST, SFTP_USER, SFTP_PASSWORD   acceso SFTP de IONOS
-#   SFTP_DIR                              carpeta del sitio nuevo, p. ej. mmcarga-nuevo
+#   SFTP_DIR                              carpeta del sitio nuevo: "mmcarga-nuevo" si el usuario SFTP ve
+#                                         la raíz, o "." si IONOS lo limitó a esa carpeta
 #   BREVO_API_KEY, FORM_TO_EMAIL, FORM_SENDER_EMAIL, FORM_SENDER_NAME (opcional), BREVO_LIST_ID (opcional)
 name: Publicar en IONOS
 
@@ -35,9 +36,9 @@ jobs:
             echo "listo=no" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          # Nunca publicar sobre la raíz ni sobre la carpeta del WordPress anterior
+          # Nunca publicar sobre la carpeta del WordPress anterior
           case "${SFTP_DIR%/}" in
-            ""|"/"|"."|"mmcarga"|"/mmcarga") echo "SFTP_DIR inválido: $SFTP_DIR"; exit 1 ;;
+            "/"|"mmcarga"|"/mmcarga") echo "SFTP_DIR inválido: $SFTP_DIR"; exit 1 ;;
           esac
           echo "listo=si" >> "$GITHUB_OUTPUT"
 
@@ -70,6 +71,13 @@ jobs:
         if: steps.check.outputs.listo == 'si'
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+          # Candado: si la carpeta destino tiene WordPress u otros sitios, no se toca nada
+          # (mirror --delete borraría lo que no esté en out/)
+          LISTA=$(lftp -u "$SFTP_USER","$SFTP_PASSWORD" "sftp://$SFTP_HOST" -e "set sftp:auto-confirm yes; mkdir -p -f $SFTP_DIR; cls -1 $SFTP_DIR/; bye" || true)
+          echo "$LISTA"
+          if echo "$LISTA" | grep -qiE '(^|/)(wp-admin|wp-content|wp-config\.php|mmcarga|intermodal|luckygas|clickandbuilds|logs)/?$'; then
+            echo "La carpeta $SFTP_DIR parece contener otro sitio: no se publica."; exit 1
+          fi
           lftp -u "$SFTP_USER","$SFTP_PASSWORD" "sftp://$SFTP_HOST" -e "
             set sftp:auto-confirm yes;
             set net:max-retries 3;
