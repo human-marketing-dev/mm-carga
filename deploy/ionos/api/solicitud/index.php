@@ -100,6 +100,8 @@ function brevo(string $ruta, string $apiKey, array $body): array {
     CURLOPT_POST => true,
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_TIMEOUT => 15,
+    // Salir siempre por IPv4: es la IP autorizada en Brevo (por IPv6 cambia y Brevo la bloquea)
+    CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
     CURLOPT_HTTPHEADER => ['api-key: ' . $apiKey, 'content-type: application/json', 'accept: application/json'],
     CURLOPT_POSTFIELDS => json_encode($body),
   ]);

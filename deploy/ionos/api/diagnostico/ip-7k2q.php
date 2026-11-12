@@ -4,7 +4,7 @@ header('Content-Type: text/plain; charset=utf-8');
 header('X-Robots-Tag: noindex');
 function get($url, $opts = []) {
   $ch = curl_init($url);
-  curl_setopt_array($ch, $opts + [CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 15]);
+  curl_setopt_array($ch, $opts + [CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 15, CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4]);
   $r = curl_exec($ch); $c = curl_getinfo($ch, CURLINFO_HTTP_CODE); $e = curl_error($ch); curl_close($ch);
   return [$c, $r === false ? "curl: $e" : $r];
 }
