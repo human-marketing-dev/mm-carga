@@ -2,14 +2,18 @@ import type { MetadataRoute } from "next";
 import { services } from "@/content/services";
 import { SITE_URL } from "@/lib/seo";
 
-// Solo páginas indexables. Las páginas por base (noindex) y el aviso de privacidad
-// no van aquí; al publicar las bases hay que agregarlas.
+// Solo páginas indexables (el aviso de privacidad lleva noindex y no va aquí)
 const pages = [
   "/",
   "/transporte-de-carga/",
   ...services.map((s) => s.slug),
   "/cobertura/",
   "/transporte-de-carga-en-monterrey/",
+  "/transporte-de-carga-en-altamira/",
+  "/transporte-de-contenedores-en-manzanillo/",
+  "/transporte-de-carga-en-nuevo-laredo/",
+  "/transporte-de-carga-en-silao-bajio/",
+  "/transporte-de-carga-en-coatzacoalcos/",
   "/nosotros/",
   "/contacto/",
 ];

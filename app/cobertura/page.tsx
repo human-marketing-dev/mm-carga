@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { localPages } from "@/content/base-links";
 import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import type { CSSProperties } from "react";
@@ -42,33 +43,6 @@ const slugify = (city: string) =>
 // Bases con almacén propio (confirmado por el cliente el 3 nov; Monterrey = Pesquería)
 const withWarehouse = new Set(["Altamira", "Manzanillo", "Monterrey"]);
 
-// Página local de cada base (las 5 nuevas siguen con noindex hasta tener datos del cliente)
-const localPages: Record<string, { href: string; label: string }> = {
-  Monterrey: {
-    href: "/transporte-de-carga-en-monterrey/",
-    label: "Transporte de carga en Monterrey",
-  },
-  Altamira: {
-    href: "/transporte-de-carga-en-altamira/",
-    label: "Transporte de carga en Altamira",
-  },
-  Manzanillo: {
-    href: "/transporte-de-contenedores-en-manzanillo/",
-    label: "Transporte de contenedores en Manzanillo",
-  },
-  "Nuevo Laredo": {
-    href: "/transporte-de-carga-en-nuevo-laredo/",
-    label: "Transporte de carga en Nuevo Laredo",
-  },
-  Silao: {
-    href: "/transporte-de-carga-en-silao-bajio/",
-    label: "Transporte de carga en Silao",
-  },
-  Coatzacoalcos: {
-    href: "/transporte-de-carga-en-coatzacoalcos/",
-    label: "Transporte de carga en Coatzacoalcos",
-  },
-};
 
 export default async function Cobertura() {
   const [c, services, { bases, contact }] = await Promise.all([

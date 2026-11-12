@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Logo } from "@/components/ui/logo";
+import { localPages } from "@/content/base-links";
 import { contactLinks, getServices, getSettings } from "@/lib/content";
 
 export async function SiteFooter() {
@@ -86,7 +87,21 @@ export async function SiteFooter() {
 
       <div className="border-t border-white/8">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-5 py-6 text-[13px] sm:flex-row sm:items-center sm:justify-between lg:px-8">
-          <p>Bases: {bases.map((b) => b.city).join(" · ")}</p>
+          <p>
+            Bases:{" "}
+            {bases.map((b, i) => (
+              <span key={b.city}>
+                {i > 0 && " · "}
+                {localPages[b.city] ? (
+                  <Link href={localPages[b.city].href} className="hover:text-white">
+                    {b.city}
+                  </Link>
+                ) : (
+                  b.city
+                )}
+              </span>
+            ))}
+          </p>
           <p className="flex flex-wrap gap-x-5 gap-y-2">
             <span>© 2026 MM Carga</span>
             <Link href="/aviso-de-privacidad/" className="hover:text-white">

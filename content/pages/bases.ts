@@ -16,7 +16,7 @@ export const basePages: Record<
     seo: {
       title: "Transporte de carga en Altamira | MM Carga",
       description:
-        "Base de operación propia muy cerca del puerto industrial de Altamira, con bodega, patio de maniobras y báscula certificada.",
+        "Transporte de carga en Altamira desde nuestra base propia junto al puerto industrial: bodega, patio de maniobras y báscula certificada.",
     },
     subtitle:
       "Base de operación propia muy cerca del puerto industrial de Altamira, con bodega, patio de maniobras y báscula certificada.",
@@ -122,7 +122,7 @@ export const basePages: Record<
     seo: {
       title: "Transporte de contenedores en Manzanillo | MM Carga",
       description:
-        "Base de operación propia cerca del puerto más importante del país, con almacén, patio y montacargas para el manejo de contenedores.",
+        "Transporte de contenedores en Manzanillo desde nuestra base propia cerca del puerto: almacén, patio y montacargas para contenedores.",
     },
     subtitle:
       "Base de operación propia cerca del puerto más importante del país, con almacén, patio y montacargas para el manejo de contenedores.",
@@ -228,7 +228,7 @@ export const basePages: Record<
     seo: {
       title: "Transporte de carga en Nuevo Laredo | MM Carga",
       description:
-        "Base de operación de nuestras cajas secas de 53 pies, enfocada en el transporte de carga cross border entre México y Estados Unidos.",
+        "Transporte de carga en Nuevo Laredo con cajas secas de 53 pies y operación cross border entre México y Estados Unidos desde base propia.",
     },
     subtitle:
       "Base de operación de nuestras cajas secas de 53 pies, enfocada en el transporte de carga cross border entre México y Estados Unidos.",
@@ -308,7 +308,7 @@ export const basePages: Record<
     seo: {
       title: "Transporte de carga en Silao y el Bajío | MM Carga",
       description:
-        "Base de operación de nuestras cajas secas de 53 pies en el corredor industrial del Bajío, enfocada en la industria automotriz.",
+        "Transporte de carga en Silao y el Bajío con cajas secas de 53 pies para la industria automotriz, desde nuestra base propia en Guanajuato.",
     },
     subtitle:
       "Base de operación de nuestras cajas secas de 53 pies en el corredor industrial del Bajío, enfocada en la industria automotriz.",
@@ -388,7 +388,7 @@ export const basePages: Record<
     seo: {
       title: "Transporte de carga en Coatzacoalcos | MM Carga",
       description:
-        "Base de operación de nuestras unidades de tolva y de las rutas del sureste del país.",
+        "Transporte de carga en Coatzacoalcos con unidades de tolva para carga a granel y rutas hacia el sureste del país, desde base propia.",
     },
     subtitle:
       "Base de operación de nuestras unidades de tolva y de las rutas del sureste del país.",

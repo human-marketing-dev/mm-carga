@@ -3,7 +3,7 @@ import { IconWarehouse, NamedIcon } from "@/components/site/icons";
 import { MexicoMap } from "@/components/site/mexico-map";
 import { PageHero } from "@/components/site/page-hero";
 import { Rich } from "@/components/site/rich";
-import { pageMetadata } from "@/lib/seo";
+import { pageMetadata, SITE_URL } from "@/lib/seo";
 import {
   Container,
   CtaBand,
@@ -21,12 +21,10 @@ export type BaseKey = keyof typeof basePages;
 
 const getBase = (key: BaseKey) => getDoc(`base-${key}`, basePages[key]);
 
-/** Metadatos de una página por base (sin indexar hasta que se confirme publicarlas) */
+/** Metadatos de una página por base */
 export async function baseMetadata(key: BaseKey) {
   const data = await getBase(key);
-  return pageMetadata(data.slug, data.seo, {
-    robots: { index: false, follow: false },
-  });
+  return pageMetadata(data.slug, data.seo);
 }
 
 /** Tarjetas de instalaciones; también las usa la página de Monterrey */
@@ -107,6 +105,8 @@ export async function BasePage({ base: key }: { base: BaseKey }) {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     name: `MM Carga ${base.city}`,
+    url: `${SITE_URL}${data.slug}`,
+    image: `${SITE_URL}${data.image?.src ?? "/og/inicio.jpg"}`,
     description: base.role,
     telephone: contact.phone,
     email: contact.email,
@@ -120,7 +120,11 @@ export async function BasePage({ base: key }: { base: BaseKey }) {
     },
     hasMap: base.maps,
     areaServed: `${base.city}, ${base.state}`,
-    parentOrganization: { "@type": "Organization", name: "MM Carga" },
+    parentOrganization: {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organizacion`,
+      name: "MM Carga",
+    },
   };
 
   return (
