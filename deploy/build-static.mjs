@@ -77,6 +77,10 @@ ${redirectLines.join("\n")}
 <IfModule mod_headers.c>
 ${headerLines.join("\n")}
   Header always unset X-Powered-By
+  # Fuera del dominio final (subdominio de prueba, URL temporal de IONOS): no indexar
+  <If "%{HTTP_HOST} !~ m#^(www\\.)?mmcarga\\.com$#i">
+    Header always set X-Robots-Tag "noindex, nofollow"
+  </If>
   # Archivos con hash en el nombre: caché de un año. Fotos: un mes. Páginas: siempre revalidar.
   <If "%{REQUEST_URI} =~ m#^/_next/static/#">
     Header set Cache-Control "public, max-age=31536000, immutable"
