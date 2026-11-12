@@ -90,7 +90,8 @@ export function WhatsAppButton({
   }
 
   return (
-    <div className="fixed right-4 bottom-4 z-40 flex flex-col items-end gap-3 md:right-6 md:bottom-6">
+    // pointer-events-none: el contenedor ocupa el espacio del chat aunque esté oculto y tapaba clics (p. ej. el botón del formulario)
+    <div className="pointer-events-none fixed right-4 bottom-4 z-40 flex flex-col items-end gap-3 md:right-6 md:bottom-6">
       {/* Mini chat */}
       <div
         id="wa-chat"
@@ -98,7 +99,7 @@ export function WhatsAppButton({
         aria-label="Chat de WhatsApp con MM Carga"
         aria-hidden={!open}
         inert={!open}
-        className={`w-[min(360px,calc(100vw-2rem))] origin-bottom-right overflow-hidden rounded-dialog bg-white shadow-dialog transition duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] ${open ? "translate-y-0 scale-100 opacity-100" : "pointer-events-none translate-y-3 scale-90 opacity-0"}`}
+        className={`w-[min(360px,calc(100vw-2rem))] origin-bottom-right overflow-hidden rounded-dialog bg-white shadow-dialog transition duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] ${open ? "pointer-events-auto translate-y-0 scale-100 opacity-100" : "pointer-events-none translate-y-3 scale-90 opacity-0"}`}
       >
         <div className="flex items-center gap-3 bg-[#075e54] px-5 py-4 text-white">
           <span className="relative grid size-11 shrink-0 place-items-center rounded-full bg-white">
@@ -206,7 +207,7 @@ export function WhatsAppButton({
 
       {/* Invitación */}
       {teaser && !open && (
-        <div className="wa-msg relative flex items-center gap-2 rounded-card-sm bg-white py-2.5 pr-2 pl-4 text-sm font-semibold text-navy-800 shadow-floating">
+        <div className="wa-msg pointer-events-auto relative flex items-center gap-2 rounded-card-sm bg-white py-2.5 pr-2 pl-4 text-sm font-semibold text-navy-800 shadow-floating">
           <button type="button" onClick={toggle} className="text-left">
             ¿Necesitas una cotización? Escríbenos
           </button>
@@ -236,7 +237,7 @@ export function WhatsAppButton({
         aria-label={
           open ? "Cerrar chat de WhatsApp" : "Escríbenos por WhatsApp"
         }
-        className="relative grid size-15 place-items-center rounded-full bg-[#25d366] text-white shadow-floating transition hover:scale-105 hover:bg-[#1ebe5b] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#25d366]"
+        className="pointer-events-auto relative grid size-15 place-items-center rounded-full bg-[#25d366] text-white shadow-floating transition hover:scale-105 hover:bg-[#1ebe5b] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#25d366]"
       >
         {!open && (
           <span
