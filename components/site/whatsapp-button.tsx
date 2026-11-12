@@ -1,5 +1,6 @@
 "use client";
 
+import { trackEvent } from "@/components/site/analytics";
 import { useEffect, useRef, useState } from "react";
 
 const TEASER_KEY = "mm-wa-teaser";
@@ -81,6 +82,7 @@ export function WhatsAppButton({
   function send(e: React.FormEvent) {
     e.preventDefault();
     const text = message.trim() || WHATSAPP_MESSAGE;
+    trackEvent("whatsapp_click", { page: window.location.pathname, source: "chat" });
     window.open(
       `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`,
       "_blank",

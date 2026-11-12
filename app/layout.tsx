@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Analytics } from "@/components/site/analytics";
 import { SiteFooter } from "@/components/site/footer";
 import { SiteHeader } from "@/components/site/header";
 import { RevealObserver } from "@/components/site/reveal";
@@ -48,6 +49,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         <SiteFooter />
         <WhatsAppButton number={contact.whatsapp} message={whatsappMessage} />
         <RevealObserver />
+        <Analytics />
       </body>
     </html>
   );

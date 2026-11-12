@@ -1,5 +1,6 @@
 "use client";
 
+import { trackEvent } from "@/components/site/analytics";
 import { useState, type FormEvent } from "react";
 import { ArrowIcon } from "@/components/ui/arrow-icon";
 
@@ -49,6 +50,11 @@ export function QuoteForm({
       form.reset();
       setReason("Cotización");
       setStatus("sent");
+      trackEvent("generate_lead", {
+        page: window.location.pathname,
+        form_reason: String(data.motivo ?? "Cotización"),
+        service: String(data.servicio ?? ""),
+      });
     } catch {
       setStatus("error");
     }
