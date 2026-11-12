@@ -76,7 +76,7 @@ export async function SiteHeader() {
           ))}
         </nav>
 
-        {/* Teléfono + cotización en un solo botón. Destino pendiente de definir: por ahora /contacto/ */}
+        {/* Teléfono + cotización en un solo botón: lleva a /contacto/ */}
         <Link
           href={QUOTE_HREF}
           className="hidden items-center gap-3 rounded-btn bg-linear-135 from-brand-500 to-[#1474ff] py-1.5 pr-4.5 pl-1.5 text-white shadow-btn-primary transition hover:from-[#0964e9] hover:to-[#197dff] lg:flex"

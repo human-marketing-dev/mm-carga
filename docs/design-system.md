@@ -6,7 +6,7 @@ Fuente: sitio actual https://mmcarga.com (WordPress + Elementor, tema con prefij
 - Sección mapa de bases (`.mmc-mapa-*`): H2, pastilla, etiquetas de ubicación, pines.
 - Tarjetas de servicios (`#dh-servicios-…`): tarjetas, botón "Ver más", popup con "Cotizar Ahora".
 
-Vista previa: `/design-system` (noindex).
+Vista previa: se quitó del sitio (12 nov 2026); la referencia visual vive en el artifact del design system.
 
 ## Dónde vive
 
@@ -25,6 +25,6 @@ Vista previa: `/design-system` (noindex).
 - **Icono dentro de los botones del hero.** Se sabe que es una flecha blanca; el tamaño y fondo de su caja (`bg-white/16`, 46px) son aproximados.
 - **Logo:** solo hay WebP de 336×84 (azul `#0046A4` y blanco). Para nitidez en pantallas grandes conviene el SVG original. El trazo del logo parece Montserrat Bold; sin confirmar.
 - **Favicon:** recortado del símbolo "mm" del logo azul (`app/icon.png`, 64px). Reemplazar si el cliente tiene uno oficial.
-- **Certificaciones:** 1 Dun & Bradstreet, 2 CANACAR, 3 Transporte Limpio, 4 ISO 9001:2015, 5 OEA, 6 CTPAT (identificados a ojo; el alt de cada una está en `app/design-system/page.tsx`).
+- **Certificaciones:** 1 Dun & Bradstreet, 2 CANACAR, 3 Transporte Limpio, 4 ISO 9001:2015, 5 OEA, 6 CTPAT (identificados a ojo).
 - **Imágenes de servicios y fotos:** pendientes; se usa `public/images/placeholder.svg`.
 - **Iconos.** El tema usa Flaticon (`flaticon-check`) e imágenes PNG; no hay set de iconos propio que migrar.
