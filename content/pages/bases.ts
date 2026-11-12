@@ -233,6 +233,10 @@ export const basePages: Record<
     subtitle:
       "Base de operación de nuestras cajas secas de 53 pies, enfocada en el transporte de carga cross border entre México y Estados Unidos.",
     warehouse: false,
+    image: {
+      src: "/images/bases/transporte-de-carga-en-nuevo-laredo-mm-carga.webp",
+      alt: "Tractocamión de MM Carga frente a cajas secas de 53 pies para transporte de carga en Nuevo Laredo, Tamaulipas",
+    },
     intro: {
       title: "Transporte de carga cross border en Nuevo Laredo",
       paragraphs: [
@@ -313,6 +317,10 @@ export const basePages: Record<
     subtitle:
       "Base de operación de nuestras cajas secas de 53 pies en el corredor industrial del Bajío, enfocada en la industria automotriz.",
     warehouse: false,
+    image: {
+      src: "/images/bases/transporte-de-carga-en-silao-bajio-mm-carga.webp",
+      alt: "Cajas secas de 53 pies de MM Carga en patio para transporte de carga en Silao y el Bajío",
+    },
     intro: {
       title: "Transporte de carga para la industria automotriz del Bajío",
       paragraphs: [

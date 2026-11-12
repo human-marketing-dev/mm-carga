@@ -20,6 +20,8 @@ const OG_PAGES = new Set([
   "/transporte-de-carga-en-altamira/",
   "/transporte-de-carga-en-coatzacoalcos/",
   "/transporte-de-contenedores-en-manzanillo/",
+  "/transporte-de-carga-en-nuevo-laredo/",
+  "/transporte-de-carga-en-silao-bajio/",
 ]);
 
 export const DEFAULT_OG_IMAGE = "/og/inicio.jpg";
